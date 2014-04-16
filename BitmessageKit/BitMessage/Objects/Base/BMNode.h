@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NSString+BM.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 
 @class BMNode;
 @class BMClient;

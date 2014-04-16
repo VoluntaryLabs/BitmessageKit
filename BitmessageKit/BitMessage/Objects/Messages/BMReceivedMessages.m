@@ -9,7 +9,7 @@
 #import "BMReceivedMessages.h"
 #import "BMReceivedMessage.h"
 #import "BMClient.h"
-#import "NSArray+extra.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 #import "BMMessage.h"
 
 @implementation BMReceivedMessages

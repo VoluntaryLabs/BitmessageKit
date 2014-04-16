@@ -7,7 +7,7 @@
 //
 
 #import "BMMessageGroup.h"
-#import "NSArray+extra.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 
 @implementation BMMessageGroup
 

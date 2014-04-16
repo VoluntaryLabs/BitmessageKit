@@ -8,7 +8,7 @@
 
 #import "BMContact.h"
 #import "BMProxyMessage.h"
-#import "NSString+BM.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 
 //#import "DraftController.h"
 //#import "AppController.h"

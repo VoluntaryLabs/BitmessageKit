@@ -8,7 +8,7 @@
 
 #import "BMProxyMessage.h"
 #import "XMLRPCEventBasedParser.h"
-#import "NSString+BM.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 #import "BMServerProcess.h"
 
 @implementation BMProxyMessage

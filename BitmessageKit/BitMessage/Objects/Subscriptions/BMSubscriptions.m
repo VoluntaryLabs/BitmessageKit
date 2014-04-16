@@ -9,7 +9,7 @@
 #import "BMSubscriptions.h"
 #import "BMProxyMessage.h"
 #import "BMSubscription.h"
-#import "NSArray+extra.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 
 @implementation BMSubscriptions
 

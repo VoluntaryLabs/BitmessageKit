@@ -10,7 +10,7 @@
 #import "BMChannel.h"
 #import "BMProxyMessage.h"
 #import "BMMessage.h"
-#import "NSArray+extra.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 
 @implementation BMChannels
 

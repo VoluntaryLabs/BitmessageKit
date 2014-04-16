@@ -7,7 +7,7 @@
 //
 
 #import "BMNode.h"
-#import "NSObject+extra.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 #import "BMClient.h"
 
 @implementation BMNode

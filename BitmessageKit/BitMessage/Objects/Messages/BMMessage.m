@@ -9,7 +9,7 @@
 #import "BMMessage.h"
 #import "BMProxyMessage.h"
 #import "BMClient.h"
-#import "NSMutableAttributedString+extra.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 
 @implementation BMMessage
 

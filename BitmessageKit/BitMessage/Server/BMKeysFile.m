@@ -7,7 +7,7 @@
 //
 
 #import "BMKeysFile.h"
-#import "NSString+BM.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 #import "BMServerProcess.h"
 
 @implementation BMKeysFile

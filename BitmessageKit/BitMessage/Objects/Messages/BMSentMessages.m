@@ -9,7 +9,7 @@
 #import "BMSentMessages.h"
 #import "BMProxyMessage.h"
 #import "BMClient.h"
-#import "NSArray+extra.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 #import "BMMessage.h"
 #import "BMSentMessage.h"
 

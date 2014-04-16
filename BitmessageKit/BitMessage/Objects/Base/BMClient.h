@@ -25,7 +25,7 @@
 
 // categories
 
-#import "NSString+BM.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 #import "BMServerProcess.h"
 // market
 

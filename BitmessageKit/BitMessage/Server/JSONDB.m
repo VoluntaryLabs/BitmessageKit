@@ -7,7 +7,7 @@
 //
 
 #import "JSONDB.h"
-#import "NSFileManager+DirectoryLocations.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 #import "BMServerProcess.h" // remove this dependency by moving path setting up to server
 
 @implementation JSONDB

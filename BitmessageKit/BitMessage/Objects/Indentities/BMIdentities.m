@@ -9,8 +9,7 @@
 #import "BMIdentities.h"
 #import "BMProxyMessage.h"
 #import "BMIdentity.h"
-//#import "BMAddressed.h"
-#import "NSString+BM.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 
 @implementation BMIdentities
 
