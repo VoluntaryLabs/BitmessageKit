@@ -94,7 +94,7 @@ static BMServerProcess *shared = nil;
     [_task setEnvironment: environment];
     
     // Set the path to the python executable
-    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSBundle *mainBundle = [NSBundle bundleForClass:self.class];
     NSString * pythonPath = [mainBundle pathForResource:@"python" ofType:@"exe" inDirectory: @"static-python"];
     NSString * pybitmessagePath = [mainBundle pathForResource:@"bitmessagemain" ofType:@"py" inDirectory: @"pybitmessage"];
     [_task setLaunchPath:pythonPath];

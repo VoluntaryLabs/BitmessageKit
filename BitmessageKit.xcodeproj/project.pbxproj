@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8ED41FA318F595BF0025A51B /* static-python in Resources */ = {isa = PBXBuildFile; fileRef = 8ED41FA218F595BF0025A51B /* static-python */; };
 		8ED41FA518F595DA0025A51B /* pybitmessage in Resources */ = {isa = PBXBuildFile; fileRef = 8ED41FA418F595DA0025A51B /* pybitmessage */; };
 		8ED41FBC18F596310025A51B /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ED41FA718F596310025A51B /* NSData+Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8ED41FBD18F596310025A51B /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED41FA818F596310025A51B /* NSData+Base64.m */; };
@@ -141,6 +140,7 @@
 		AA153C2E18FEFC45007B4785 /* ZKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = AA153C0618FEFC45007B4785 /* ZKLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA153C2F18FEFC45007B4785 /* ZKLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AA153C0718FEFC45007B4785 /* ZKLog.m */; };
 		AA153C3618FF057D007B4785 /* BitmessageKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EDE5B8A18F59414009A726A /* BitmessageKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAE31DBD18FF11A000405754 /* static-python in Resources */ = {isa = PBXBuildFile; fileRef = AAE31DBC18FF11A000405754 /* static-python */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -294,6 +294,8 @@
 		AA153C0518FEFC45007B4785 /* ZKLFHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLFHeader.m; sourceTree = "<group>"; };
 		AA153C0618FEFC45007B4785 /* ZKLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKLog.h; sourceTree = "<group>"; };
 		AA153C0718FEFC45007B4785 /* ZKLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLog.m; sourceTree = "<group>"; };
+		AAE31DBC18FF11A000405754 /* static-python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "static-python"; path = "Vendor/static-python"; sourceTree = "<group>"; };
+		AAE31DBE18FF11BA00405754 /* pybitmessage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybitmessage; path = Vendor/pybitmessage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -401,6 +403,8 @@
 		8EDE5B8418F59414009A726A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AAE31DBE18FF11BA00405754 /* pybitmessage */,
+				AAE31DBC18FF11A000405754 /* static-python */,
 				8EDE5B8518F59414009A726A /* BitmessageKit-Info.plist */,
 				8EDE5B8618F59414009A726A /* InfoPlist.strings */,
 				8EDE5B8918F59414009A726A /* BitmessageKit-Prefix.pch */,
@@ -800,8 +804,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAE31DBD18FF11A000405754 /* static-python in Resources */,
 				8ED41FA518F595DA0025A51B /* pybitmessage in Resources */,
-				8ED41FA318F595BF0025A51B /* static-python in Resources */,
 				AA153C0A18FEFC45007B4785 /* COPYING.TXT in Resources */,
 				AA153C1918FEFC45007B4785 /* ZipKit-Info.plist in Resources */,
 				8EDE5B8818F59414009A726A /* InfoPlist.strings in Resources */,
