@@ -128,5 +128,15 @@
     return YES;
 }
 
+- (NSString *)verifyActionMessage:(NSString *)actionString
+{
+    if ([actionString isEqualToString:@"delete"])
+    {
+        return [NSString stringWithFormat:@"CAUTION: Are you sure you want to delete the '%@' contact?", self.nodeTitle];
+    }
+    
+    return nil;
+}
+
 
 @end

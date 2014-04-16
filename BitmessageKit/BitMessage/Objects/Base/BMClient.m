@@ -8,6 +8,7 @@
 
 #import "BMClient.h"
 #import "BMAddressed.h"
+#import "BMArchive.h"
 
 @implementation BMClient
 
@@ -162,16 +163,16 @@ static BMClient *sharedBMClient;
 
 - (void)startServer
 {
-    self.bitmessageProcess = [BMServerProcess sharedBMServerProcess];
-    [self.bitmessageProcess launch];
-    //[self startRefreshTimer];
+    self.server = [BMServerProcess sharedBMServerProcess];
+    [self.server launch];
+    [self startRefreshTimer];
     
 }
 
 - (void)stopServer
 {
     [self stopRefreshTimer];
-    [self.bitmessageProcess terminate];
+    [self.server terminate];
 }
 
 // timer
@@ -199,6 +200,45 @@ static BMClient *sharedBMClient;
     //NSLog(@"refresh sent");
     [self.messages.sent refresh];
     //NSLog(@"refresh done");
+}
+
+/*
+- (void)fetchAll
+{
+    for (BMNode *child in self.children)
+    {
+        [child fetch];
+    }
+}
+*/
+
+// archive
+
+- (NSString *)archiveSuffix
+{
+    return @"bmbox";
+}
+
+- (void)archiveToUrl:(NSURL *)url
+{
+    NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+    
+    NSString *archivedPath = [[url path] stringByAppendingPathComponent:
+                              [NSString stringWithFormat:@"bitmessage.%i.%@",
+                               (int)timeStamp, self.archiveSuffix]];
+    [self stopServer];
+    NSString *serverFolder = [[BMServerProcess sharedBMServerProcess] serverDataFolder];
+    [[[BMArchive alloc] init] archiveFromPath:serverFolder toPath:archivedPath];
+    [self startServer];
+}
+
+- (void)unarchiveFromUrl:(NSURL *)url
+{
+    [self stopServer];
+    NSString *serverFolder = [[BMServerProcess sharedBMServerProcess] serverDataFolder];
+    [[[BMArchive alloc] init] unarchiveFromPath:[url path] toPath:serverFolder];
+    [self startServer];
+    [self deepFetch];
 }
 
 @end

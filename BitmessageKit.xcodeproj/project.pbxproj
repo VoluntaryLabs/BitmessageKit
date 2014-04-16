@@ -100,6 +100,49 @@
 		8EDE5C2D18F594EA009A726A /* BMServerProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5BEE18F594EA009A726A /* BMServerProcess.m */; };
 		8EDE5C2E18F594EA009A726A /* JSONDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EDE5BEF18F594EA009A726A /* JSONDB.h */; };
 		8EDE5C2F18F594EA009A726A /* JSONDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5BF018F594EA009A726A /* JSONDB.m */; };
+		AA0E588F18FEE3FD0095DEBD /* BMArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E588D18FEE3FD0095DEBD /* BMArchive.h */; };
+		AA0E589018FEE3FD0095DEBD /* BMArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E588E18FEE3FD0095DEBD /* BMArchive.m */; };
+		AA0E58BB18FEE44F0095DEBD /* GMAppleDouble+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E589218FEE44F0095DEBD /* GMAppleDouble+ZKAdditions.h */; };
+		AA0E58BC18FEE44F0095DEBD /* GMAppleDouble+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E589318FEE44F0095DEBD /* GMAppleDouble+ZKAdditions.m */; };
+		AA0E58BD18FEE44F0095DEBD /* COPYING.TXT in Resources */ = {isa = PBXBuildFile; fileRef = AA0E589518FEE44F0095DEBD /* COPYING.TXT */; };
+		AA0E58BE18FEE44F0095DEBD /* GMAppleDouble.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E589618FEE44F0095DEBD /* GMAppleDouble.h */; };
+		AA0E58BF18FEE44F0095DEBD /* GMAppleDouble.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E589718FEE44F0095DEBD /* GMAppleDouble.m */; };
+		AA0E58C018FEE44F0095DEBD /* NSData+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E589818FEE44F0095DEBD /* NSData+ZKAdditions.h */; };
+		AA0E58C118FEE44F0095DEBD /* NSData+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E589918FEE44F0095DEBD /* NSData+ZKAdditions.m */; };
+		AA0E58C218FEE44F0095DEBD /* NSDate+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E589A18FEE44F0095DEBD /* NSDate+ZKAdditions.h */; };
+		AA0E58C318FEE44F0095DEBD /* NSDate+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E589B18FEE44F0095DEBD /* NSDate+ZKAdditions.m */; };
+		AA0E58C418FEE44F0095DEBD /* NSDictionary+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E589C18FEE44F0095DEBD /* NSDictionary+ZKAdditions.h */; };
+		AA0E58C518FEE44F0095DEBD /* NSDictionary+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E589D18FEE44F0095DEBD /* NSDictionary+ZKAdditions.m */; };
+		AA0E58C618FEE44F0095DEBD /* NSFileHandle+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E589E18FEE44F0095DEBD /* NSFileHandle+ZKAdditions.h */; };
+		AA0E58C718FEE44F0095DEBD /* NSFileHandle+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E589F18FEE44F0095DEBD /* NSFileHandle+ZKAdditions.m */; };
+		AA0E58C818FEE44F0095DEBD /* NSFileManager+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E58A018FEE44F0095DEBD /* NSFileManager+ZKAdditions.h */; };
+		AA0E58C918FEE44F0095DEBD /* NSFileManager+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E58A118FEE44F0095DEBD /* NSFileManager+ZKAdditions.m */; };
+		AA0E58CA18FEE44F0095DEBD /* NSString+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E58A218FEE44F0095DEBD /* NSString+ZKAdditions.h */; };
+		AA0E58CB18FEE44F0095DEBD /* NSString+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E58A318FEE44F0095DEBD /* NSString+ZKAdditions.m */; };
+		AA0E58CC18FEE44F0095DEBD /* ZipKit-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA0E58A418FEE44F0095DEBD /* ZipKit-Info.plist */; };
+		AA0E58CD18FEE44F0095DEBD /* ZipKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA0E58A518FEE44F0095DEBD /* ZipKit-Prefix.pch */; };
+		AA0E58CE18FEE44F0095DEBD /* ZipKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E58A618FEE44F0095DEBD /* ZipKit.h */; };
+		AA0E58CF18FEE44F0095DEBD /* ZKArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E58A718FEE44F0095DEBD /* ZKArchive.h */; };
+		AA0E58D018FEE44F0095DEBD /* ZKArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E58A818FEE44F0095DEBD /* ZKArchive.m */; };
+		AA0E58D118FEE44F0095DEBD /* ZKCDHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E58A918FEE44F0095DEBD /* ZKCDHeader.h */; };
+		AA0E58D218FEE44F0095DEBD /* ZKCDHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E58AA18FEE44F0095DEBD /* ZKCDHeader.m */; };
+		AA0E58D318FEE44F0095DEBD /* ZKCDTrailer.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E58AB18FEE44F0095DEBD /* ZKCDTrailer.h */; };
+		AA0E58D418FEE44F0095DEBD /* ZKCDTrailer.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E58AC18FEE44F0095DEBD /* ZKCDTrailer.m */; };
+		AA0E58D518FEE44F0095DEBD /* ZKCDTrailer64.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E58AD18FEE44F0095DEBD /* ZKCDTrailer64.h */; };
+		AA0E58D618FEE44F0095DEBD /* ZKCDTrailer64.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E58AE18FEE44F0095DEBD /* ZKCDTrailer64.m */; };
+		AA0E58D718FEE44F0095DEBD /* ZKCDTrailer64Locator.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E58AF18FEE44F0095DEBD /* ZKCDTrailer64Locator.h */; };
+		AA0E58D818FEE44F0095DEBD /* ZKCDTrailer64Locator.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E58B018FEE44F0095DEBD /* ZKCDTrailer64Locator.m */; };
+		AA0E58D918FEE44F0095DEBD /* ZKDataArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E58B118FEE44F0095DEBD /* ZKDataArchive.h */; };
+		AA0E58DA18FEE44F0095DEBD /* ZKDataArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E58B218FEE44F0095DEBD /* ZKDataArchive.m */; };
+		AA0E58DB18FEE44F0095DEBD /* ZKDefs.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E58B318FEE44F0095DEBD /* ZKDefs.h */; };
+		AA0E58DC18FEE44F0095DEBD /* ZKDefs.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E58B418FEE44F0095DEBD /* ZKDefs.m */; };
+		AA0E58DD18FEE44F0095DEBD /* ZKFileArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E58B518FEE44F0095DEBD /* ZKFileArchive.h */; };
+		AA0E58DE18FEE44F0095DEBD /* ZKFileArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E58B618FEE44F0095DEBD /* ZKFileArchive.m */; };
+		AA0E58DF18FEE44F0095DEBD /* ZKLFHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E58B718FEE44F0095DEBD /* ZKLFHeader.h */; };
+		AA0E58E018FEE44F0095DEBD /* ZKLFHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E58B818FEE44F0095DEBD /* ZKLFHeader.m */; };
+		AA0E58E118FEE44F0095DEBD /* ZKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0E58B918FEE44F0095DEBD /* ZKLog.h */; };
+		AA0E58E218FEE44F0095DEBD /* ZKLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E58BA18FEE44F0095DEBD /* ZKLog.m */; };
+		AA0E58E418FEE4830095DEBD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0E58E318FEE4830095DEBD /* libz.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -213,6 +256,49 @@
 		8EDE5BEE18F594EA009A726A /* BMServerProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMServerProcess.m; sourceTree = "<group>"; };
 		8EDE5BEF18F594EA009A726A /* JSONDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONDB.h; sourceTree = "<group>"; };
 		8EDE5BF018F594EA009A726A /* JSONDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONDB.m; sourceTree = "<group>"; };
+		AA0E588D18FEE3FD0095DEBD /* BMArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMArchive.h; sourceTree = "<group>"; };
+		AA0E588E18FEE3FD0095DEBD /* BMArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMArchive.m; sourceTree = "<group>"; };
+		AA0E589218FEE44F0095DEBD /* GMAppleDouble+ZKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMAppleDouble+ZKAdditions.h"; sourceTree = "<group>"; };
+		AA0E589318FEE44F0095DEBD /* GMAppleDouble+ZKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GMAppleDouble+ZKAdditions.m"; sourceTree = "<group>"; };
+		AA0E589518FEE44F0095DEBD /* COPYING.TXT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING.TXT; sourceTree = "<group>"; };
+		AA0E589618FEE44F0095DEBD /* GMAppleDouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMAppleDouble.h; sourceTree = "<group>"; };
+		AA0E589718FEE44F0095DEBD /* GMAppleDouble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMAppleDouble.m; sourceTree = "<group>"; };
+		AA0E589818FEE44F0095DEBD /* NSData+ZKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ZKAdditions.h"; sourceTree = "<group>"; };
+		AA0E589918FEE44F0095DEBD /* NSData+ZKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ZKAdditions.m"; sourceTree = "<group>"; };
+		AA0E589A18FEE44F0095DEBD /* NSDate+ZKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ZKAdditions.h"; sourceTree = "<group>"; };
+		AA0E589B18FEE44F0095DEBD /* NSDate+ZKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ZKAdditions.m"; sourceTree = "<group>"; };
+		AA0E589C18FEE44F0095DEBD /* NSDictionary+ZKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ZKAdditions.h"; sourceTree = "<group>"; };
+		AA0E589D18FEE44F0095DEBD /* NSDictionary+ZKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ZKAdditions.m"; sourceTree = "<group>"; };
+		AA0E589E18FEE44F0095DEBD /* NSFileHandle+ZKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileHandle+ZKAdditions.h"; sourceTree = "<group>"; };
+		AA0E589F18FEE44F0095DEBD /* NSFileHandle+ZKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileHandle+ZKAdditions.m"; sourceTree = "<group>"; };
+		AA0E58A018FEE44F0095DEBD /* NSFileManager+ZKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+ZKAdditions.h"; sourceTree = "<group>"; };
+		AA0E58A118FEE44F0095DEBD /* NSFileManager+ZKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+ZKAdditions.m"; sourceTree = "<group>"; };
+		AA0E58A218FEE44F0095DEBD /* NSString+ZKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ZKAdditions.h"; sourceTree = "<group>"; };
+		AA0E58A318FEE44F0095DEBD /* NSString+ZKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ZKAdditions.m"; sourceTree = "<group>"; };
+		AA0E58A418FEE44F0095DEBD /* ZipKit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ZipKit-Info.plist"; sourceTree = "<group>"; };
+		AA0E58A518FEE44F0095DEBD /* ZipKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZipKit-Prefix.pch"; sourceTree = "<group>"; };
+		AA0E58A618FEE44F0095DEBD /* ZipKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipKit.h; sourceTree = "<group>"; };
+		AA0E58A718FEE44F0095DEBD /* ZKArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKArchive.h; sourceTree = "<group>"; };
+		AA0E58A818FEE44F0095DEBD /* ZKArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKArchive.m; sourceTree = "<group>"; };
+		AA0E58A918FEE44F0095DEBD /* ZKCDHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKCDHeader.h; sourceTree = "<group>"; };
+		AA0E58AA18FEE44F0095DEBD /* ZKCDHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKCDHeader.m; sourceTree = "<group>"; };
+		AA0E58AB18FEE44F0095DEBD /* ZKCDTrailer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKCDTrailer.h; sourceTree = "<group>"; };
+		AA0E58AC18FEE44F0095DEBD /* ZKCDTrailer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKCDTrailer.m; sourceTree = "<group>"; };
+		AA0E58AD18FEE44F0095DEBD /* ZKCDTrailer64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKCDTrailer64.h; sourceTree = "<group>"; };
+		AA0E58AE18FEE44F0095DEBD /* ZKCDTrailer64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKCDTrailer64.m; sourceTree = "<group>"; };
+		AA0E58AF18FEE44F0095DEBD /* ZKCDTrailer64Locator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKCDTrailer64Locator.h; sourceTree = "<group>"; };
+		AA0E58B018FEE44F0095DEBD /* ZKCDTrailer64Locator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKCDTrailer64Locator.m; sourceTree = "<group>"; };
+		AA0E58B118FEE44F0095DEBD /* ZKDataArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKDataArchive.h; sourceTree = "<group>"; };
+		AA0E58B218FEE44F0095DEBD /* ZKDataArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKDataArchive.m; sourceTree = "<group>"; };
+		AA0E58B318FEE44F0095DEBD /* ZKDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKDefs.h; sourceTree = "<group>"; };
+		AA0E58B418FEE44F0095DEBD /* ZKDefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKDefs.m; sourceTree = "<group>"; };
+		AA0E58B518FEE44F0095DEBD /* ZKFileArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKFileArchive.h; sourceTree = "<group>"; };
+		AA0E58B618FEE44F0095DEBD /* ZKFileArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKFileArchive.m; sourceTree = "<group>"; };
+		AA0E58B718FEE44F0095DEBD /* ZKLFHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKLFHeader.h; sourceTree = "<group>"; };
+		AA0E58B818FEE44F0095DEBD /* ZKLFHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLFHeader.m; sourceTree = "<group>"; };
+		AA0E58B918FEE44F0095DEBD /* ZKLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKLog.h; sourceTree = "<group>"; };
+		AA0E58BA18FEE44F0095DEBD /* ZKLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLog.m; sourceTree = "<group>"; };
+		AA0E58E318FEE4830095DEBD /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +306,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA0E58E418FEE4830095DEBD /* libz.dylib in Frameworks */,
 				8EDE5B7E18F59414009A726A /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,6 +375,7 @@
 		8EDE5B7C18F59414009A726A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA0E58E318FEE4830095DEBD /* libz.dylib */,
 				8EDE5B7D18F59414009A726A /* Cocoa.framework */,
 				8EDE5B9218F59414009A726A /* XCTest.framework */,
 				8EDE5B7F18F59414009A726A /* Other Frameworks */,
@@ -482,6 +570,8 @@
 		8EDE5BE818F594EA009A726A /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				AA0E588D18FEE3FD0095DEBD /* BMArchive.h */,
+				AA0E588E18FEE3FD0095DEBD /* BMArchive.m */,
 				8EDE5BE918F594EA009A726A /* BMDatabase.h */,
 				8EDE5BEA18F594EA009A726A /* BMDatabase.m */,
 				8EDE5BEB18F594EA009A726A /* BMKeysFile.h */,
@@ -504,11 +594,68 @@
 		8EDE5C8B18F5953B009A726A /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				AA0E589118FEE44F0095DEBD /* ZipKit */,
 				8ED41FA618F596030025A51B /* xmlrpc */,
 				8ED41FA418F595DA0025A51B /* pybitmessage */,
 				8ED41FA218F595BF0025A51B /* static-python */,
 			);
 			name = Vendor;
+			sourceTree = "<group>";
+		};
+		AA0E589118FEE44F0095DEBD /* ZipKit */ = {
+			isa = PBXGroup;
+			children = (
+				AA0E589218FEE44F0095DEBD /* GMAppleDouble+ZKAdditions.h */,
+				AA0E589318FEE44F0095DEBD /* GMAppleDouble+ZKAdditions.m */,
+				AA0E589418FEE44F0095DEBD /* MacFUSE */,
+				AA0E589818FEE44F0095DEBD /* NSData+ZKAdditions.h */,
+				AA0E589918FEE44F0095DEBD /* NSData+ZKAdditions.m */,
+				AA0E589A18FEE44F0095DEBD /* NSDate+ZKAdditions.h */,
+				AA0E589B18FEE44F0095DEBD /* NSDate+ZKAdditions.m */,
+				AA0E589C18FEE44F0095DEBD /* NSDictionary+ZKAdditions.h */,
+				AA0E589D18FEE44F0095DEBD /* NSDictionary+ZKAdditions.m */,
+				AA0E589E18FEE44F0095DEBD /* NSFileHandle+ZKAdditions.h */,
+				AA0E589F18FEE44F0095DEBD /* NSFileHandle+ZKAdditions.m */,
+				AA0E58A018FEE44F0095DEBD /* NSFileManager+ZKAdditions.h */,
+				AA0E58A118FEE44F0095DEBD /* NSFileManager+ZKAdditions.m */,
+				AA0E58A218FEE44F0095DEBD /* NSString+ZKAdditions.h */,
+				AA0E58A318FEE44F0095DEBD /* NSString+ZKAdditions.m */,
+				AA0E58A418FEE44F0095DEBD /* ZipKit-Info.plist */,
+				AA0E58A518FEE44F0095DEBD /* ZipKit-Prefix.pch */,
+				AA0E58A618FEE44F0095DEBD /* ZipKit.h */,
+				AA0E58A718FEE44F0095DEBD /* ZKArchive.h */,
+				AA0E58A818FEE44F0095DEBD /* ZKArchive.m */,
+				AA0E58A918FEE44F0095DEBD /* ZKCDHeader.h */,
+				AA0E58AA18FEE44F0095DEBD /* ZKCDHeader.m */,
+				AA0E58AB18FEE44F0095DEBD /* ZKCDTrailer.h */,
+				AA0E58AC18FEE44F0095DEBD /* ZKCDTrailer.m */,
+				AA0E58AD18FEE44F0095DEBD /* ZKCDTrailer64.h */,
+				AA0E58AE18FEE44F0095DEBD /* ZKCDTrailer64.m */,
+				AA0E58AF18FEE44F0095DEBD /* ZKCDTrailer64Locator.h */,
+				AA0E58B018FEE44F0095DEBD /* ZKCDTrailer64Locator.m */,
+				AA0E58B118FEE44F0095DEBD /* ZKDataArchive.h */,
+				AA0E58B218FEE44F0095DEBD /* ZKDataArchive.m */,
+				AA0E58B318FEE44F0095DEBD /* ZKDefs.h */,
+				AA0E58B418FEE44F0095DEBD /* ZKDefs.m */,
+				AA0E58B518FEE44F0095DEBD /* ZKFileArchive.h */,
+				AA0E58B618FEE44F0095DEBD /* ZKFileArchive.m */,
+				AA0E58B718FEE44F0095DEBD /* ZKLFHeader.h */,
+				AA0E58B818FEE44F0095DEBD /* ZKLFHeader.m */,
+				AA0E58B918FEE44F0095DEBD /* ZKLog.h */,
+				AA0E58BA18FEE44F0095DEBD /* ZKLog.m */,
+			);
+			name = ZipKit;
+			path = BitmessageKit/Vendor/ZipKit/ZipKit;
+			sourceTree = "<group>";
+		};
+		AA0E589418FEE44F0095DEBD /* MacFUSE */ = {
+			isa = PBXGroup;
+			children = (
+				AA0E589518FEE44F0095DEBD /* COPYING.TXT */,
+				AA0E589618FEE44F0095DEBD /* GMAppleDouble.h */,
+				AA0E589718FEE44F0095DEBD /* GMAppleDouble.m */,
+			);
+			path = MacFUSE;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -523,16 +670,29 @@
 				8EDE5C2018F594EA009A726A /* BMSubscription.h in Headers */,
 				8EDE5C0818F594EA009A726A /* BMChannels.h in Headers */,
 				8EDE5C0018F594EA009A726A /* BMAddressed.h in Headers */,
+				AA0E58C818FEE44F0095DEBD /* NSFileManager+ZKAdditions.h in Headers */,
+				AA0E58D918FEE44F0095DEBD /* ZKDataArchive.h in Headers */,
 				8EDE5BFC18F594EA009A726A /* NSString+BM.h in Headers */,
+				AA0E58CD18FEE44F0095DEBD /* ZipKit-Prefix.pch in Headers */,
+				AA0E58BB18FEE44F0095DEBD /* GMAppleDouble+ZKAdditions.h in Headers */,
 				8EDE5C0E18F594EA009A726A /* BMIdentities.h in Headers */,
+				AA0E58D718FEE44F0095DEBD /* ZKCDTrailer64Locator.h in Headers */,
+				AA0E58DD18FEE44F0095DEBD /* ZKFileArchive.h in Headers */,
+				AA0E58D518FEE44F0095DEBD /* ZKCDTrailer64.h in Headers */,
+				AA0E58C218FEE44F0095DEBD /* NSDate+ZKAdditions.h in Headers */,
 				8EDE5C0218F594EA009A726A /* BMClient.h in Headers */,
 				8ED41FCD18F596310025A51B /* XMLRPCRequest.h in Headers */,
+				AA0E58DB18FEE44F0095DEBD /* ZKDefs.h in Headers */,
 				8EDE5BFE18F594EA009A726A /* BMAddress.h in Headers */,
 				8EDE5C2A18F594EA009A726A /* BMKeysFile.h in Headers */,
+				AA0E58BE18FEE44F0095DEBD /* GMAppleDouble.h in Headers */,
+				AA0E58CA18FEE44F0095DEBD /* NSString+ZKAdditions.h in Headers */,
 				8EDE5C1818F594EA009A726A /* BMReceivedMessage.h in Headers */,
 				8EDE5C1218F594EA009A726A /* BMMessage.h in Headers */,
 				8ED41FCF18F596310025A51B /* XMLRPCResponse.h in Headers */,
+				AA0E588F18FEE3FD0095DEBD /* BMArchive.h in Headers */,
 				8EDE5C0618F594EA009A726A /* BMChannel.h in Headers */,
+				AA0E58DF18FEE44F0095DEBD /* ZKLFHeader.h in Headers */,
 				8EDE5C2418F594EA009A726A /* BMProxyMessage.h in Headers */,
 				8EDE5BF218F594EA009A726A /* NSArray+extra.h in Headers */,
 				8ED41FBE18F596310025A51B /* NSStringAdditions.h in Headers */,
@@ -540,7 +700,10 @@
 				8ED41FC318F596310025A51B /* XMLRPCConnectionDelegate.h in Headers */,
 				8ED41FC918F596310025A51B /* XMLRPCEventBasedParser.h in Headers */,
 				8ED41FBC18F596310025A51B /* NSData+Base64.h in Headers */,
+				AA0E58C018FEE44F0095DEBD /* NSData+ZKAdditions.h in Headers */,
+				AA0E58E118FEE44F0095DEBD /* ZKLog.h in Headers */,
 				8EDE5BF618F594EA009A726A /* NSFileManager+DirectoryLocations.h in Headers */,
+				AA0E58C618FEE44F0095DEBD /* NSFileHandle+ZKAdditions.h in Headers */,
 				8EDE5C2618F594EA009A726A /* BMServerProxy.h in Headers */,
 				8EDE5BFA18F594EA009A726A /* NSObject+extra.h in Headers */,
 				8EDE5C1018F594EA009A726A /* BMIdentity.h in Headers */,
@@ -548,12 +711,16 @@
 				8EDE5C2218F594EA009A726A /* BMSubscriptions.h in Headers */,
 				8ED41FC018F596310025A51B /* XMLRPC.h in Headers */,
 				8EDE5C2E18F594EA009A726A /* JSONDB.h in Headers */,
+				AA0E58D318FEE44F0095DEBD /* ZKCDTrailer.h in Headers */,
+				AA0E58D118FEE44F0095DEBD /* ZKCDHeader.h in Headers */,
 				8ED41FCB18F596310025A51B /* XMLRPCEventBasedParserDelegate.h in Headers */,
 				8EDE5C1E18F594EA009A726A /* BMSentMessages.h in Headers */,
+				AA0E58CE18FEE44F0095DEBD /* ZipKit.h in Headers */,
 				8EDE5C0C18F594EA009A726A /* BMContacts.h in Headers */,
 				8EDE5C2C18F594EA009A726A /* BMServerProcess.h in Headers */,
 				8EDE5BF418F594EA009A726A /* NSDictionary+json.h in Headers */,
 				8EDE5C0418F594EA009A726A /* BMNode.h in Headers */,
+				AA0E58CF18FEE44F0095DEBD /* ZKArchive.h in Headers */,
 				8ED41FC118F596310025A51B /* XMLRPCConnection.h in Headers */,
 				8EDE5C1A18F594EA009A726A /* BMReceivedMessages.h in Headers */,
 				8ED41FC418F596310025A51B /* XMLRPCConnectionManager.h in Headers */,
@@ -561,6 +728,7 @@
 				8EDE5C0A18F594EA009A726A /* BMContact.h in Headers */,
 				8EDE5C1C18F594EA009A726A /* BMSentMessage.h in Headers */,
 				8ED41FC618F596310025A51B /* XMLRPCDefaultEncoder.h in Headers */,
+				AA0E58C418FEE44F0095DEBD /* NSDictionary+ZKAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,6 +810,8 @@
 			files = (
 				8ED41FA518F595DA0025A51B /* pybitmessage in Resources */,
 				8ED41FA318F595BF0025A51B /* static-python in Resources */,
+				AA0E58BD18FEE44F0095DEBD /* COPYING.TXT in Resources */,
+				AA0E58CC18FEE44F0095DEBD /* ZipKit-Info.plist in Resources */,
 				8EDE5B8818F59414009A726A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -662,17 +832,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EDE5B8C18F59414009A726A /* BitmessageKit.m in Sources */,
+				AA0E58D418FEE44F0095DEBD /* ZKCDTrailer.m in Sources */,
+				AA0E58C718FEE44F0095DEBD /* NSFileHandle+ZKAdditions.m in Sources */,
 				8EDE5C1118F594EA009A726A /* BMIdentity.m in Sources */,
 				8ED41FD018F596310025A51B /* XMLRPCResponse.m in Sources */,
+				AA0E58D818FEE44F0095DEBD /* ZKCDTrailer64Locator.m in Sources */,
+				AA0E58C318FEE44F0095DEBD /* NSDate+ZKAdditions.m in Sources */,
 				8EDE5C1718F594EA009A726A /* BMMessages.m in Sources */,
 				8EDE5C2F18F594EA009A726A /* JSONDB.m in Sources */,
 				8EDE5C2D18F594EA009A726A /* BMServerProcess.m in Sources */,
 				8EDE5C0518F594EA009A726A /* BMNode.m in Sources */,
 				8ED41FC218F596310025A51B /* XMLRPCConnection.m in Sources */,
+				AA0E58C918FEE44F0095DEBD /* NSFileManager+ZKAdditions.m in Sources */,
 				8EDE5C1D18F594EA009A726A /* BMSentMessage.m in Sources */,
+				AA0E58D218FEE44F0095DEBD /* ZKCDHeader.m in Sources */,
+				AA0E58DE18FEE44F0095DEBD /* ZKFileArchive.m in Sources */,
 				8EDE5C0118F594EA009A726A /* BMAddressed.m in Sources */,
 				8ED41FC718F596310025A51B /* XMLRPCDefaultEncoder.m in Sources */,
 				8ED41FCC18F596310025A51B /* XMLRPCEventBasedParserDelegate.m in Sources */,
+				AA0E58BC18FEE44F0095DEBD /* GMAppleDouble+ZKAdditions.m in Sources */,
+				AA0E58DA18FEE44F0095DEBD /* ZKDataArchive.m in Sources */,
 				8EDE5C2B18F594EA009A726A /* BMKeysFile.m in Sources */,
 				8ED41FBF18F596310025A51B /* NSStringAdditions.m in Sources */,
 				8EDE5BF718F594EA009A726A /* NSFileManager+DirectoryLocations.m in Sources */,
@@ -680,13 +859,18 @@
 				8EDE5BFB18F594EA009A726A /* NSObject+extra.m in Sources */,
 				8ED41FCA18F596310025A51B /* XMLRPCEventBasedParser.m in Sources */,
 				8EDE5C1318F594EA009A726A /* BMMessage.m in Sources */,
+				AA0E589018FEE3FD0095DEBD /* BMArchive.m in Sources */,
 				8EDE5C0B18F594EA009A726A /* BMContact.m in Sources */,
 				8ED41FBD18F596310025A51B /* NSData+Base64.m in Sources */,
+				AA0E58C118FEE44F0095DEBD /* NSData+ZKAdditions.m in Sources */,
 				8EDE5BFF18F594EA009A726A /* BMAddress.m in Sources */,
+				AA0E58E218FEE44F0095DEBD /* ZKLog.m in Sources */,
+				AA0E58E018FEE44F0095DEBD /* ZKLFHeader.m in Sources */,
 				8EDE5C1F18F594EA009A726A /* BMSentMessages.m in Sources */,
 				8EDE5C2318F594EA009A726A /* BMSubscriptions.m in Sources */,
 				8EDE5C0718F594EA009A726A /* BMChannel.m in Sources */,
 				8ED41FC518F596310025A51B /* XMLRPCConnectionManager.m in Sources */,
+				AA0E58D018FEE44F0095DEBD /* ZKArchive.m in Sources */,
 				8EDE5BF518F594EA009A726A /* NSDictionary+json.m in Sources */,
 				8EDE5C0D18F594EA009A726A /* BMContacts.m in Sources */,
 				8EDE5C1918F594EA009A726A /* BMReceivedMessage.m in Sources */,
@@ -695,11 +879,16 @@
 				8EDE5BF918F594EA009A726A /* NSMutableAttributedString+extra.m in Sources */,
 				8EDE5C2518F594EA009A726A /* BMProxyMessage.m in Sources */,
 				8EDE5C2718F594EA009A726A /* BMServerProxy.m in Sources */,
+				AA0E58D618FEE44F0095DEBD /* ZKCDTrailer64.m in Sources */,
+				AA0E58DC18FEE44F0095DEBD /* ZKDefs.m in Sources */,
+				AA0E58CB18FEE44F0095DEBD /* NSString+ZKAdditions.m in Sources */,
 				8ED41FCE18F596310025A51B /* XMLRPCRequest.m in Sources */,
 				8EDE5C2918F594EA009A726A /* BMDatabase.m in Sources */,
 				8EDE5C0318F594EA009A726A /* BMClient.m in Sources */,
+				AA0E58BF18FEE44F0095DEBD /* GMAppleDouble.m in Sources */,
 				8EDE5BFD18F594EA009A726A /* NSString+BM.m in Sources */,
 				8EDE5BF318F594EA009A726A /* NSArray+extra.m in Sources */,
+				AA0E58C518FEE44F0095DEBD /* NSDictionary+ZKAdditions.m in Sources */,
 				8EDE5C2118F594EA009A726A /* BMSubscription.m in Sources */,
 				8EDE5C0918F594EA009A726A /* BMChannels.m in Sources */,
 			);
