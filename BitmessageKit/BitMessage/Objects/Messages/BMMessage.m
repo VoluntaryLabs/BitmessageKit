@@ -16,8 +16,19 @@
 - (id)init
 {
     self = [super init];
-    self.actions = [NSMutableArray arrayWithObjects:@"reply", @"forward", @"delete", nil];
     return self;
+}
+
+- (NSArray *)uiActions
+{
+    NSArray *uiActions = [NSMutableArray arrayWithObjects:@"reply", @"forward", nil];
+    return  [uiActions arrayByAddingObjectsFromArray:super.uiActions];
+}
+
+- (NSArray *)modelActions
+{
+    NSArray *modelActions = [NSMutableArray arrayWithObjects:@"delete", nil];
+    return  [modelActions arrayByAddingObjectsFromArray:super.modelActions];
 }
 
 - (NSUInteger)hash

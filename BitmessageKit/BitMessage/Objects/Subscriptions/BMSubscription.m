@@ -21,9 +21,20 @@
 - (id)init
 {
     self = [super init];
-    self.actions = [NSMutableArray arrayWithObjects:@"message", @"delete", nil];
     self.label = self.class.defaultLabel;
     return self;
+}
+
+- (NSArray *)uiActions
+{
+    NSArray *uiActions = [NSMutableArray arrayWithObjects:@"message", nil];
+    return  [uiActions arrayByAddingObjectsFromArray:super.uiActions];
+}
+
+- (NSArray *)modelActions
+{
+    NSArray *modelActions = [NSMutableArray arrayWithObjects:@"delete", nil];
+    return  [modelActions arrayByAddingObjectsFromArray:super.modelActions];
 }
 
 + (BMSubscription *)withDict:(NSDictionary *)dict

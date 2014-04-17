@@ -15,8 +15,13 @@
 - (id)init
 {
     self = [super init];
-    self.actions = [NSMutableArray arrayWithObjects:@"delete", nil];
     return self;
+}
+
+- (NSArray *)modelActions
+{
+    NSArray *modelActions = [NSArray arrayWithObjects:@"delete", nil];
+    return  [modelActions arrayByAddingObjectsFromArray:super.modelActions];
 }
 
 + (BMIdentity *)withDict:(NSDictionary *)dict

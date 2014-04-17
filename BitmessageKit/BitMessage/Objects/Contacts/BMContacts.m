@@ -14,10 +14,16 @@
 - (id)init
 {
     self = [super init];
-    self.actions = [NSMutableArray arrayWithObjects:@"add", nil];
     self.shouldSelectChildOnAdd = YES;
     return self;
 }
+
+- (NSArray *)modelActions
+{
+    NSArray *modelActions = [NSMutableArray arrayWithObjects:@"add", nil];
+    return  [modelActions arrayByAddingObjectsFromArray:super.modelActions];
+}
+
 
 - (void)fetch
 {

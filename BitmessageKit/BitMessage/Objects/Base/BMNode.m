@@ -17,7 +17,7 @@
     self = [super init];
     
     self.children = [NSMutableArray array];
-    self.actions  = [NSMutableArray array];
+    //self.actions  = [NSMutableArray array];
     //[self.actions addObject:@"testAction"];
     
     self.shouldSortChildren = YES;
@@ -381,14 +381,26 @@
     return YES;
 }
 
-
 // actions
+
+- (NSArray *)actions
+{
+    return [self.modelActions arrayByAddingObjectsFromArray:self.uiActions];
+}
+
+- (NSArray *)modelActions
+{
+    return [NSMutableArray array];
+}
+
+- (NSArray *)uiActions
+{
+    return [NSMutableArray array];
+}
 
 - (NSString *)verifyActionMessage:(NSString *)aString
 {
     return nil;
 }
-
-
 
 @end

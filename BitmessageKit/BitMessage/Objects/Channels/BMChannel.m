@@ -22,10 +22,21 @@
 - (id)init
 {
     self = [super init];
-    self.actions = [NSMutableArray arrayWithObjects:@"message", @"delete", nil];
     [self setPassphrase:self.class.defaultLabel];
     [self setAddress:@""];
     return self;
+}
+
+- (NSArray *)uiActions
+{
+    NSArray *uiActions = [NSMutableArray arrayWithObjects:@"message", nil];
+    return  [uiActions arrayByAddingObjectsFromArray:super.uiActions];
+}
+
+- (NSArray *)modelActions
+{
+    NSArray *modelActions = [NSMutableArray arrayWithObjects:@"delete", nil];
+    return  [modelActions arrayByAddingObjectsFromArray:super.modelActions];
 }
 
 // -----------------------------

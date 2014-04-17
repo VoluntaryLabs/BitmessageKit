@@ -71,11 +71,14 @@ static BMClient *sharedBMClient;
                                                  name:NSApplicationWillTerminateNotification
                                                object:nil];
 
-    self.actions = [NSMutableArray arrayWithObjects:@"compose", nil];
-
     return self;
 }
 
+- (NSArray *)uiActions
+{
+    NSArray *uiActions = [NSMutableArray arrayWithObjects:@"compose", nil];
+    return  [uiActions arrayByAddingObjectsFromArray:super.uiActions];
+}
 
 
 - (CGFloat)nodeSuggestedWidth

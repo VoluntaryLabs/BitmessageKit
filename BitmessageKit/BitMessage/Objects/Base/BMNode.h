@@ -21,7 +21,7 @@
 
 @property (assign, nonatomic) BMNode *nodeParent;
 @property (strong, nonatomic) NSMutableArray *children;
-@property (strong, nonatomic) NSMutableArray *actions;
+//@property (strong, nonatomic) NSMutableArray *actions;
 @property (strong, nonatomic) NSView *nodeView;
 @property (assign, nonatomic) BOOL shouldSelectChildOnAdd;
 @property (assign, nonatomic) BOOL shouldSortChildren;
@@ -74,6 +74,10 @@
 - (BMClient *)client;
 
 // actions
+
+- (NSArray *)actions;
+- (NSArray *)modelActions;
+- (NSArray *)uiActions;
 
 - (NSString *)verifyActionMessage:(NSString *)aString;
 

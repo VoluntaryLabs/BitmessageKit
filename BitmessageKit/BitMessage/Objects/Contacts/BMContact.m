@@ -21,10 +21,16 @@
 - (id)init
 {
     self = [super init];
-    self.actions = [NSMutableArray arrayWithObjects:@"message", @"delete", nil];
     self.isSynced = NO;
     return self;
 }
+
+- (NSArray *)modelActions
+{
+    NSArray *modelActions = [NSMutableArray arrayWithObjects:@"message", @"delete", nil];
+    return  [modelActions arrayByAddingObjectsFromArray:super.modelActions];
+}
+
 
 + (BMContact *)withDict:(NSDictionary *)dict
 {
