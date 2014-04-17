@@ -41,7 +41,9 @@
 
     if (!_hasFetchedBefore && (lastUnreadCount != self.unreadCount))
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"BMReceivedMessagesUnreadCountChanged" object:self];
+        NSNumber *num = [NSNumber numberWithInteger:self.unreadCount];
+        NSDictionary *dict = [NSDictionary dictionaryWithObject:num forKey:@"number"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NavDocTileUpdate" object:dict];
     }
     
     

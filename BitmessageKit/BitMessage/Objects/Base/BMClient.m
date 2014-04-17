@@ -65,9 +65,18 @@ static BMClient *sharedBMClient;
     [self.subscriptions fetch];
     
     [self deepFetch];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(stopServer)
+                                                 name:NSApplicationWillTerminateNotification
+                                               object:nil];
+
+    self.actions = [NSMutableArray arrayWithObjects:@"compose", nil];
 
     return self;
 }
+
+
 
 - (CGFloat)nodeSuggestedWidth
 {
@@ -158,6 +167,7 @@ static BMClient *sharedBMClient;
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self stopServer];
 }
 
@@ -239,6 +249,11 @@ static BMClient *sharedBMClient;
     [[[BMArchive alloc] init] unarchiveFromPath:[url path] toPath:serverFolder];
     [self startServer];
     [self deepFetch];
+}
+
+- (void)compose
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BMNewDraft" object:nil];
 }
 
 @end

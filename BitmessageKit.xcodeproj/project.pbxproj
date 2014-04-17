@@ -451,14 +451,14 @@
 		8EDE5BB718F594EA009A726A /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				8EDE5BB818F594EA009A726A /* BMAddress.h */,
-				8EDE5BB918F594EA009A726A /* BMAddress.m */,
-				8EDE5BBA18F594EA009A726A /* BMAddressed.h */,
-				8EDE5BBB18F594EA009A726A /* BMAddressed.m */,
 				8EDE5BBC18F594EA009A726A /* BMClient.h */,
 				8EDE5BBD18F594EA009A726A /* BMClient.m */,
 				8EDE5BBE18F594EA009A726A /* BMNode.h */,
 				8EDE5BBF18F594EA009A726A /* BMNode.m */,
+				8EDE5BB818F594EA009A726A /* BMAddress.h */,
+				8EDE5BB918F594EA009A726A /* BMAddress.m */,
+				8EDE5BBA18F594EA009A726A /* BMAddressed.h */,
+				8EDE5BBB18F594EA009A726A /* BMAddressed.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
