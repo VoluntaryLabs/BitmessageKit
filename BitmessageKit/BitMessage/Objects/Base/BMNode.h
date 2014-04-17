@@ -12,6 +12,11 @@
 @class BMNode;
 @class BMClient;
 
+@protocol NodeViewProtocol <NSObject>
+- (void)setNode:(id)aNode;
+@end
+
+
 @interface BMNode : NSObject
 
 @property (assign, nonatomic) BMNode *nodeParent;
