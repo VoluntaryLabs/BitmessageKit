@@ -74,13 +74,6 @@ static BMClient *sharedBMClient;
     return self;
 }
 
-- (NSArray *)uiActions
-{
-    NSArray *uiActions = [NSMutableArray arrayWithObjects:@"compose", nil];
-    return  [uiActions arrayByAddingObjectsFromArray:super.uiActions];
-}
-
-
 - (CGFloat)nodeSuggestedWidth
 {
     return 150.0;
@@ -252,11 +245,6 @@ static BMClient *sharedBMClient;
     [[[BMArchive alloc] init] unarchiveFromPath:[url path] toPath:serverFolder];
     [self startServer];
     [self deepFetch];
-}
-
-- (void)compose
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"BMNewDraft" object:nil];
 }
 
 @end

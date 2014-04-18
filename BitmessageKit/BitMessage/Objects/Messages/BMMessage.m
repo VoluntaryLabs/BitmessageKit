@@ -19,12 +19,6 @@
     return self;
 }
 
-- (NSArray *)uiActions
-{
-    NSArray *uiActions = [NSMutableArray arrayWithObjects:@"reply", @"forward", nil];
-    return  [uiActions arrayByAddingObjectsFromArray:super.uiActions];
-}
-
 - (NSArray *)modelActions
 {
     NSArray *modelActions = [NSMutableArray arrayWithObjects:@"delete", nil];
