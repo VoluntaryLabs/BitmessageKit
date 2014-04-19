@@ -520,7 +520,7 @@ class Style(object):
             return self.tk.eval("return $ttk::currentTheme")
 
         # using "ttk::setTheme" instead of "ttk::style theme use" causes
-        # the variable currentTheme to be updated, also, ttk::setTheme calls
+        # the variable currentNavTheme to be updated, also, ttk::setNavTheme calls
         # "ttk::style theme use" in order to change theme.
         self.tk.call("ttk::setTheme", themename)
 

@@ -31,7 +31,7 @@ class ConfigDialog(Toplevel):
         self.title('IDLE Preferences')
         self.geometry("+%d+%d" % (parent.winfo_rootx()+20,
                 parent.winfo_rooty()+30))
-        #Theme Elements. Each theme element key is its display name.
+        #NavTheme Elements. Each theme element key is its display name.
         #The first value of the tuple is the sample area tag name.
         #The second value is the display name list sort index.
         self.themeElements={'Normal Text':('normal','00'),
@@ -180,7 +180,7 @@ class ConfigDialog(Toplevel):
         frameCustom=LabelFrame(frame,borderwidth=2,relief=GROOVE,
                                text=' Custom Highlighting ')
         frameTheme=LabelFrame(frame,borderwidth=2,relief=GROOVE,
-                              text=' Highlighting Theme ')
+                              text=' Highlighting NavTheme ')
         #frameCustom
         self.textHighlightSample=Text(frameCustom,relief=SOLID,borderwidth=1,
             font=('courier',12,''),cursor='hand2',width=21,height=11,
@@ -764,7 +764,7 @@ class ConfigDialog(Toplevel):
             #user didn't cancel, and they chose a new colour
             if self.themeIsBuiltin.get(): #current theme is a built-in
                 message=('Your changes will be saved as a new Custom Theme. '+
-                        'Enter a name for your new Custom Theme below.')
+                        'Enter a name for your new Custom NavTheme below.')
                 newTheme=self.GetNewThemeName(message)
                 if not newTheme: #user cancelled custom theme creation
                     return
@@ -793,7 +793,7 @@ class ConfigDialog(Toplevel):
         return newTheme
 
     def SaveAsNewTheme(self):
-        newThemeName=self.GetNewThemeName('New Theme Name:')
+        newThemeName=self.GetNewThemeName('New NavTheme Name:')
         if newThemeName:
             self.CreateNewTheme(newThemeName)
 
