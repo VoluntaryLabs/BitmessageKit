@@ -45,7 +45,7 @@ static BMClient *sharedBMClient;
     [self addChild:self.contacts];
     [self addChild:self.identities];
     [self addChild:self.channels];
-    [self addChild:self.subscriptions];
+    //[self addChild:self.subscriptions];
 
     self.readMessagesDB = [[BMDatabase alloc] init];
     [self.readMessagesDB setName:@"readMessagesDB"];
