@@ -10,8 +10,6 @@
 #import "BMProxyMessage.h"
 #import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 
-//#import "DraftController.h"
-//#import "AppController.h"
 #import "BMClient.h"
 #import "BMIdentities.h"
 #import "BMAddress.h"

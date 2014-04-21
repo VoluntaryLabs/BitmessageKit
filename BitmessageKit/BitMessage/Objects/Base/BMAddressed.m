@@ -8,8 +8,6 @@
 
 #import "BMAddressed.h"
 #import "BMAddress.h"
-
-//#import "AppController.h"
 #import "BMClient.h"
 #import "BMReceivedMessage.h"
 

@@ -89,7 +89,7 @@
 
 - (void)removeChild:(id)aChild
 {
-    [super addChild:aChild];
+    [super removeChild:aChild];
     
     if (![(BMMessage *)aChild read])
     {

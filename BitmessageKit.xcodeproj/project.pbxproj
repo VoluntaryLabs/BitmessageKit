@@ -128,6 +128,7 @@
 		AA153C2E18FEFC45007B4785 /* ZKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = AA153C0618FEFC45007B4785 /* ZKLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA153C2F18FEFC45007B4785 /* ZKLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AA153C0718FEFC45007B4785 /* ZKLog.m */; };
 		AA153C3618FF057D007B4785 /* BitmessageKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EDE5B8A18F59414009A726A /* BitmessageKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AACD78101905C765008832FB /* NavNodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACD78021905C4F6008832FB /* NavNodeKit.framework */; };
 		AAE31DBD18FF11A000405754 /* static-python in Resources */ = {isa = PBXBuildFile; fileRef = AAE31DBC18FF11A000405754 /* static-python */; };
 		AAE31EEA18FF21BE00405754 /* FoundationCategoriesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE31EE718FF219B00405754 /* FoundationCategoriesKit.framework */; };
 /* End PBXBuildFile section */
@@ -139,6 +140,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8EDE5B7918F59414009A726A;
 			remoteInfo = BitmessageKit;
+		};
+		AACD78011905C4F6008832FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AACD77F91905C4F5008832FB /* NavNodeKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AACD77AF1905C051008832FB;
+			remoteInfo = NavNodeKit;
+		};
+		AACD78031905C4F6008832FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AACD77F91905C4F5008832FB /* NavNodeKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AACD77C61905C051008832FB;
+			remoteInfo = NavNodeKitTests;
 		};
 		AAE31EE618FF219B00405754 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -285,6 +300,7 @@
 		AA153C0518FEFC45007B4785 /* ZKLFHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLFHeader.m; sourceTree = "<group>"; };
 		AA153C0618FEFC45007B4785 /* ZKLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKLog.h; sourceTree = "<group>"; };
 		AA153C0718FEFC45007B4785 /* ZKLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLog.m; sourceTree = "<group>"; };
+		AACD77F91905C4F5008832FB /* NavNodeKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NavNodeKit.xcodeproj; path = ../NavNodeKit/NavNodeKit.xcodeproj; sourceTree = "<group>"; };
 		AAE31DBC18FF11A000405754 /* static-python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "static-python"; path = "Vendor/static-python"; sourceTree = "<group>"; };
 		AAE31DBE18FF11BA00405754 /* pybitmessage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybitmessage; path = Vendor/pybitmessage; sourceTree = "<group>"; };
 		AAE31EE118FF219B00405754 /* FoundationCategoriesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FoundationCategoriesKit.xcodeproj; path = ../FoundationCategoriesKit/FoundationCategoriesKit.xcodeproj; sourceTree = "<group>"; };
@@ -295,6 +311,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AACD78101905C765008832FB /* NavNodeKit.framework in Frameworks */,
 				AAE31EEA18FF21BE00405754 /* FoundationCategoriesKit.framework in Frameworks */,
 				AA0E58E418FEE4830095DEBD /* libz.dylib in Frameworks */,
 				8EDE5B7E18F59414009A726A /* Cocoa.framework in Frameworks */,
@@ -345,6 +362,7 @@
 		8EDE5B7018F59414009A726A = {
 			isa = PBXGroup;
 			children = (
+				AACD77F91905C4F5008832FB /* NavNodeKit.xcodeproj */,
 				AAE31EE118FF219B00405754 /* FoundationCategoriesKit.xcodeproj */,
 				8EDE5C8B18F5953B009A726A /* Vendor */,
 				8EDE5B8318F59414009A726A /* BitmessageKit */,
@@ -628,6 +646,15 @@
 			path = MacFUSE;
 			sourceTree = "<group>";
 		};
+		AACD77FA1905C4F5008832FB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AACD78021905C4F6008832FB /* NavNodeKit.framework */,
+				AACD78041905C4F6008832FB /* NavNodeKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		AAE31EE218FF219B00405754 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -773,6 +800,10 @@
 					ProductGroup = AAE31EE218FF219B00405754 /* Products */;
 					ProjectRef = AAE31EE118FF219B00405754 /* FoundationCategoriesKit.xcodeproj */;
 				},
+				{
+					ProductGroup = AACD77FA1905C4F5008832FB /* Products */;
+					ProjectRef = AACD77F91905C4F5008832FB /* NavNodeKit.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -783,6 +814,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		AACD78021905C4F6008832FB /* NavNodeKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NavNodeKit.framework;
+			remoteRef = AACD78011905C4F6008832FB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AACD78041905C4F6008832FB /* NavNodeKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NavNodeKitTests.xctest;
+			remoteRef = AACD78031905C4F6008832FB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		AAE31EE718FF219B00405754 /* FoundationCategoriesKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
