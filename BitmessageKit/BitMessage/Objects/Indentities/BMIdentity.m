@@ -64,7 +64,7 @@
     id response = [message parsedResponseValue];
     NSLog(@"delete response = %@", response);
     
-    [self.nodeParent removeChild:self];
+    [self removeFromParent];
     [self postParentChanged];
 }
 

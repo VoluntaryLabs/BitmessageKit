@@ -188,7 +188,7 @@
 - (void)leave
 {
     [self justLeave];
-    [self.nodeParent removeChild:self];
+    [self removeFromParent];
     [self postParentChanged];
 }
 

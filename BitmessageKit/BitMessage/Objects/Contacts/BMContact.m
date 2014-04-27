@@ -81,7 +81,7 @@
 - (void)delete
 {
     [self justDelete];
-    [self.nodeParent removeChild:self];
+    [self removeFromParent];
 }
 
 - (void)update

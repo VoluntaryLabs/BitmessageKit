@@ -189,8 +189,7 @@
 
 - (void)delete
 {
-    [self.nodeParent removeChild:self];
-
+    [self removeFromParent];
     [self justDelete];
     //id result = [message parsedResponseValue];
     //NSLog(@"delete result %@", result);
