@@ -10,6 +10,7 @@
 #import "XMLRPCEventBasedParser.h"
 #import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 #import "BMServerProcess.h"
+#import "BMClient.h"
 
 @implementation BMProxyMessage
 
@@ -53,6 +54,11 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ProgressPush" object:self];
     [self composeRequest];
     
+    if (!BMClient.sharedBMClient.server.isRunning) // start server if needed
+    {
+        [NSException raise:@"Error" format:@"Bitmessage server not running"];
+    }
+        
     NSError *error;
     self.response = [XMLRPCConnection sendSynchronousXMLRPCRequest:self.request error:&error];
     self.error = error;
