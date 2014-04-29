@@ -34,6 +34,7 @@
 {
     self = [super init];
     _name = @"default";
+    self.location = JSONDB_IN_SERVER_FOLDER;
     return self;
 }
 
@@ -44,20 +45,28 @@
 
 - (NSString *)path
 {
-    if (self.isInAppWrapper)
+    NSString *fileName = [NSString stringWithFormat:@"%@.json", self.name];
+    
+    if ([_location isEqualToString:JSONDB_IN_APP_WRAPPER])
     {
         NSString *path = [[NSBundle mainBundle] pathForResource:self.name ofType:nil];
         return path;
     }
-    else
+    else if ([_location isEqualToString:JSONDB_IN_SERVER_FOLDER])
     {
         NSString *folder = [[BMServerProcess sharedBMServerProcess] serverDataFolder];
-        //NSString *folder = [@"~/Library/Application Support/PyBitmessage" stringByExpandingTildeInPath];
-        //NSString *folder = [[NSFileManager defaultManager] applicationSupportDirectory];
-        NSString *path = [folder stringByAppendingPathComponent:
-                          [NSString stringWithFormat:@"%@.json", self.name]];
+        NSString *path = [folder stringByAppendingPathComponent:fileName];
         return path;
     }
+    else if ([_location isEqualToString:JSONDB_IN_APP_SUPPORT_FOLDER])
+    {
+        NSString *folder = [[NSFileManager defaultManager] applicationSupportDirectory];
+        NSString *path = [folder stringByAppendingPathComponent:fileName];
+        return path;
+    }
+
+    [NSException raise:@"Invalid location" format:@"unknown location setting '%@'", _location];
+    return nil;
 }
 
 - (NSDictionary *)dict

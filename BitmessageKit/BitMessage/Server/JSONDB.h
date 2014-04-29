@@ -8,11 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+#define JSONDB_IN_SERVER_FOLDER      @"JSONDB_IN_SERVER_FOLDER"
+#define JSONDB_IN_APP_WRAPPER        @"JSONDB_IN_APP_WRAPPER"
+#define JSONDB_IN_APP_SUPPORT_FOLDER @"JSONDB_IN_APP_SUPPORT_FOLDER"
+
 @interface JSONDB : NSObject
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSMutableDictionary *dict;
-@property (assign, nonatomic) BOOL isInAppWrapper;
+@property (strong, nonatomic) NSString *location;
 
 - (void)read;
 - (void)write;
