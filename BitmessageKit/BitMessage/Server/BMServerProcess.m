@@ -11,6 +11,7 @@
 #include <sys/sysctl.h>
 #include <unistd.h>
 #include <errno.h>
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 #import "BMProxyMessage.h"
 
 @implementation BMServerProcess
@@ -35,6 +36,10 @@ static BMServerProcess *shared = nil;
     self.port = 8442;
     self.username = @"bitmarket";
     self.password = @"87342873428901648473823";
+    NSString *applicationSupportDirectory =
+    [NSString stringWithString:[[NSFileManager defaultManager] applicationSupportDirectory]];
+    self.dataPath = [applicationSupportDirectory stringByAppendingPathComponent:@"pybitmessage"];
+
     
     self.keysFile = [[BMKeysFile alloc] init];
     [self setupKeysDat];
@@ -91,6 +96,7 @@ static BMServerProcess *shared = nil;
     // Set environment variables containing api username and password
     [environment setObject:self.username forKey:@"PYBITMESSAGE_USER"];
     [environment setObject:self.password forKey:@"PYBITMESSAGE_PASSWORD"];
+    [environment setObject:self.dataPath forKey:@"BITMESSAGE_HOME"];
     [_task setEnvironment: environment];
     
     // Set the path to the python executable
@@ -162,7 +168,7 @@ static BMServerProcess *shared = nil;
 
 - (NSString *)serverDataFolder
 {
-    return [@"~/Library/Application Support/PyBitmessage" stringByExpandingTildeInPath];
+    return self.dataPath;
 }
 
 @end
