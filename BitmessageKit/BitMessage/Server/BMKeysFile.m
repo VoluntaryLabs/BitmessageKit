@@ -14,8 +14,7 @@
 
 - (NSString *)folder
 {
-    return [@"~/Library/Application Support/PyBitmessage" stringByExpandingTildeInPath];
-
+    return [[BMServerProcess sharedBMServerProcess] serverDataFolder];
 }
 - (NSString *)path
 {
