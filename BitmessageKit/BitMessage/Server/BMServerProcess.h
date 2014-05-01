@@ -21,6 +21,7 @@
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) BMKeysFile *keysFile;
+@property (strong, nonatomic) NSString *dataPath;
 
 
 - (void)launch;
