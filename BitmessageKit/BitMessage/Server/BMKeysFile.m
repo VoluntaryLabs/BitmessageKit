@@ -140,6 +140,21 @@
     [self write];
 }
 
+- (void)setupForNonTor
+{
+    [self read];
+    [self.settings setObject:@"" forKey:@"socksport"];;
+    [self.settings setObject:@"" forKey:@"socksproxytype"];
+    [self write];
+}
+
+- (void)setupForTor
+{
+    [self read];
+    [self.settings setObject:@"9050" forKey:@"socksport"];;
+    [self.settings setObject:@"SOCKS5" forKey:@"socksproxytype"];
+    [self write];
+}
 
 - (BOOL)setApiUsername:(NSString *)aString
 {

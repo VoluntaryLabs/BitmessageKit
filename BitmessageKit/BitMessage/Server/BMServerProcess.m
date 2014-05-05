@@ -65,6 +65,7 @@ static BMServerProcess *shared = nil;
 {
     [self.keysFile backup];
     [self.keysFile setupForDaemon];
+    [self.keysFile setupForTor];
     [self randomizeLogin];
 }
 
@@ -78,6 +79,33 @@ static BMServerProcess *shared = nil;
     return YES;
 }
 
+- (void)launchTor
+{
+    _torTask = [[NSTask alloc] init];
+    _inpipe = [NSPipe pipe];
+    
+    // Set the path to the python executable
+    NSBundle *mainBundle = [NSBundle bundleForClass:self.class];
+    NSString * torPath = [mainBundle pathForResource:@"tor" ofType:@"" inDirectory: @"tor"];
+    NSString * torConfigPath = [mainBundle pathForResource:@"torrc" ofType:@"" inDirectory: @"tor"];
+    NSString * torDataDirectory = [[self serverDataFolder] stringByAppendingPathComponent: @".tor"];
+    [_torTask setLaunchPath:torPath];
+    
+    NSFileHandle *nullFileHandle = [NSFileHandle fileHandleWithNullDevice];
+    [_torTask setStandardOutput:nullFileHandle];
+    [_torTask setStandardInput: (NSFileHandle *) _inpipe];
+    [_torTask setStandardError:nullFileHandle];
+    
+    [_torTask setArguments:@[ @"-f", torConfigPath, @"--DataDirectory", torDataDirectory ]];
+    
+    [_torTask launch];
+    
+    if (![_torTask isRunning])
+    {
+        NSLog(@"tor task not running after launch");
+    }
+}
+
 - (void)launch
 {
     if (self.isRunning)
@@ -86,7 +114,11 @@ static BMServerProcess *shared = nil;
         return;
     }
     
-    _task = [[NSTask alloc] init];
+    // Launch tor client
+    
+    [self launchTor];
+    
+    _pyBitmessageTask = [[NSTask alloc] init];
     _inpipe = [NSPipe pipe];
     NSDictionary *environmentDict = [[NSProcessInfo processInfo] environment];
     NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithDictionary:environmentDict];
@@ -96,26 +128,26 @@ static BMServerProcess *shared = nil;
     [environment setObject:self.username forKey:@"PYBITMESSAGE_USER"];
     [environment setObject:self.password forKey:@"PYBITMESSAGE_PASSWORD"];
     [environment setObject:self.dataPath forKey:@"BITMESSAGE_HOME"];
-    [_task setEnvironment: environment];
+    [_pyBitmessageTask setEnvironment: environment];
     
     // Set the path to the python executable
     NSBundle *mainBundle = [NSBundle bundleForClass:self.class];
     NSString * pythonPath = [mainBundle pathForResource:@"python" ofType:@"exe" inDirectory: @"static-python"];
     NSString * pybitmessagePath = [mainBundle pathForResource:@"bitmessagemain" ofType:@"py" inDirectory: @"pybitmessage"];
-    [_task setLaunchPath:pythonPath];
+    [_pyBitmessageTask setLaunchPath:pythonPath];
     
     NSFileHandle *nullFileHandle = [NSFileHandle fileHandleWithNullDevice];
-    [_task setStandardOutput:nullFileHandle];
-    [_task setStandardInput: (NSFileHandle *) _inpipe];
-    //[_task setStandardError:nullFileHandle];
+    [_pyBitmessageTask setStandardOutput:nullFileHandle];
+    [_pyBitmessageTask setStandardInput: (NSFileHandle *) _inpipe];
+    //[_pyBitmessageTask setStandardError:nullFileHandle];
     
-    [_task setArguments:@[ pybitmessagePath ]];
+    [_pyBitmessageTask setArguments:@[ pybitmessagePath ]];
    
-    [_task launch];
+    [_pyBitmessageTask launch];
     
-    if (![_task isRunning])
+    if (![_pyBitmessageTask isRunning])
     {
-        NSLog(@"task not running after launch");
+        NSLog(@"pybitmessage task not running after launch");
     }
     else
     {
@@ -143,14 +175,19 @@ static BMServerProcess *shared = nil;
 - (void)terminate
 {
     NSLog(@"Killing pybitmessage process...");
-    [_task terminate];
-    self.task = nil;
+    [_pyBitmessageTask terminate];
+    self.pyBitmessageTask = nil;
     [self.keysFile setupForNonDaemon];
+    [self.keysFile setupForNonTor];
+
+    NSLog(@"Killing tor process...");
+    [_torTask terminate];
+    self.torTask = nil;
 }
 
 - (BOOL)isRunning
 {
-    return (_task && [_task isRunning]);
+    return (_pyBitmessageTask && [_pyBitmessageTask isRunning]);
 }
 
 - (BOOL)canConnect

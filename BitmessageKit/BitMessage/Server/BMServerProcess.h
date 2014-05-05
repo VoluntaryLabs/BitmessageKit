@@ -13,7 +13,8 @@
 
 + (BMServerProcess *)sharedBMServerProcess;
 
-@property (strong) NSTask *task;
+@property (strong) NSTask *torTask;
+@property (strong) NSTask *pyBitmessageTask;
 @property (strong) NSPipe *inpipe;
 
 @property (retain, nonatomic) NSString *host;
@@ -25,6 +26,7 @@
 
 
 - (void)launch;
+- (void)launchTor;
 - (BOOL)isRunning;
 - (void)terminate;
 - (BOOL)canConnect;
