@@ -27,6 +27,7 @@
 
 - (void)launch;
 - (void)launchTor;
+- (BOOL)isProcessRunningWithName:(NSString *)name pid:(pid_t)pid;
 - (BOOL)isRunning;
 - (void)terminate;
 - (BOOL)canConnect;
