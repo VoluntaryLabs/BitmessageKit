@@ -13,7 +13,8 @@
 
 + (BMServerProcess *)sharedBMServerProcess;
 
-@property (strong) NSTask *task;
+@property (strong) NSTask *torTask;
+@property (strong) NSTask *pyBitmessageTask;
 @property (strong) NSPipe *inpipe;
 
 @property (retain, nonatomic) NSString *host;
@@ -21,9 +22,12 @@
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) BMKeysFile *keysFile;
+@property (strong, nonatomic) NSString *dataPath;
 
 
 - (void)launch;
+- (void)launchTor;
+- (BOOL)isProcessRunningWithName:(NSString *)name pid:(pid_t)pid;
 - (BOOL)isRunning;
 - (void)terminate;
 - (BOOL)canConnect;

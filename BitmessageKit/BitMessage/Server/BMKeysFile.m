@@ -14,8 +14,7 @@
 
 - (NSString *)folder
 {
-    return [@"~/Library/Application Support/PyBitmessage" stringByExpandingTildeInPath];
-
+    return [[BMServerProcess sharedBMServerProcess] serverDataFolder];
 }
 - (NSString *)path
 {
@@ -141,6 +140,23 @@
     [self write];
 }
 
+- (void)setupForNonTor
+{
+    [self read];
+    [self.settings setObject:@"" forKey:@"socksport"];;
+    [self.settings setObject:@"" forKey:@"socksproxytype"];
+    [self.settings setObject:@"False" forKey:@"socksproxytype"];
+    [self write];
+}
+
+- (void)setupForTor
+{
+    [self read];
+    [self.settings setObject:@"9050" forKey:@"socksport"];;
+    [self.settings setObject:@"SOCKS5" forKey:@"socksproxytype"];
+    [self.settings setObject:@"True" forKey:@"socksproxytype"];
+    [self write];
+}
 
 - (BOOL)setApiUsername:(NSString *)aString
 {

@@ -14,6 +14,8 @@
 
 - (void)setupForDaemon;
 - (void)setupForNonDaemon; // call this when shutting down
+- (void)setupForTor;
+- (void)setupForNonTor;
 
 - (BOOL)setApiUsername:(NSString *)aString;
 - (BOOL)setApiPassword:(NSString *)aString;

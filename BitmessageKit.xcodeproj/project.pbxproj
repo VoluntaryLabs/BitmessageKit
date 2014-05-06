@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8EBC9BAE191803D700FE71FA /* tor in Resources */ = {isa = PBXBuildFile; fileRef = 8EBC9BAD191803D700FE71FA /* tor */; };
 		8ED41FA518F595DA0025A51B /* pybitmessage in Resources */ = {isa = PBXBuildFile; fileRef = 8ED41FA418F595DA0025A51B /* pybitmessage */; };
 		8ED41FBC18F596310025A51B /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ED41FA718F596310025A51B /* NSData+Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8ED41FBD18F596310025A51B /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED41FA818F596310025A51B /* NSData+Base64.m */; };
@@ -174,6 +175,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8EBC9BAD191803D700FE71FA /* tor */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tor; path = BitmessageKit/Vendor/tor; sourceTree = "<group>"; };
 		8ED41FA218F595BF0025A51B /* static-python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "static-python"; path = "BitmessageKit/Vendor/static-python"; sourceTree = "<group>"; };
 		8ED41FA418F595DA0025A51B /* pybitmessage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybitmessage; path = BitmessageKit/Vendor/pybitmessage; sourceTree = "<group>"; };
 		8ED41FA718F596310025A51B /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "BitmessageKit/Vendor/xmlrpc/NSData+Base64.h"; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 		8EDE5C8B18F5953B009A726A /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				8EBC9BAD191803D700FE71FA /* tor */,
 				AA153BDE18FEFC45007B4785 /* ZipKit */,
 				8ED41FA618F596030025A51B /* xmlrpc */,
 				8ED41FA418F595DA0025A51B /* pybitmessage */,
@@ -857,6 +860,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EBC9BAE191803D700FE71FA /* tor in Resources */,
 				AAE31DBD18FF11A000405754 /* static-python in Resources */,
 				8ED41FA518F595DA0025A51B /* pybitmessage in Resources */,
 				AA153C0A18FEFC45007B4785 /* COPYING.TXT in Resources */,
