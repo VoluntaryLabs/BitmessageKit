@@ -59,6 +59,7 @@ class singleListener(threading.Thread):
                 time.sleep(10)
 
             rdy_read, rdy_write, in_error = select.select([sock, sys.stdin],[],[])
+
             if sys.stdin in rdy_read:
                 print 'Parent Exit. Stopping Bitmessage Daemon.'
                 shared.doCleanShutdown()
@@ -66,7 +67,7 @@ class singleListener(threading.Thread):
             a, (HOST, PORT) = sock.accept()
 
             # The following code will, unfortunately, block an incoming
-            # connection if someone else on the same LAN is already connected
+            # connection if someone else on the same LAN is already connect
             # because the two computers will share the same external IP. This
             # is here to prevent connection flooding.
             while HOST in shared.connectedHostsList:

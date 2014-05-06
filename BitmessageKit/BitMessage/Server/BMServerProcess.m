@@ -137,7 +137,7 @@ static BMServerProcess *shared = nil;
     [_pyBitmessageTask setLaunchPath:pythonPath];
     
     NSFileHandle *nullFileHandle = [NSFileHandle fileHandleWithNullDevice];
-    [_pyBitmessageTask setStandardOutput:nullFileHandle];
+    //[_pyBitmessageTask setStandardOutput:nullFileHandle];
     [_pyBitmessageTask setStandardInput: (NSFileHandle *) _inpipe];
     //[_pyBitmessageTask setStandardError:nullFileHandle];
     
