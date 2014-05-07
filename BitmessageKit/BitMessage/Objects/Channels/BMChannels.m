@@ -86,7 +86,7 @@
 {
     for (BMChannel *channel in self.children)
     {
-        NSLog(@"channel.passphrase = '%@'", channel.passphrase);
+        //NSLog(@"channel.passphrase = '%@'", channel.passphrase);
         
         if ([channel.passphrase isEqualToString:aPassphrase])
         {
