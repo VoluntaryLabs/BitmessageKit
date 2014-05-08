@@ -19,10 +19,11 @@
     self = [super init];
     
     self.sent = [[BMSentMessages alloc] init];
+    [self addChild:self.sent];
+
     self.received = [[BMReceivedMessages alloc] init];
+    [self addChild:self.received];
     
-    [self.children addObject:self.sent];
-    [self.children addObject:self.received];
     return self;
 }
 

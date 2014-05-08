@@ -71,14 +71,16 @@
     return nil;
 }
 
-- (void)addChild:(id)aChild
+- (BOOL)addChild:(id)aChild
 {
-    [super addChild:aChild];
+    BOOL result = [super addChild:aChild];
     
     if (![(BMMessage *)aChild read])
     {
         [self incrementUnreadCount];
     }
+    
+    return result;
 }
 
 - (void)incrementUnreadCount
