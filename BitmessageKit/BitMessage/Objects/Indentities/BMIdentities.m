@@ -141,5 +141,16 @@
     return @"My Identities";
 }
 
+- (NSArray *)identityAddresses
+{
+    NSMutableArray *addresses = [NSMutableArray array];
+    
+    for (BMIdentity *identity in self.children)
+    {
+        [addresses addObject:identity.address];
+    }
+    
+    return addresses;
+}
 
 @end

@@ -18,4 +18,6 @@
 
 - (BMIdentity *)firstIdentity;
 
+- (NSArray *)identityAddresses;
+
 @end
