@@ -10,6 +10,8 @@
 
 @interface BMSentMessage : BMMessage
 
+- (BOOL)notFound;
+- (BOOL)wasSent;
 - (NSString *)getStatus;
 - (NSString *)getHumanReadbleStatus;
 

@@ -42,6 +42,16 @@
             @"received", @"ackreceived", nil];
 }
 
+- (BOOL)notFound
+{
+    return [self.getStatus isEqualToString:@"notfound"];
+}
+
+- (BOOL)wasSent
+{
+    return [self.getHumanReadbleStatus containsCaseInsensitiveString:@"sent"];
+}
+
 - (NSArray *)readStates
 {
     return [NSArray arrayWithObjects:@"msgsentnoackexpected", @"ackreceived", @"broadcastsent", nil];

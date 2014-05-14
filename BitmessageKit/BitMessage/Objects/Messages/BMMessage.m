@@ -157,7 +157,7 @@
     [message setParameters:params];
     [message sendSync];
     
-    self.ackData = [message parsedResponseValue];
+    self.ackData = [message responseValue];
     NSLog(@" self.ackData %@",  self.ackData);
 }
 
