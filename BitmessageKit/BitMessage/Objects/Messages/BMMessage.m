@@ -157,8 +157,8 @@
     [message setParameters:params];
     [message sendSync];
     
-    //id result = [message parsedResponseValue];
-    //NSLog(@"send result %@", result);
+    self.ackData = [message parsedResponseValue];
+    NSLog(@" self.ackData %@",  self.ackData);
 }
 
 - (void)broadcast
