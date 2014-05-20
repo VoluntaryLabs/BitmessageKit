@@ -36,6 +36,7 @@
 - (NSString *)toAddressLabel;
 
 - (NSDate *)date;
+- (NSTimeInterval)ageInSeconds;
 
 
 - (void)send;

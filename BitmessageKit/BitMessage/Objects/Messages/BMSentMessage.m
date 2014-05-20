@@ -26,6 +26,24 @@
 }
 */
 
+/*
+- (NSDictionary *)shortStatusDict
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            @"not found", @"notfound",
+            @"queued", @"msgqueued",
+            @"broadcast queued", @"broadcastqueued",
+            @"broadcast sent", @"broadcastsent",
+            @"doing public key proof of work", @"doingpubkeypow",
+            @"awaiting public key", @"awaitingpubkey",
+            @"doing message proof of work", @"doingmsgpow",
+            @"force proof of work", @"forcepow",
+            @"sent but unacknowledged", @"msgsent",
+            @"sent, no acknowledge expected", @"msgsentnoackexpected",
+            @"received", @"ackreceived", nil];
+}
+*/
+
 - (NSDictionary *)statusDict
 {
     return [NSDictionary dictionaryWithObjectsAndKeys:

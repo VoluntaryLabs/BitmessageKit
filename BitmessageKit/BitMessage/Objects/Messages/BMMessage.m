@@ -144,6 +144,12 @@
     return nil;
 }
 
+- (NSTimeInterval)ageInSeconds
+{
+    return -[self.date timeIntervalSinceNow];
+}
+
+
 // -----------------------
 
 - (void)send
