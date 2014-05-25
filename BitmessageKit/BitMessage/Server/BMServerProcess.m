@@ -285,7 +285,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     [_pyBitmessageTask setLaunchPath:pythonPath];
     
     NSFileHandle *nullFileHandle = [NSFileHandle fileHandleWithNullDevice];
-    [_pyBitmessageTask setStandardOutput:nullFileHandle];
+    //[_pyBitmessageTask setStandardOutput:nullFileHandle];
     [_pyBitmessageTask setStandardInput: (NSFileHandle *) _inpipe];
     //[_pyBitmessageTask setStandardError:nullFileHandle];
     
