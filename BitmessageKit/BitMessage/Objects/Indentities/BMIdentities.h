@@ -13,10 +13,12 @@
 @interface BMIdentities : BMNode
 
 - (BMIdentity *)createFirstIdentityIfAbsent;
+- (void)createRandomAddressWithLabel:(NSString *)label;
 
 - (void)add;
 
 - (BMIdentity *)firstIdentity;
+- (BMIdentity *)identityWithLabel:(NSString *)aLabel;
 
 - (NSArray *)identityAddresses;
 

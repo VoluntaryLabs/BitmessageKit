@@ -109,32 +109,18 @@
     return (BMIdentity *)self.children.firstObject;
 }
 
-/*
-- (NSString *)firstIdentityLabel
+- (BMIdentity *)identityWithLabel:(NSString *)aLabel
 {
-    BMIdentity *identity = (BMIdentity *)self.children.firstObject;
-    
-    if (identity)
+    for (BMIdentity *identity in self.children)
     {
-        return identity.label;
+        if ([identity.label isEqualToString:aLabel])
+        {
+            return identity;
+        }
     }
     
     return nil;
 }
-
-
-- (NSString *)firstIdentityAddress
-{
-    BMIdentity *identity = (BMIdentity *)self.children.firstObject;
-    
-    if (identity)
-    {
-        return identity.address;
-    }
-    
-    return nil;
-}
- */
 
 - (NSString *)nodeTitle
 {
