@@ -24,6 +24,7 @@
     self = [super init];
     [self setPassphrase:self.class.defaultLabel];
     [self setAddress:@""];
+    [self setDifficulty:@"1"];
     return self;
 }
 
@@ -118,7 +119,7 @@
     
     BMProxyMessage *message = [[BMProxyMessage alloc] init];
     [message setMethodName:@"createChan"];
-    NSArray *params = [NSArray arrayWithObjects:self.passphrase.encodedBase64, nil];
+    NSArray *params = [NSArray arrayWithObjects:self.passphrase.encodedBase64, self.difficulty, nil];
     [message setParameters:params];
     //message.debug = YES;
     [message sendSync];
