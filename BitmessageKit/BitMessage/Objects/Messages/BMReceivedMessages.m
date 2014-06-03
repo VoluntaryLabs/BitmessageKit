@@ -74,7 +74,11 @@
     for (BMReceivedMessage *message in messages)
     {
         // remove deleted
-        if (![self.client.deletedMessagesDB hasMarked:message.msgid])
+        if ([self.client.deletedMessagesDB hasMarked:message.msgid])
+        {
+            [message delete];
+        }
+        else
         {
             /*if ([subscriptions mergeMessage:message])
             {

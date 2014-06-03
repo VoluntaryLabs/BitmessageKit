@@ -136,14 +136,14 @@
 - (void)create
 {
     [self justCreate];
+    //[self join];
     [self.nodeParent addChild:self];
     //[self postParentChanged];
 }
 
-/*
 - (void)join
 {
-    // Don't need this method as createChan will add the address
+    // Don't need this method as createChan will add the address?
     // this method appears to be for when the API isn't used to create the channel address
     
     // joinChan	 <passphrase> <address>	 0.4.2	 Join a chan. passphrase must be base64 encoded. Outputs "success"
@@ -156,9 +156,9 @@
     [message sendSync];
     id response = [message parsedResponseValue];
     NSLog(@"response %@", response);
-    [self postParentChanged];
+    [self.nodeParent addChild:self];
+    //[self postParentChanged];
 }
-*/
 
 - (void)delete
 {

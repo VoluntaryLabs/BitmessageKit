@@ -105,7 +105,9 @@
     {
         channel = [[BMChannel alloc] init];
         [channel setPassphrase:aPassphrase];
+        //[channel join];
         [channel create];
+        [self addChild:channel];
         // need to add error checking
     }
     
@@ -142,5 +144,14 @@
         [channel completeMergeChildren];
     }
 }
+
+- (void)leaveAllChannels
+{
+    for (BMChannel *channel in self.children.copy)
+    {
+        [channel delete];
+    }
+}
+
 
 @end
