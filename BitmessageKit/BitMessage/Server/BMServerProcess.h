@@ -19,6 +19,8 @@
 
 @property (retain, nonatomic) NSString *host;
 @property (assign) int port;
+@property (assign) int apiPort;
+
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) BMKeysFile *keysFile;

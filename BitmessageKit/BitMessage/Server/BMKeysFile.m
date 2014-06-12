@@ -174,6 +174,23 @@
     return YES;
 }
 
+- (BOOL)setApiPort:(NSUInteger)aPort
+{
+    [self read];
+    [self.settings setObject:[NSString stringWithFormat:@"%i", (int)aPort] forKey:@"apiport"];
+    [self write];
+    return YES;
+}
+
+- (BOOL)setPort:(NSUInteger)aPort
+{
+    [self read];
+    [self.settings setObject:[NSString stringWithFormat:@"%i", (int)aPort] forKey:@"apiport"];
+    [self write];
+    return YES;
+}
+
+
 - (BOOL)setLabel:(NSString *)aLabel onAddress:(NSString *)anAddress
 {
     [self read];

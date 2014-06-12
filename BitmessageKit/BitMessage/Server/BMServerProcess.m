@@ -130,8 +130,9 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 - (id)init
 {
     self = [super init];
-    self.host = @"127.0.0.1";
-    self.port = 8442;
+
+    self.port = 8444+10;
+    self.apiPort = 8442+10;
     self.username = @"bitmarket";
     self.password = @"87342873428901648473823";
     self.dataPath =
@@ -140,6 +141,9 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     
     self.keysFile = [[BMKeysFile alloc] init];
     [self setupKeysDat];
+    
+    //self.host = @"127.0.0.1";
+    
     return self;
 }
 
@@ -164,6 +168,8 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     [self.keysFile backup];
     [self.keysFile setupForDaemon];
     [self.keysFile setupForTor];
+    [self.keysFile setApiPort:self.apiPort];
+    [self.keysFile setPort:self.port];
     [self randomizeLogin];
 }
 

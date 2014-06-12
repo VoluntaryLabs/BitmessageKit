@@ -21,7 +21,7 @@
     self.username = [server username];
     self.password = [server password];
     self.host = [server host];
-    self.port = [server port];
+    self.port = [server apiPort];
     self.parameters = [NSArray array];
     self.debug = NO;
     return self;
