@@ -131,18 +131,18 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 {
     self = [super init];
 
-    self.port = 8444+10;
-    self.apiPort = 8442+10;
+    self.host     = @"127.0.0.1";
+    self.port     = 8444+10;
+    self.apiPort  = 8442+10;
     self.username = @"bitmarket";
     self.password = @"87342873428901648473823";
+    
     self.dataPath =
         [NSString stringWithString:[[NSFileManager defaultManager] applicationSupportDirectory]];
 
     
     self.keysFile = [[BMKeysFile alloc] init];
     [self setupKeysDat];
-    
-    //self.host = @"127.0.0.1";
     
     return self;
 }

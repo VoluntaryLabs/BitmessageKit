@@ -127,6 +127,11 @@
     
     NSLog(@"self.address %@", self.address);
     
+    if (self.address == nil)
+    {
+        [NSException raise:@"unable to create channel address" format:nil];
+    }
+    
     if ([self.address hasPrefix:@"BM"])
     {
         self.isSynced = YES;

@@ -36,9 +36,9 @@
     [self composeAuth];
     [self.request setMethod:self.methodName withParameters:self.parameters];
 
-    if (self.debug)
+    //if (self.debug)
     {
-        NSLog(@"Request body: %@", [self.request body]);
+        NSLog(@"Request body: %@\n", [self.request body]);
     }
 }
 
@@ -63,14 +63,14 @@
     self.response = [XMLRPCConnection sendSynchronousXMLRPCRequest:self.request error:&error];
     self.error = error;
     
-    if (self.debug)
+    //if (self.debug)
     {
         //NSLog(@"\n\nResponse: %@", self.response);
-        NSLog(@"\n\nresponseValue: %@", [self responseValue]);
+        NSLog(@"\n\nresponseValue: %@\n", [self responseValue]);
 
         if (self.error)
         {
-            NSLog(@"\n\nerror %@", self.error);
+            NSLog(@"\n\nerror %@\n", self.error);
         }
     }
     
@@ -118,9 +118,7 @@
     return nil;
 }
 
-
 /*
-
 - (void)sendAsync
 {
     [self composeRequest];

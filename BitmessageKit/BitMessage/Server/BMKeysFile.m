@@ -185,7 +185,7 @@
 - (BOOL)setPort:(NSUInteger)aPort
 {
     [self read];
-    [self.settings setObject:[NSString stringWithFormat:@"%i", (int)aPort] forKey:@"apiport"];
+    [self.settings setObject:[NSString stringWithFormat:@"%i", (int)aPort] forKey:@"port"];
     [self write];
     return YES;
 }
