@@ -134,8 +134,8 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     self.host     = @"127.0.0.1";
     self.port     = 8444+10;
     self.apiPort  = 8442+10;
-    self.username = @"bitmarket";
-    self.password = @"87342873428901648473823";
+    self.username = @"bitmarket"; // this will get replaced with something random on startup
+    self.password = @"87342873428901648473823"; // this will get replaced with something random on startup
     
     self.dataPath =
         [NSString stringWithString:[[NSFileManager defaultManager] applicationSupportDirectory]];
