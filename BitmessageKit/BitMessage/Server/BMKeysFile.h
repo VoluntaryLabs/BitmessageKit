@@ -23,6 +23,8 @@
 - (BOOL)setApiPassword:(NSString *)aString;
 - (BOOL)setLabel:(NSString *)aLabel onAddress:(NSString *)anAddress;
 
+- (BOOL)doesExist;
+
 - (void)backup;
 
 @end

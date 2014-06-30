@@ -10,6 +10,7 @@
 #import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 #import "BMServerProcess.h"
 
+
 @implementation BMKeysFile
 
 - (NSString *)folder
@@ -22,13 +23,6 @@
 }
 
 
-- (NSString *)newBackupPath
-{
-    char buffer[50];
-    unsigned long t = [[NSDate date] timeIntervalSince1970];
-    sprintf(buffer, "%lu", t);
-    return [NSString stringWithFormat:@"%@.%s.backup", self.path, buffer];
-}
 
 - (void)checkServer
 {
@@ -116,7 +110,14 @@
 
 - (NSMutableDictionary *)settings
 {
-    return [self.dict objectForKey:@"[bitmessagesettings]"];
+    NSMutableDictionary *settings = [self.dict objectForKey:@"[bitmessagesettings]"];
+    
+    if (!settings)
+    {
+        settings = [NSMutableDictionary dictionary];
+    }
+    
+    return settings;
 }
 
 // --- setting ----
@@ -214,7 +215,22 @@
     return YES;
 }
 
+- (BOOL)doesExist
+{
+    BOOL isDir;
+    BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:self.path isDirectory:&isDir];
+    return exists;
+}
+
 // backup
+
+- (NSString *)newBackupPath
+{
+    char buffer[50];
+    unsigned long t = [[NSDate date] timeIntervalSince1970];
+    sprintf(buffer, "%lu", t);
+    return [NSString stringWithFormat:@"%@.%s.backup", self.backupFolder, buffer];
+}
 
 - (NSString *)backupFolder
 {
@@ -249,12 +265,21 @@
     [self createBackupFolderIfNeeded];
     
     NSString *data = [self readString];
-    NSError *error;
     
-    [data writeToFile:self.newBackupPath
-           atomically:YES
-             encoding:NSUTF8StringEncoding
-                error:&error];
+    if (data)
+    {
+        NSError *error;
+        
+        [data writeToFile:self.newBackupPath
+               atomically:YES
+                 encoding:NSUTF8StringEncoding
+                    error:&error];
+        
+        if (error)
+        {
+            [NSException raise:@"backup error" format:@"%@", error];
+        }
+    }
 }
 
 @end

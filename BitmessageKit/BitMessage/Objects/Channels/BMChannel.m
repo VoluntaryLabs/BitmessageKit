@@ -121,7 +121,7 @@
     [message setMethodName:@"createChan"];
     NSArray *params = [NSArray arrayWithObjects:self.passphrase.encodedBase64, self.difficulty, nil];
     [message setParameters:params];
-    //message.debug = YES;
+    message.debug = YES;
     [message sendSync];
     self.address = [message responseValue];
     

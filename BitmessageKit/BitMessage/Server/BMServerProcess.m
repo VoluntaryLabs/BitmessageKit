@@ -142,7 +142,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 
     
     self.keysFile = [[BMKeysFile alloc] init];
-    [self setupKeysDat];
+    //[self setupKeysDat];
     
     return self;
 }
@@ -173,8 +173,17 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     [self randomizeLogin];
 }
 
+- (void)assertIsRunning
+{
+    if (!self.isRunning)
+    {
+        [NSException raise:@"Server not running" format:nil];
+    }
+}
+
 - (BOOL)setLabel:(NSString *)aLabel onAddress:(NSString *)anAddress
 {
+    [self assertIsRunning];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ProgressPush" object:self];
     [self terminate];
     [self.keysFile setLabel:aLabel onAddress:anAddress];
@@ -272,6 +281,13 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     
     [self launchTor];
     
+    BOOL hasRunBefore = self.keysFile.doesExist;
+    
+    if (hasRunBefore)
+    {
+        [self setupKeysDat];
+    }
+    
     _pyBitmessageTask = [[NSTask alloc] init];
     _inpipe = [NSPipe pipe];
     NSDictionary *environmentDict = [[NSProcessInfo processInfo] environment];
@@ -282,6 +298,14 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     [environment setObject:self.username forKey:@"PYBITMESSAGE_USER"];
     [environment setObject:self.password forKey:@"PYBITMESSAGE_PASSWORD"];
     [environment setObject:self.dataPath forKey:@"BITMESSAGE_HOME"];
+   /*
+    self.host     = @"127.0.0.1";
+    self.port     = 8444+10;
+    self.apiPort  = 8442+10;
+    self.username = @"bitmarket"; // this will get replaced with something random on startup
+    self.password = @"87342873428901648473823"; // this will get replaced with something random on startup
+ */
+    
     [_pyBitmessageTask setEnvironment: environment];
     
     // Set the path to the python executable
@@ -299,6 +323,14 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
    
     [_pyBitmessageTask launch];
     
+    if (!hasRunBefore)
+    {
+        NSLog(@"first launch - relaunching in 3 seconds to complete keys.dat setup...");
+        sleep(3);
+        [self terminate];
+        [self launch];
+    }
+    
     if (![_pyBitmessageTask isRunning])
     {
         NSLog(@"pybitmessage task not running after launch");
@@ -311,7 +343,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 
 - (BOOL)waitOnConnect
 {
-    for (int i = 0; i < 5; i ++)
+    for (int i = 0; i < 100; i ++)
     {
         if ([self canConnect])
         {
@@ -350,7 +382,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     [message setMethodName:@"helloWorld"];
     NSArray *params = [NSArray arrayWithObjects:@"hello", @"world", nil];
     [message setParameters:params];
-    //message.debug = YES;
+    message.debug = YES;
     [message sendSync];
     NSString *response = [message responseValue];
     return [response isEqualToString:@"hello-world"];
