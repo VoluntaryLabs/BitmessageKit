@@ -157,7 +157,7 @@
     [message setMethodName:@"joinChan"];
     NSArray *params = [NSArray arrayWithObjects:self.passphrase.encodedBase64, self.address, nil];
     [message setParameters:params];
-    message.debug = YES;
+    //message.debug = YES;
     [message sendSync];
     id response = [message parsedResponseValue];
     NSLog(@"response %@", response);

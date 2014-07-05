@@ -328,7 +328,9 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
         NSLog(@"first launch - relaunching in 3 seconds to complete keys.dat setup...");
         sleep(3);
         [self terminate];
+        sleep(2); // would be nice to wait for shutdown instead
         [self launch];
+        return;
     }
     
     if (![_pyBitmessageTask isRunning])
@@ -363,8 +365,8 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     NSLog(@"Killing pybitmessage process...");
     [_pyBitmessageTask terminate];
     self.pyBitmessageTask = nil;
-    [self.keysFile setupForNonDaemon];
-    [self.keysFile setupForNonTor];
+    //[self.keysFile setupForNonDaemon];
+    //[self.keysFile setupForNonTor];
 
     NSLog(@"Killing tor process...");
     [_torTask terminate];
@@ -382,7 +384,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     [message setMethodName:@"helloWorld"];
     NSArray *params = [NSArray arrayWithObjects:@"hello", @"world", nil];
     [message setParameters:params];
-    message.debug = YES;
+    //message.debug = YES;
     [message sendSync];
     NSString *response = [message responseValue];
     return [response isEqualToString:@"hello-world"];
