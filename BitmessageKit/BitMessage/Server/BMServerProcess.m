@@ -328,7 +328,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
         NSLog(@"first launch - relaunching in 3 seconds to complete keys.dat setup...");
         sleep(3);
         [self terminate];
-        sleep(2); // would be nice to wait for shutdown instead
+        sleep(3); // would be nice to wait for shutdown instead
         [self launch];
         return;
     }
