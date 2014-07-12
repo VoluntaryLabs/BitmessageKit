@@ -25,6 +25,7 @@
     [self setPassphrase:self.class.defaultLabel];
     [self setAddress:@""];
     [self setDifficulty:@"1"];
+    [self setNodeForceDisplayChildren:YES];
     return self;
 }
 
