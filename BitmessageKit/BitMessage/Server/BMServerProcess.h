@@ -20,6 +20,7 @@
 @property (retain, nonatomic) NSString *host;
 @property (assign) int port;
 @property (assign) int apiPort;
+@property (retain, nonatomic) NSString* torPort;
 
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *password;

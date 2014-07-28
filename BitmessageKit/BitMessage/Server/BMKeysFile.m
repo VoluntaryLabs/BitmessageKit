@@ -153,10 +153,17 @@
 - (void)setupForTor
 {
     [self read];
-    [self.settings setObject:@"9050" forKey:@"socksport"];;
     [self.settings setObject:@"SOCKS5" forKey:@"socksproxytype"];
     [self.settings setObject:@"True" forKey:@"socksproxytype"];
     [self write];
+}
+
+- (BOOL)setSOCKSPort:(NSString *)aString
+{
+    [self read];
+    [self.settings setObject:aString forKey:@"socksport"];;
+    [self write];
+    return YES;
 }
 
 - (BOOL)setApiUsername:(NSString *)aString
