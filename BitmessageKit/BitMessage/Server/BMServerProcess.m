@@ -131,9 +131,12 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 {
     self = [super init];
 
+    // Get custom ports to prevent conflicts between bit* apps
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    self.torPort = [mainBundle objectForInfoDictionaryKey:@"TorPort"];
+    self.port = [[mainBundle objectForInfoDictionaryKey:@"BitmessagePort"] intValue];
+    self.apiPort = [[mainBundle objectForInfoDictionaryKey:@"BitmessageAPIPort"] intValue];
     self.host     = @"127.0.0.1";
-    self.port     = 8444+10;
-    self.apiPort  = 8442+10;
     self.username = @"bitmarket"; // this will get replaced with something random on startup
     self.password = @"87342873428901648473823"; // this will get replaced with something random on startup
     
@@ -168,6 +171,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     [self.keysFile backup];
     [self.keysFile setupForDaemon];
     [self.keysFile setupForTor];
+    [self.keysFile setSOCKSPort: self.torPort];
     [self.keysFile setApiPort:self.apiPort];
     [self.keysFile setPort:self.port];
     [self randomizeLogin];
@@ -223,7 +227,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     [_torTask setStandardInput: (NSFileHandle *) _inpipe];
     [_torTask setStandardError:nullFileHandle];
     
-    [_torTask setArguments:@[ @"-f", torConfigPath, @"--DataDirectory", torDataDirectory, @"--PidFile", torPidFilePath ]];
+    [_torTask setArguments:@[ @"-f", torConfigPath, @"--DataDirectory", torDataDirectory, @"--PidFile", torPidFilePath, @"--SOCKSPort", self.torPort ]];
     
     [_torTask launch];
     
