@@ -25,8 +25,13 @@
     [self setPassphrase:self.class.defaultLabel];
     [self setAddress:@""];
     [self setDifficulty:@"1"];
-    [self setNodeForceDisplayChildren:YES];
+    //[self setNodeForceDisplayChildren:YES];
     return self;
+}
+
+- (BOOL)nodeForceDisplayChildren
+{
+    return self.children.count > 0;
 }
 
 - (NSArray *)uiActions
