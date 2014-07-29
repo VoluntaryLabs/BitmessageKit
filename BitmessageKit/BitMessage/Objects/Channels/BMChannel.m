@@ -26,6 +26,7 @@
     [self setAddress:@""];
     [self setDifficulty:@"1"];
     //[self setNodeForceDisplayChildren:YES];
+    self.nodeSuggestedWidth = 180;
     return self;
 }
 
