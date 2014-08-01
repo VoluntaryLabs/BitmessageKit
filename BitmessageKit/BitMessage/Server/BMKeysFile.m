@@ -236,7 +236,8 @@
     char buffer[50];
     unsigned long t = [[NSDate date] timeIntervalSince1970];
     sprintf(buffer, "%lu", t);
-    return [NSString stringWithFormat:@"%@.%s.backup", self.backupFolder, buffer];
+    NSString *fileName = [NSString stringWithFormat:@"%s.backup", buffer];
+    return [self.backupFolder stringByAppendingPathComponent:fileName];
 }
 
 - (NSString *)backupFolder
@@ -276,8 +277,9 @@
     if (data)
     {
         NSError *error;
+        NSString *path = self.newBackupPath;
         
-        [data writeToFile:self.newBackupPath
+        [data writeToFile:path
                atomically:YES
                  encoding:NSUTF8StringEncoding
                     error:&error];
