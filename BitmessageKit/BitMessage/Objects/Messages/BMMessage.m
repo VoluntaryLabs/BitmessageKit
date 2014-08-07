@@ -329,5 +329,10 @@
     
 }
 
+- (void)show
+{
+    NSLog(@"-------------------\n  from: %@\n  to:%@\n  message: %@\n ------------------", _fromAddress, _toAddress, _message);
+}
+
 
 @end

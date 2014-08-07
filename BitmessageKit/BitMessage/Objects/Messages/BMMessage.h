@@ -51,4 +51,6 @@
 
 - (NSMutableAttributedString *)messageStringWithAttributes:(NSDictionary *)attributes;
 
+- (void)show;
+
 @end
