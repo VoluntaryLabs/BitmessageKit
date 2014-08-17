@@ -14,4 +14,10 @@
 
 - (BMClient *)client;
 
+// --- merging --------------------------------
+
+- (void)prepareToMergeChildren;
+- (BOOL)mergeChild:(BMNode *)aNode;
+- (void)completeMergeChildren;
+
 @end

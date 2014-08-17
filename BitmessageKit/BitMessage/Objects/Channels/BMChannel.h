@@ -8,10 +8,11 @@
 
 #import "BMAddressed.h"
 #import "BMMessage.h"
+#import "BMMergable.h"
 
-@interface BMChannel : BMAddressed
+@interface BMChannel : BMMergable
 
-@property (retain, nonatomic) NSMutableArray *mergingChildren;
+//@property (retain, nonatomic) NSMutableArray *mergingChildren;
 @property (retain, nonatomic) NSString *passphrase;
 @property (retain, nonatomic) NSString *difficulty;
 @property (assign, nonatomic) NSInteger unreadCount;

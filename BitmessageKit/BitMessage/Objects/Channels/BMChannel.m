@@ -237,6 +237,7 @@
     [self.children sortUsingDescriptors:[NSArray arrayWithObject:sorter]];
 }
 
+/*
 - (void)prepareToMergeChildren
 {
     self.mergingChildren = [NSMutableArray array];
@@ -262,9 +263,11 @@
     [self postSelfChanged];
     self.mergingChildren = nil;
 }
+ */
 
 // --- unread - MERGE this with BMMessageGroup ---------
 
+/*
 - (void)updateUnreadCount
 {
     _unreadCount = 0;
@@ -298,6 +301,7 @@
     
     return nil;
 }
+ */
 
 // -------------------
 
@@ -324,6 +328,13 @@
 - (BOOL)canSearch
 {
     return YES;
+}
+
+// --- merge ---
+
+- (SEL)mergeAttributeSelector
+{
+    return @selector(toAddress);
 }
 
 @end

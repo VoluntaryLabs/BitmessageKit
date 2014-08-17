@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 Bitmarkets.org. All rights reserved.
 //
 
-#import "BMAddressed.h"
+//#import "BMAddressed.h"
+#import "BMMergable.h"
 
-@interface BMSubscription : BMAddressed
+@interface BMSubscription : BMMergable
 
 @property (assign, nonatomic) BOOL enabled;
 

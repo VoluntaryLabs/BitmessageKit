@@ -16,9 +16,11 @@
 
 /// merge
 
+/*
 - (void)prepareToMergeChildren;
 - (BOOL)mergeChild:(BMMessage *)aMessage;
 - (void)completeMergeChildren;
+*/
 
 - (void)leaveAllChannels;
 

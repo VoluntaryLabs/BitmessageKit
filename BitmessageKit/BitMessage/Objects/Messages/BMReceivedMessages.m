@@ -33,6 +33,13 @@
     [self updateUnreadCount];
 }
 
+- (void)updateUnreadTile
+{
+    NSNumber *num = [NSNumber numberWithInteger:self.unreadCount];
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:num forKey:@"number"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"NavDocTileUpdate" object:dict];
+}
+
 - (void)updateUnreadCount
 {
     NSInteger lastUnreadCount = self.unreadCount;
@@ -41,11 +48,8 @@
 
     if (!_hasFetchedBefore && (lastUnreadCount != self.unreadCount))
     {
-        NSNumber *num = [NSNumber numberWithInteger:self.unreadCount];
-        NSDictionary *dict = [NSDictionary dictionaryWithObject:num forKey:@"number"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"NavDocTileUpdate" object:dict];
+        [self updateUnreadTile];
     }
-    
     
     _hasFetchedBefore = YES;
 }
@@ -65,8 +69,8 @@
 {
     NSMutableArray *results = [NSMutableArray array];
 
-    //BMSubscriptions *subscriptions = self.client.subscriptions;
-    //[subscriptions prepareToMessageMerge];
+    BMSubscriptions *subscriptions = self.client.subscriptions;
+    [subscriptions prepareToMergeChildren];
     
     BMChannels *channels = self.client.channels;
     [channels prepareToMergeChildren];
@@ -80,11 +84,11 @@
         }
         else
         {
-            /*if ([subscriptions mergeMessage:message])
+            if ([subscriptions mergeChild:message])
             {
                 continue;
             }
-            else */
+            else
             if ([channels mergeChild:message])
             {
                 continue;
@@ -96,7 +100,7 @@
         }
     }
     
-    //[subscriptions completeMessageMerge];
+    [subscriptions completeMergeChildren];
     [channels completeMergeChildren];
     
     return results;

@@ -114,36 +114,7 @@
     return channel;
 }
 
-// -----------------------------------------
-
-- (void)prepareToMergeChildren
-{
-    for (BMChannel *channel in self.children)
-    {
-        [channel prepareToMergeChildren];
-    }
-}
-
-- (BOOL)mergeChild:(BMMessage *)aMessage
-{
-    for (BMChannel *channel in self.children)
-    {
-        if([channel mergeChild:aMessage])
-        {
-            return YES;
-        }
-    }
-    
-    return NO;
-}
-
-- (void)completeMergeChildren
-{
-    for (BMChannel *channel in self.children)
-    {
-        [channel completeMergeChildren];
-    }
-}
+// ----------------------------------------
 
 - (void)leaveAllChannels
 {

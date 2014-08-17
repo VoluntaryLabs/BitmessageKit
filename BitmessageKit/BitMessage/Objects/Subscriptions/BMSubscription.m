@@ -25,6 +25,11 @@
     return self;
 }
 
+- (BOOL)nodeForceDisplayChildren
+{
+    return self.children.count > 0;
+}
+
 - (NSArray *)uiActions
 {
     NSArray *uiActions = [NSMutableArray arrayWithObjects:@"message", nil];
@@ -68,11 +73,18 @@
     return self.label;
 }
 
+- (NSString *)nodeNote
+{
+    return [super nodeNote];
+}
+
+/*
 - (void)fetch
 {
     // is this right?
     //self.children = [[[BMClient sharedBMClient] messages] getSentMessagesBySender:self.address];
 }
+*/
 
 // ----------------------
 
@@ -156,5 +168,18 @@
     return YES;
 }
 
+// --- merge ---
+
+- (SEL)mergeAttributeSelector
+{
+    return @selector(fromAddress);
+}
+
+/*
+- (void)updateUnreadCount
+{
+    [super updateUnreadCount];
+}
+*/
 
 @end

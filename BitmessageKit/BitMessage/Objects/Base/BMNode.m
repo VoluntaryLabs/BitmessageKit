@@ -16,4 +16,36 @@
     return [BMClient sharedBMClient];
 }
 
+// --- merging --------------------------------
+
+
+- (void)prepareToMergeChildren
+{
+    for (BMNode *node in self.children)
+    {
+        [node prepareToMergeChildren];
+    }
+}
+
+- (BOOL)mergeChild:(BMNode *)aChild
+{
+    for (BMNode *node in self.children)
+    {
+        if([node mergeChild:aChild])
+        {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+- (void)completeMergeChildren
+{
+    for (BMNode *node in self.children)
+    {
+        [node completeMergeChildren];
+    }
+}
+
 @end

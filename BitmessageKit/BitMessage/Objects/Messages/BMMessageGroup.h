@@ -8,21 +8,30 @@
 
 #import "BMNode.h"
 #import "BMMessage.h"
+#import "BMUnreadCountable.h"
 
-@interface BMMessageGroup : BMNode
+@interface BMMessageGroup : BMUnreadCountable
 
+
+// --- merging --------------------------
+
+/*
 @property (strong, nonatomic) NSMutableArray *mergingChildren;
-@property (assign, nonatomic) NSInteger unreadCount;
 
 - (void)prepareToMergeChildren;
 - (BOOL)mergeChild:(BMMessage *)aMessage;
 - (void)completeMergeChildren;
+*/
 
-// ----------------------
+// -- unread count ----------------------
+
+/*
+@property (assign, nonatomic) NSInteger unreadCount;
 
 - (void)updateUnreadCount;
 - (void)incrementUnreadCount;
 - (void)decrementUnreadCount;
+*/
 
 // -----------------------
 

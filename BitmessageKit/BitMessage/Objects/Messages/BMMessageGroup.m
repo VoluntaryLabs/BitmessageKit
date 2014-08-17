@@ -11,6 +11,7 @@
 
 @implementation BMMessageGroup
 
+/*
 - (void)prepareToMergeChildren
 {
     self.mergingChildren = [NSMutableArray array];
@@ -27,9 +28,11 @@
     [self setChildren:self.children]; // so node parents set
     self.mergingChildren = nil;
 }
+*/
 
 // ----------------------
 
+/*
 - (void)updateUnreadCount
 {
     //NSLog(@"updateUnreadCount");
@@ -53,23 +56,12 @@
 
 - (void)changedUnreadCount
 {
-    /*
-    [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"BMReceivedMessagesUnreadCountChanged"
-         object:self];
-    */
+   // [[NSNotificationCenter defaultCenter]
+    //     postNotificationName:@"BMReceivedMessagesUnreadCountChanged"
+     //    object:self];
    // [self.nodeParent postParentChanged];
 }
 
-- (NSString *)nodeNote
-{
-    if (_unreadCount)
-    {
-        return [NSString stringWithFormat:@"%i", (int)_unreadCount];
-    }
-    
-    return nil;
-}
 
 - (BOOL)addChild:(id)aChild
 {
@@ -83,12 +75,6 @@
     return result;
 }
 
-- (void)incrementUnreadCount
-{
-    _unreadCount ++;
-    [self changedUnreadCount];
-}
-
 - (void)removeChild:(id)aChild
 {
     [super removeChild:aChild];
@@ -98,12 +84,8 @@
         [self decrementUnreadCount];
     }
 }
+ */
 
-- (void)decrementUnreadCount
-{
-    _unreadCount --;
-    [self changedUnreadCount];
-}
 
 // ------------------------------
 

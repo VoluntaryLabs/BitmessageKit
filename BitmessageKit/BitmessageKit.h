@@ -11,6 +11,9 @@
 
 #import "BMNode.h"
 
+#import "BMMergable.h"
+#import "BMUnreadCountable.h"
+
 #import "BMMessages.h"
 #import "BMSubscription.h"
 #import "BMChannels.h"

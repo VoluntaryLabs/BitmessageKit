@@ -45,7 +45,7 @@ static BMClient *sharedBMClient;
     [self addChild:self.contacts];
     [self addChild:self.identities];
     [self addChild:self.channels];
-    //[self addChild:self.subscriptions];
+    [self addChild:self.subscriptions];
 
     self.readMessagesDB = [[BMDatabase alloc] init];
     [self.readMessagesDB setName:@"readMessagesDB"];
@@ -53,10 +53,6 @@ static BMClient *sharedBMClient;
     self.deletedMessagesDB = [[BMDatabase alloc] init];
     [self.deletedMessagesDB setName:@"deletedMessagesDB"];
     
-    // market
-    
-    //self.markets = [[MKMarkets alloc] init];
-    //[self addChild:self.markets];
 
     // fetch these addresses first so we can filter messages
     // when we fetch them
