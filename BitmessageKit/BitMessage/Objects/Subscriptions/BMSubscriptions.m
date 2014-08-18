@@ -66,6 +66,34 @@
     return subscriptions;
 }
 
+- (BMSubscription *)subscriptionWithAddress:(NSString *)anAddress
+{
+    for (BMSubscription *sub in self.children)
+    {
+        if ([sub.address isEqualToString:anAddress])
+        {
+            return sub;
+        }
+    }
+    
+    return nil;
+}
+
+- (BMSubscription *)subscriptionWithAddressAddIfNeeded:(NSString *)anAddress
+{
+    BMSubscription *sub = [self subscriptionWithAddress:anAddress];
+    
+    if (!sub)
+    {
+        sub = [[BMSubscription alloc] init];
+        [sub setAddress:anAddress];
+        [sub subscribe];
+        [self addChild:sub];
+        // add error checking?
+    }
+    
+    return sub;
+}
 
 // -------------------------------------
 

@@ -8,8 +8,11 @@
 
 #import "BMNode.h"
 #import "BMMessage.h"
+#import "BMSubscription.h"
 
 @interface BMSubscriptions : BMNode
 
+- (BMSubscription *)subscriptionWithAddress:(NSString *)anAddress;
+- (BMSubscription *)subscriptionWithAddressAddIfNeeded:(NSString *)anAddress;
 
 @end
