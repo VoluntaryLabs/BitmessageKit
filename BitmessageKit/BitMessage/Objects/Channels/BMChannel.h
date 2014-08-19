@@ -27,10 +27,4 @@
 //- (void)join;
 - (void)delete;
 
-/// merge
-
-- (void)prepareToMergeChildren;
-- (BOOL)mergeChild:(BMMessage *)aMessage;
-- (void)completeMergeChildren;
-
 @end

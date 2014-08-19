@@ -174,7 +174,7 @@
 
 - (void)delete
 {
-    [self deleteAllChildren];
+    //[self deleteAllChildren];
     self.isSynced = NO;
     [self leave];
 }
@@ -200,6 +200,7 @@
 
 - (void)leave
 {
+    [self deleteAllChildren];
     [self justLeave];
     [self removeFromParent];
     [self postParentChanged];
@@ -237,83 +238,7 @@
     [self.children sortUsingDescriptors:[NSArray arrayWithObject:sorter]];
 }
 
-/*
-- (void)prepareToMergeChildren
-{
-    self.mergingChildren = [NSMutableArray array];
-}
-
-- (BOOL)mergeChild:(BMMessage *)aMessage
-{
-    if ([aMessage.toAddress isEqualToString:self.address])
-    {
-        [self.mergingChildren addObject:aMessage];
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (void)completeMergeChildren
-{
-    [self.children mergeWith:self.mergingChildren];
-    [self setChildren:self.children]; // so node parents set
-    [self sortChildren];
-    [self updateUnreadCount];
-    [self postSelfChanged];
-    self.mergingChildren = nil;
-}
- */
-
-// --- unread - MERGE this with BMMessageGroup ---------
-
-/*
-- (void)updateUnreadCount
-{
-    _unreadCount = 0;
-    
-    for (BMMessage *message in self.children)
-    {
-        if (![message read])
-        {
-            _unreadCount ++;
-        }
-    }
-}
-
-- (void)decrementUnreadCount
-{
-    _unreadCount --;
-    [self changedUnreadCount];
-}
-
-- (void)changedUnreadCount
-{
-    [self postParentChanged];
-}
-
-- (NSString *)nodeNote
-{
-    if (_unreadCount)
-    {
-        return [NSString stringWithFormat:@"%i", (int)_unreadCount];
-    }
-    
-    return nil;
-}
- */
-
 // -------------------
-
-- (void)deleteAllChildren
-{
-    for (BMMessage *msg in self.children.copy)
-    {
-        [msg delete];
-    }
-    
-    [self postParentChanged];
-}
 
 - (NSString *)verifyActionMessage:(NSString *)actionString
 {

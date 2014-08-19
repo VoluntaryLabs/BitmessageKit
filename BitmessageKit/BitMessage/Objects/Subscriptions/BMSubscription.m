@@ -113,7 +113,7 @@
     [message setMethodName:@"deleteSubscription"];
     NSArray *params = [NSArray arrayWithObjects:self.address, nil];
     [message setParameters:params];
-    message.debug = NO;
+    message.debug = YES;
     [message sendSync];
     id response = [message parsedResponseValue];
     NSLog(@"response %@", response);
@@ -121,8 +121,10 @@
 
 - (void)delete
 {
+    [self deleteAllChildren];
     [self justDelete];
     [self removeFromParent];
+    [self postParentChanged];
 }
 
 - (void)update

@@ -56,4 +56,14 @@
     self.mergingChildren = nil;
 }
 
+- (void)deleteAllChildren
+{
+    for (BMMessage *msg in self.children.copy)
+    {
+        [msg delete];
+    }
+    
+    [self postParentChanged];
+}
+
 @end

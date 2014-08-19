@@ -17,4 +17,6 @@
 - (BOOL)mergeChild:(BMMessage *)aMessage;
 - (void)completeMergeChildren;
 
+- (void)deleteAllChildren;
+
 @end
