@@ -48,7 +48,7 @@
 
 - (NSMutableArray *)getAllSentMessages
 {
-    return [[[BMClient sharedBMClient] messages]
+    return [[BMClient.sharedBMClient messages]
             getMessagesWithMethod:@"getAllSentMessages"
             andKey:@"sentMessages"
             class:[BMSentMessage class]];

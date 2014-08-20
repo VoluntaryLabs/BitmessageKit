@@ -13,7 +13,7 @@
 
 - (BMClient *)client
 {
-    return [BMClient sharedBMClient];
+    return BMClient.sharedBMClient;
 }
 
 // --- merging --------------------------------

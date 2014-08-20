@@ -79,7 +79,7 @@
     /*
     NSMutableArray *children = [NSMutableArray array];
     
-    NSArray *messages = [[[BMClient sharedBMClient] messages] received].children;
+    NSArray *messages = [[BMClient.sharedBMClient messages] received].children;
     
     for (BMMessage *message in messages)
     {

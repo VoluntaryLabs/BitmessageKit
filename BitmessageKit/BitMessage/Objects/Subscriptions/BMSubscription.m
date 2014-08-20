@@ -82,7 +82,7 @@
 - (void)fetch
 {
     // is this right?
-    //self.children = [[[BMClient sharedBMClient] messages] getSentMessagesBySender:self.address];
+    //self.children = [[BMClient.sharedBMClient messages] getSentMessagesBySender:self.address];
 }
 */
 

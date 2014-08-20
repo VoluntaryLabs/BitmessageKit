@@ -108,7 +108,7 @@
 
 - (NSMutableArray *)getAllInboxMessages
 {
-    NSMutableArray *messages = [[[BMClient sharedBMClient] messages]
+    NSMutableArray *messages = [[BMClient.sharedBMClient messages]
             getMessagesWithMethod:@"getAllInboxMessages"
             andKey:@"inboxMessages"
             class:[BMReceivedMessage class]];
