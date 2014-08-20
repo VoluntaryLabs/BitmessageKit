@@ -113,10 +113,10 @@
     [message setMethodName:@"deleteSubscription"];
     NSArray *params = [NSArray arrayWithObjects:self.address, nil];
     [message setParameters:params];
-    message.debug = YES;
+    //message.debug = YES;
     [message sendSync];
-    id response = [message parsedResponseValue];
-    NSLog(@"response %@", response);
+    //id response = [message parsedResponseValue];
+    //NSLog(@"response %@", response);
 }
 
 - (void)delete

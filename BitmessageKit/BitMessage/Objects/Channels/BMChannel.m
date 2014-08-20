@@ -122,17 +122,17 @@
 - (void)justCreate
 {
     // createChan	 <passphrase>	 0.4.2	 Creates a new chan. passphrase must be base64 encoded. Outputs the corresponding Bitmessage address.
-    NSLog(@"BMChannel createChan '%@'", self.passphrase);
+    //NSLog(@"BMChannel createChan '%@'", self.passphrase);
     
     BMProxyMessage *message = [[BMProxyMessage alloc] init];
     [message setMethodName:@"createChan"];
     NSArray *params = [NSArray arrayWithObjects:self.passphrase.encodedBase64, self.difficulty, nil];
     [message setParameters:params];
-    message.debug = YES;
+    //message.debug = YES;
     [message sendSync];
     self.address = [message responseValue];
     
-    NSLog(@"self.address %@", self.address);
+    //NSLog(@"self.address %@", self.address);
     
     if (self.address == nil)
     {

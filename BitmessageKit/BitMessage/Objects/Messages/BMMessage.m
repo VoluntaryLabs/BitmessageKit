@@ -159,12 +159,12 @@
     
     // subject and message in base64
     NSArray *params = [NSArray arrayWithObjects:self.toAddress, self.fromAddress, self.subject.encodedBase64, self.message.encodedBase64, /*@2,*/ nil];
-    message.debug = YES;
+    //message.debug = YES;
     [message setParameters:params];
     [message sendSync];
     
-    self.ackData = [message responseValue];
-    NSLog(@" self.ackData %@",  self.ackData);
+    //self.ackData = [message responseValue];
+    //NSLog(@" self.ackData %@",  self.ackData);
 }
 
 - (void)broadcast
@@ -175,12 +175,12 @@
     // subject and message in base64
     NSArray *params = [NSArray arrayWithObjects:self.fromAddress, self.subject.encodedBase64, self.message.encodedBase64, nil];
     
-    message.debug = YES;
+    //message.debug = YES;
     [message setParameters:params];
     [message sendSync];
     
     id result =  [message parsedResponseValue];
-    NSLog(@"broadcast result %@", result);
+    //NSLog(@"broadcast result %@", result);
 }
 
 - (void)justDelete
@@ -241,7 +241,7 @@
 {
     if (!self.read)
     {
-        NSLog(@"markAsRead");
+        //NSLog(@"markAsRead");
         [self.client.readMessagesDB mark:self.msgid];
         [self setReadState:YES];
         [(BMMessageGroup *)self.nodeParent decrementUnreadCount];
