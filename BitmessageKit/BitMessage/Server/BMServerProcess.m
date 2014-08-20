@@ -188,11 +188,11 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 - (BOOL)setLabel:(NSString *)aLabel onAddress:(NSString *)anAddress
 {
     [self assertIsRunning];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ProgressPush" object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPush" object:self];
     [self terminate];
     [self.keysFile setLabel:aLabel onAddress:anAddress];
     [self launch];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ProgressPop" object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
     return YES;
 }
 
@@ -283,7 +283,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     
     // Launch tor client
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ProgressPush" object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPush" object:self];
     [self launchTor];
     
     BOOL hasRunBefore = self.keysFile.doesExist;
@@ -327,7 +327,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     [_pyBitmessageTask setArguments:@[ pybitmessagePath ]];
    
     [_pyBitmessageTask launch];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ProgressPop" object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
     
     if (!hasRunBefore)
     {
@@ -351,14 +351,14 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 
 - (BOOL)waitOnConnect
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ProgressPush" object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPush" object:self];
     
     for (int i = 0; i < 100; i ++)
     {
         if ([self canConnect])
         {
             NSLog(@"connected to server");
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"ProgressPop" object:self];
+            [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
             return YES;
         }
         
@@ -366,7 +366,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
         sleep(1);
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ProgressPop" object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
     
     return NO;
 }

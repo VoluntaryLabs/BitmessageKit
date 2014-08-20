@@ -61,13 +61,35 @@ static BMClient *sharedBMClient;
     [self.subscriptions fetch];
     
     [self deepFetch];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(stopServer)
-                                                 name:NSApplicationWillTerminateNotification
-                                               object:nil];
 
+    [self registerForNotifications];
+    [self.messages.received changedUnreadCount];
+    
     return self;
+}
+
+- (void)registerForNotifications
+{
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(stopServer)
+                                               name:NSApplicationWillTerminateNotification
+                                             object:nil];
+    
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(unreadCountChanged:)
+                                               name:@"BMReceivedMessagesUnreadCountChanged"
+                                             object:self.messages.received];
+}
+
+- (void)unreadCountChanged:(NSNotification *)aNote
+{
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    [userInfo setObject:@(self.messages.received.unreadCount) forKey:@"number"];
+    
+    [NSNotificationCenter.defaultCenter
+        postNotificationName:@"NavDocTileUpdate"
+        object:self
+        userInfo:aNote.userInfo];
 }
 
 - (CGFloat)nodeSuggestedWidth
@@ -159,7 +181,7 @@ static BMClient *sharedBMClient;
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [NSNotificationCenter.defaultCenter removeObserver:self];
     [self stopServer];
 }
 

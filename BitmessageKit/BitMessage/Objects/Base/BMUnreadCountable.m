@@ -62,11 +62,14 @@
 
 - (void)changedUnreadCount
 {
-    /*
-     [[NSNotificationCenter defaultCenter]
-     postNotificationName:@"BMReceivedMessagesUnreadCountChanged"
-     object:self];
-     */
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    [userInfo setObject:@(self.unreadCount) forKey:@"number"];
+    
+     [NSNotificationCenter.defaultCenter
+        postNotificationName:@"BMReceivedMessagesUnreadCountChanged"
+        object:self
+        userInfo:userInfo];
+
     [self postParentChanged];
 }
 

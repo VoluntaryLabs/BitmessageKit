@@ -13,6 +13,7 @@
 @property (assign, nonatomic) NSInteger unreadCount;
 
 - (void)updateUnreadCount;
+- (void)changedUnreadCount;
 - (void)incrementUnreadCount;
 - (void)decrementUnreadCount;
 

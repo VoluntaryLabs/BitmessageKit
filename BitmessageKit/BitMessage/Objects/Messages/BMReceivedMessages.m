@@ -33,13 +33,16 @@
     [self updateUnreadCount];
 }
 
+/*
 - (void)updateUnreadTile
 {
     NSNumber *num = [NSNumber numberWithInteger:self.unreadCount];
     NSDictionary *dict = [NSDictionary dictionaryWithObject:num forKey:@"number"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"NavDocTileUpdate" object:dict];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"NavDocTileUpdate" object:dict];
 }
+*/
 
+/*
 - (void)updateUnreadCount
 {
     NSInteger lastUnreadCount = self.unreadCount;
@@ -53,6 +56,7 @@
     
     _hasFetchedBefore = YES;
 }
+*/
 
 - (void)sortChildren
 {

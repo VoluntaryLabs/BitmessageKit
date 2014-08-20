@@ -51,7 +51,7 @@
 
 - (void)sendSync
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ProgressPush" object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPush" object:self];
     [self composeRequest];
     
     if (!BMClient.sharedBMClient.server.isRunning) // start server if needed
@@ -74,7 +74,7 @@
         }
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ProgressPop" object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
 }
 
 - (id)responseValue
