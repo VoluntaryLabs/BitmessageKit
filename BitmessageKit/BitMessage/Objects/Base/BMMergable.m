@@ -40,7 +40,7 @@
         {
             [self.mergingChildren addObject:aMessage];
             return YES;
-    }
+        }
     }
     
     return NO;
