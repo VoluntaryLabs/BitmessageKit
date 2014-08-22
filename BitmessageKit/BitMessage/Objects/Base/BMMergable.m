@@ -27,7 +27,7 @@
     
     if (mergeAttributeSelector)
     {
-        NSString *attribute = [aMessage performSelector:mergeAttributeSelector];
+        NSString *attribute = [aMessage idNoWarningPerformSelector:mergeAttributeSelector];
         
         /*
         if ([self.label isEqualToString:@"Time Service"])

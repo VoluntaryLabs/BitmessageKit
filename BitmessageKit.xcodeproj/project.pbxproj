@@ -129,6 +129,10 @@
 		AA153C2E18FEFC45007B4785 /* ZKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = AA153C0618FEFC45007B4785 /* ZKLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA153C2F18FEFC45007B4785 /* ZKLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AA153C0718FEFC45007B4785 /* ZKLog.m */; };
 		AA153C3618FF057D007B4785 /* BitmessageKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EDE5B8A18F59414009A726A /* BitmessageKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA27EF2D19A80199000E0339 /* BMProcesses.h in Headers */ = {isa = PBXBuildFile; fileRef = AA27EF2B19A80199000E0339 /* BMProcesses.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA27EF2E19A80199000E0339 /* BMProcesses.m in Sources */ = {isa = PBXBuildFile; fileRef = AA27EF2C19A80199000E0339 /* BMProcesses.m */; };
+		AA27EF3519A802D2000E0339 /* BMTorProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = AA27EF3319A802D2000E0339 /* BMTorProcess.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA27EF3619A802D2000E0339 /* BMTorProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = AA27EF3419A802D2000E0339 /* BMTorProcess.m */; };
 		AA5DFE02190DF03B00383283 /* NavNodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5DFDFD190DF03B00383283 /* NavNodeKit.framework */; };
 		AA5DFE04190DF03B00383283 /* FoundationCategoriesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5DFDFF190DF03B00383283 /* FoundationCategoriesKit.framework */; };
 		AA9A6570199ECF5800993E8B /* BMMergable.h in Headers */ = {isa = PBXBuildFile; fileRef = AA9A656E199ECF5800993E8B /* BMMergable.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -308,6 +312,10 @@
 		AA153C0518FEFC45007B4785 /* ZKLFHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLFHeader.m; sourceTree = "<group>"; };
 		AA153C0618FEFC45007B4785 /* ZKLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKLog.h; sourceTree = "<group>"; };
 		AA153C0718FEFC45007B4785 /* ZKLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLog.m; sourceTree = "<group>"; };
+		AA27EF2B19A80199000E0339 /* BMProcesses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMProcesses.h; sourceTree = "<group>"; };
+		AA27EF2C19A80199000E0339 /* BMProcesses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMProcesses.m; sourceTree = "<group>"; };
+		AA27EF3319A802D2000E0339 /* BMTorProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMTorProcess.h; sourceTree = "<group>"; };
+		AA27EF3419A802D2000E0339 /* BMTorProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMTorProcess.m; sourceTree = "<group>"; };
 		AA5DFDFD190DF03B00383283 /* NavNodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NavNodeKit.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BitMarkets-eenrgxhlyrwgqccvbetldvfypzkj/Build/Products/Debug/NavNodeKit.framework"; sourceTree = "<group>"; };
 		AA5DFDFF190DF03B00383283 /* FoundationCategoriesKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FoundationCategoriesKit.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BitMarkets-eenrgxhlyrwgqccvbetldvfypzkj/Build/Products/Debug/FoundationCategoriesKit.framework"; sourceTree = "<group>"; };
 		AA9A656E199ECF5800993E8B /* BMMergable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMMergable.h; sourceTree = "<group>"; };
@@ -590,6 +598,10 @@
 				8EDE5BEE18F594EA009A726A /* BMServerProcess.m */,
 				8EDE5BEF18F594EA009A726A /* JSONDB.h */,
 				8EDE5BF018F594EA009A726A /* JSONDB.m */,
+				AA27EF2B19A80199000E0339 /* BMProcesses.h */,
+				AA27EF2C19A80199000E0339 /* BMProcesses.m */,
+				AA27EF3319A802D2000E0339 /* BMTorProcess.h */,
+				AA27EF3419A802D2000E0339 /* BMTorProcess.m */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -751,6 +763,8 @@
 				8EDE5C1C18F594EA009A726A /* BMSentMessage.h in Headers */,
 				8ED41FC618F596310025A51B /* XMLRPCDefaultEncoder.h in Headers */,
 				AA9A6570199ECF5800993E8B /* BMMergable.h in Headers */,
+				AA27EF3519A802D2000E0339 /* BMTorProcess.h in Headers */,
+				AA27EF2D19A80199000E0339 /* BMProcesses.h in Headers */,
 				AA9A6579199EDA9700993E8B /* BMUnreadCountable.h in Headers */,
 				AA153C1118FEFC45007B4785 /* NSDictionary+ZKAdditions.h in Headers */,
 				AA153C3618FF057D007B4785 /* BitmessageKit.h in Headers */,
@@ -918,6 +932,7 @@
 				8ED41FCC18F596310025A51B /* XMLRPCEventBasedParserDelegate.m in Sources */,
 				AA153C0918FEFC45007B4785 /* GMAppleDouble+ZKAdditions.m in Sources */,
 				AA153C2718FEFC45007B4785 /* ZKDataArchive.m in Sources */,
+				AA27EF3619A802D2000E0339 /* BMTorProcess.m in Sources */,
 				8EDE5C2B18F594EA009A726A /* BMKeysFile.m in Sources */,
 				8ED41FBF18F596310025A51B /* NSStringAdditions.m in Sources */,
 				8EDE5C1518F594EA009A726A /* BMMessageGroup.m in Sources */,
@@ -943,6 +958,7 @@
 				8EDE5C0F18F594EA009A726A /* BMIdentities.m in Sources */,
 				8EDE5C2518F594EA009A726A /* BMProxyMessage.m in Sources */,
 				AA153C2318FEFC45007B4785 /* ZKCDTrailer64.m in Sources */,
+				AA27EF2E19A80199000E0339 /* BMProcesses.m in Sources */,
 				AA153C2918FEFC45007B4785 /* ZKDefs.m in Sources */,
 				AA153C1818FEFC45007B4785 /* NSString+ZKAdditions.m in Sources */,
 				8ED41FCE18F596310025A51B /* XMLRPCRequest.m in Sources */,

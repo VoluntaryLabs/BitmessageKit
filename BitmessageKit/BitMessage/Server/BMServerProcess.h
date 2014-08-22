@@ -8,19 +8,22 @@
 
 #import <Foundation/Foundation.h>
 #import "BMKeysFile.h"
+#import "BMTorProcess.h"
 
 @interface BMServerProcess : NSObject
 
 + (BMServerProcess *)sharedBMServerProcess;
 
-@property (strong) NSTask *torTask;
+@property (strong) BMTorProcess *torProcess;
+
+//@property (strong) NSTask *torTask;
 @property (strong) NSTask *pyBitmessageTask;
 @property (strong) NSPipe *inpipe;
 
 @property (retain, nonatomic) NSString *host;
 @property (assign) int port;
 @property (assign) int apiPort;
-@property (retain, nonatomic) NSString* torPort;
+//@property (retain, nonatomic) NSString *torPort;
 
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *password;
@@ -29,10 +32,9 @@
 
 
 - (void)launch;
-- (void)launchTor;
-- (BOOL)isProcessRunningWithName:(NSString *)name pid:(pid_t)pid;
 - (BOOL)isRunning;
 - (void)terminate;
+
 - (BOOL)canConnect;
 
 

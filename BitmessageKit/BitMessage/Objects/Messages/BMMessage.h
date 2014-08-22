@@ -39,8 +39,8 @@
 - (NSTimeInterval)ageInSeconds;
 
 
-- (void)send;
-- (void)broadcast;
+- (BOOL)send;
+- (BOOL)broadcast;
 - (void)delete;
 - (void)justDelete;
 
