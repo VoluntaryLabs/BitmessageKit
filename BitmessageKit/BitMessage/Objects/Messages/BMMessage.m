@@ -152,22 +152,25 @@
 
 // -----------------------
 
-- (void)send
+- (BOOL)send
 {
     BMProxyMessage *message = [[BMProxyMessage alloc] init];
     [message setMethodName:@"sendMessage"];
     
     // subject and message in base64
     NSArray *params = [NSArray arrayWithObjects:self.toAddress, self.fromAddress, self.subject.encodedBase64, self.message.encodedBase64, /*@2,*/ nil];
-    //message.debug = YES;
+    message.debug = YES;
     [message setParameters:params];
     [message sendSync];
     
-    //self.ackData = [message responseValue];
+    self.ackData = [message responseValue];
     //NSLog(@" self.ackData %@",  self.ackData);
+    // not all messages are acknowledge?
+    
+    return self.ackData != nil;
 }
 
-- (void)broadcast
+- (BOOL)broadcast
 {
     BMProxyMessage *message = [[BMProxyMessage alloc] init];
     [message setMethodName:@"sendBroadcast"];
@@ -179,8 +182,11 @@
     [message setParameters:params];
     [message sendSync];
     
-    id result =  [message parsedResponseValue];
+    //id result =  [message parsedResponseValue];
+    self.ackData = [message responseValue];
     //NSLog(@"broadcast result %@", result);
+    
+    return self.ackData != nil;
 }
 
 - (void)justDelete
