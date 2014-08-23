@@ -20,4 +20,6 @@
 - (BOOL)mergeChild:(BMNode *)aNode;
 - (void)completeMergeChildren;
 
+- (NSSet *)childrenAddressSet;
+
 @end

@@ -79,10 +79,20 @@
     BMChannels *channels = self.client.channels;
     [channels prepareToMergeChildren];
     
+    NSSet *receivingAddressSet = [self.client receivingAddressSet];
+    
+    for (NSString *address in receivingAddressSet)
+    {
+        NSLog(@"address: %@", address);
+    }
+    
     for (BMReceivedMessage *message in messages)
     {
         // remove deleted
-        if ([self.client.deletedMessagesDB hasMarked:message.msgid])
+        if (
+            [self.client.deletedMessagesDB hasMarked:message.msgid]
+            || (![receivingAddressSet containsObject:message.toAddress] && ![receivingAddressSet containsObject:message.fromAddress])
+            )
         {
             [message delete];
         }
@@ -106,6 +116,8 @@
     
     [subscriptions completeMergeChildren];
     [channels completeMergeChildren];
+    
+    
     
     return results;
 }

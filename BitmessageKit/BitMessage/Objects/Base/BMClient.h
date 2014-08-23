@@ -72,4 +72,8 @@
 - (void)archiveToUrl:(NSURL *)url;
 - (void)unarchiveFromUrl:(NSURL *)url;
 
+// addresses
+
+- (NSSet *)receivingAddressSet;
+
 @end

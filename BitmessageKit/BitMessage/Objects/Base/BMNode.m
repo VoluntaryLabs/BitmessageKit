@@ -48,4 +48,18 @@
     }
 }
 
+// --- addresses ---
+
+- (NSSet *)childrenAddressSet
+{
+    NSMutableSet *set = [NSMutableSet set];
+    
+    for (BMIdentity *identity in self.children)
+    {
+        [set addObject:identity.address];
+    }
+    
+    return set;
+}
+
 @end

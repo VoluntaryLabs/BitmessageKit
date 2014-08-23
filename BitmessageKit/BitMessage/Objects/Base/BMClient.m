@@ -57,6 +57,7 @@ static BMClient *sharedBMClient;
     // fetch these addresses first so we can filter messages
     // when we fetch them
     
+    [self.identities fetch];
     [self.channels fetch];
     [self.subscriptions fetch];
     
@@ -264,5 +265,23 @@ static BMClient *sharedBMClient;
     [self startServer];
     [self deepFetch];
 }
+
+// addresses
+
+- (NSSet *)receivingAddressSet
+{
+    NSMutableSet *set = [NSMutableSet set];
+    
+    NSLog(@"self.identities.childrenAddressSet = %@", self.identities.childrenAddressSet);
+    [set unionSet:self.identities.childrenAddressSet];
+    
+    NSLog(@"channels = %@", self.channels.childrenAddressSet);
+    [set unionSet:self.channels.childrenAddressSet];
+    
+    NSLog(@"subscriptions = %@", self.subscriptions.childrenAddressSet);
+    [set unionSet:self.subscriptions.childrenAddressSet];
+    return set;
+}
+
 
 @end
