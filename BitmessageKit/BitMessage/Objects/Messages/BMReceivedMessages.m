@@ -3,7 +3,7 @@
 //  Bitmarket
 //
 //  Created by Steve Dekorte on 1/25/14.
-//  Copyright (c) 2014 Bitmarkets.org. All rights reserved.
+//  Copyright (c) 2014 voluntary.net. All rights reserved.
 //
 
 #import "BMReceivedMessages.h"
@@ -20,6 +20,11 @@
     //self.actions = [NSMutableArray arrayWithObjects:@"refresh", nil];
     self.children = [NSMutableArray array];
     return self;
+}
+
+- (NSString *)nodeTitle
+{
+    return @"Inbox";
 }
 
 - (void)fetch
@@ -79,23 +84,27 @@
     BMChannels *channels = self.client.channels;
     [channels prepareToMergeChildren];
     
-    //NSSet *receivingAddressSet = [self.client receivingAddressSet];
-    NSSet *subscriptionAddressSet = [self.client.subscriptions childrenAddressSet];
-    
+    NSSet *receivingAddressSet = [self.client receivingAddressSet];
+    //NSSet *subscriptionAddressSet = [self.client.subscriptions childrenAddressSet];
     
     for (BMReceivedMessage *message in messages)
     {
-        // remove deleted
-        if ([self.client.deletedMessagesDB hasMarked:message.msgid])
+        if ([self.client.deletedMessagesDB hasMarked:message.msgid]) // remove deleted
         {
             [message delete];
         }
-        else if ([message.toAddress isEqualToString:@"[Broadcast subscribers]"])
+        /*
+        else if ([message.toAddress isEqualToString:@"[Broadcast subscribers]"]) // workaround bitmessage subscriptions bug
         {
-            if (![subscriptionAddressSet containsObject:message.fromAddress])
+            if (![subscriptionAddressSet containsObject:message.fromAddress]) // we shouldn't see these
             {
                 [message delete];
             }
+        }
+        */
+        else if (![receivingAddressSet containsObject:message.fromAddress]) // we shouldn't see these
+        {
+            [message delete];
         }
         else
         {
@@ -117,8 +126,6 @@
     [subscriptions completeMergeChildren];
     [channels completeMergeChildren];
     
-    
-    
     return results;
 }
 
@@ -132,11 +139,6 @@
     messages = [self filterMessages:messages];
     
     return messages;
-}
-
-- (NSString *)nodeTitle
-{
-    return @"Inbox";
 }
 
 @end
