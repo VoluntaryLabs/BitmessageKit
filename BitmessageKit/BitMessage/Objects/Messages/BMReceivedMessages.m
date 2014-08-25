@@ -84,7 +84,8 @@
     BMChannels *channels = self.client.channels;
     [channels prepareToMergeChildren];
     
-    NSSet *receivingAddressSet = [self.client receivingAddressSet];
+    //NSSet *receivingAddressSet = [self.client receivingAddressSet];
+    NSSet *identitiesAddressSet = [self.client.identities childrenAddressSet];
     //NSSet *subscriptionAddressSet = [self.client.subscriptions childrenAddressSet];
     
     for (BMReceivedMessage *message in messages)
@@ -93,33 +94,23 @@
         {
             [message delete];
         }
-        /*
-        else if ([message.toAddress isEqualToString:@"[Broadcast subscribers]"]) // workaround bitmessage subscriptions bug
+        else if ([subscriptions mergeChild:message])
         {
-            if (![subscriptionAddressSet containsObject:message.fromAddress]) // we shouldn't see these
-            {
-                [message delete];
-            }
+            continue;
         }
-        */
-        else if (![receivingAddressSet containsObject:message.fromAddress]) // we shouldn't see these
+        else if ([channels mergeChild:message])
+        {
+            continue;
+        }
+        else if (
+                 ![identitiesAddressSet containsObject:message.toAddress]
+                 ) // we shouldn't be seeing these
         {
             [message delete];
         }
         else
         {
-            if ([subscriptions mergeChild:message])
-            {
-                continue;
-            }
-            else if ([channels mergeChild:message])
-            {
-                continue;
-            }
-            else
-            {
-                [results addObject:message];
-            }
+            [results addObject:message];
         }
     }
     

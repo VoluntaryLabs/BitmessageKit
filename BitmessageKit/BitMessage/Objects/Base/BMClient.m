@@ -271,15 +271,17 @@ static BMClient *sharedBMClient;
 - (NSSet *)receivingAddressSet
 {
     NSMutableSet *set = [NSMutableSet set];
-    
+
+    /*
     NSLog(@"self.identities.childrenAddressSet = %@", self.identities.childrenAddressSet);
-    [set unionSet:self.identities.childrenAddressSet];
-    
-    NSLog(@"channels = %@", self.channels.childrenAddressSet);
-    [set unionSet:self.channels.childrenAddressSet];
-    
     NSLog(@"subscriptions = %@", self.subscriptions.childrenAddressSet);
+    NSLog(@"channels = %@", self.channels.childrenAddressSet);
+    */
+    
+    [set unionSet:self.identities.childrenAddressSet];
+    [set unionSet:self.channels.childrenAddressSet];
     [set unionSet:self.subscriptions.childrenAddressSet];
+    
     return set;
 }
 
