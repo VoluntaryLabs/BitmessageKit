@@ -3,7 +3,7 @@
 //  Bitmessage
 //
 //  Created by Steve Dekorte on 2/23/14.
-//  Copyright (c) 2014 Bitmarkets.org. All rights reserved.
+//  Copyright (c) 2014 voluntary.net. All rights reserved.
 //
 
 // database to workaround bitmessage bugs like reappearing deleted messages
