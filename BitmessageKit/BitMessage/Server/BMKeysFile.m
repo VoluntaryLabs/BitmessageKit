@@ -154,8 +154,8 @@
 - (void)setupForTor
 {
     [self read];
-    [self.settings setObject:@"SOCKS5" forKey:@"socksproxytype"];
-    //[self.settings setObject:@"True" forKey:@"socksproxytype"];
+    //[self.settings setObject:@"SOCKS5" forKey:@"socksproxytype"];
+    [self.settings setObject:@"True" forKey:@"socksproxytype"];
     [self write];
 }
 
