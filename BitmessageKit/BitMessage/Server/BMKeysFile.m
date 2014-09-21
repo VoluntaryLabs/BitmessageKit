@@ -145,17 +145,19 @@
 {
     [self read];
     [self.settings setObject:@"" forKey:@"socksport"];
-    [self setSOCKSPort:@""];
-    //[self.settings setObject:@"" forKey:@"socksproxytype"];
+    [self.settings setObject:@"" forKey:@"sockshostname"];
     [self.settings setObject:@"none" forKey:@"socksproxytype"];
+    [self setSOCKSPort:@""];
     [self write];
 }
 
 - (void)setupForTor
 {
     [self read];
-    //[self.settings setObject:@"SOCKS5" forKey:@"socksproxytype"];
-    [self.settings setObject:@"True" forKey:@"socksproxytype"];
+    
+    [self.settings setObject:@"127.0.0.1" forKey:@"sockshostname"];
+    [self.settings setObject:@"SOCKS5" forKey:@"socksproxytype"];
+    //[self setSOCKSPort:@""]; // should be set elsewhere to match tor
     [self write];
 }
 
