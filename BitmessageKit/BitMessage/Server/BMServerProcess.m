@@ -30,6 +30,7 @@ static BMServerProcess *shared = nil;
 - (id)init
 {
     self = [super init];
+    self.useTor = NO;
     
     // Get custom ports to prevent conflicts between bit* apps
     NSBundle *mainBundle = [NSBundle mainBundle];
@@ -42,9 +43,12 @@ static BMServerProcess *shared = nil;
     self.dataPath =
         [NSString stringWithString:[[NSFileManager defaultManager] applicationSupportDirectory]];
 
-    _torProcess = [[BMTorProcess alloc] init];
-    _torProcess.torPort = [mainBundle objectForInfoDictionaryKey:@"TorPort"];
-    _torProcess.serverDataFolder = self.serverDataFolder;
+    if (self.useTor)
+    {
+        _torProcess = [[BMTorProcess alloc] init];
+        _torProcess.torPort = [mainBundle objectForInfoDictionaryKey:@"TorPort"];
+        _torProcess.serverDataFolder = self.serverDataFolder;
+    }
     
     self.keysFile = [[BMKeysFile alloc] init];
     //[self setupKeysDat];
@@ -72,11 +76,25 @@ static BMServerProcess *shared = nil;
 {
     [self.keysFile backup];
     [self.keysFile setupForDaemon];
-    [self.keysFile setupForTor];
-    [self.keysFile setSOCKSPort: _torProcess.torPort];
+    
+    if (!self.useTor)
+    {
+        [self.keysFile setupForNonTor];
+        NSLog(@"*** setup Bitmessage for non tor use");
+        [self.keysFile setSOCKSPort: @""];
+    }
+    else
+    {
+        [self.keysFile setupForTor];
+        [self.keysFile setSOCKSPort: _torProcess.torPort];
+        NSLog(@"*** setup Bitmessage for tor on port %@", _torProcess.torPort);
+    }
+    
     [self.keysFile setApiPort:self.apiPort];
     [self.keysFile setPort:self.port];
     [self randomizeLogin];
+    
+
 }
 
 - (void)assertIsRunning
@@ -155,7 +173,17 @@ static BMServerProcess *shared = nil;
     
     [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPush" object:self];
     
-    [self.torProcess launch];
+    if (self.useTor && !self.torProcess.isRunning)
+    {
+        [self.torProcess launch];
+
+        if (!self.torProcess.isRunning)
+        {
+            [NSException raise:@"tor not running" format:nil];
+        }
+    }
+    
+
     
     BOOL hasRunBefore = self.keysFile.doesExist;
     
@@ -190,13 +218,16 @@ static BMServerProcess *shared = nil;
     NSString * pybitmessagePath = [mainBundle pathForResource:@"bitmessagemain" ofType:@"py" inDirectory: @"pybitmessage"];
     [_pyBitmessageTask setLaunchPath:pythonPath];
     
-    NSFileHandle *nullFileHandle = [NSFileHandle fileHandleWithNullDevice];
-    [_pyBitmessageTask setStandardOutput:nullFileHandle];
+    //NSFileHandle *output = [NSFileHandle fileHandleWithNullDevice];
+    NSFileHandle *output = [NSFileHandle fileHandleWithStandardOutput];
     [_pyBitmessageTask setStandardInput: (NSFileHandle *) _inpipe];
-    [_pyBitmessageTask setStandardError:nullFileHandle];
+    [_pyBitmessageTask setStandardOutput:output];
+    [_pyBitmessageTask setStandardError:output];
     
     [_pyBitmessageTask setArguments:@[ pybitmessagePath ]];
    
+    NSLog(@"*** launching _pyBitmessage");
+    
     [_pyBitmessageTask launch];
     [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
     
@@ -216,6 +247,7 @@ static BMServerProcess *shared = nil;
     }
     else
     {
+        sleep(2);
         [self waitOnConnect];
     }
 }
@@ -247,15 +279,26 @@ static BMServerProcess *shared = nil;
     NSLog(@"Killing pybitmessage process...");
     [_pyBitmessageTask terminate];
     self.pyBitmessageTask = nil;
-    //[self.keysFile setupForNonDaemon];
-    //[self.keysFile setupForNonTor];
 
-    [self.torProcess terminate];
+    if (self.torProcess)
+    {
+        [self.torProcess terminate];
+    }
 }
 
 - (BOOL)isRunning
 {
-    return (_pyBitmessageTask && [_pyBitmessageTask isRunning]);
+    if (!_pyBitmessageTask.isRunning)
+    {
+        return NO;
+    }
+    
+    if (self.useTor && !_torProcess.isRunning)
+    {
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (BOOL)canConnect

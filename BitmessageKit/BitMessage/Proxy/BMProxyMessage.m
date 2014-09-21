@@ -27,6 +27,15 @@
     return self;
 }
 
+- (void)setError:(NSError *)error
+{
+    if (error)
+    {
+        NSLog(@"BMProxy error: %@", error);
+    }
+    _error = error;
+}
+
 - (void)composeRequest
 {
     NSString *urlString = [NSString stringWithFormat:@"http://%@:%i/", self.host, self.port];

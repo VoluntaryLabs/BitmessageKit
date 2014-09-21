@@ -144,9 +144,10 @@
 - (void)setupForNonTor
 {
     [self read];
-    [self.settings setObject:@"" forKey:@"socksport"];;
-    [self.settings setObject:@"" forKey:@"socksproxytype"];
-    [self.settings setObject:@"False" forKey:@"socksproxytype"];
+    [self.settings setObject:@"" forKey:@"socksport"];
+    [self setSOCKSPort:@""];
+    //[self.settings setObject:@"" forKey:@"socksproxytype"];
+    [self.settings setObject:@"none" forKey:@"socksproxytype"];
     [self write];
 }
 
@@ -154,7 +155,7 @@
 {
     [self read];
     [self.settings setObject:@"SOCKS5" forKey:@"socksproxytype"];
-    [self.settings setObject:@"True" forKey:@"socksproxytype"];
+    //[self.settings setObject:@"True" forKey:@"socksproxytype"];
     [self write];
 }
 

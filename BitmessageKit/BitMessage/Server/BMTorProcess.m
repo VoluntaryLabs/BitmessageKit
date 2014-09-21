@@ -23,9 +23,23 @@ static id sharedBMTorProcess = nil;
     return sharedBMTorProcess;
 }
 
+/*
+- (NSString *)torPidFilePath
+{
+    return [[[self serverDataFolder] stringByAppendingPathComponent:@"tor"] stringByAppendingPathExtension:@"pid"];
+    
+}
+
+- (NSString *)torPid
+{
+    return [[NSString alloc] initWithContentsOfFile:self.torPidFilePath encoding:NSUTF8StringEncoding error:NULL];
+}
+*/
+
 
 - (void)launch
 {
+    NSLog(@"*** launching Tor ***");
     // Check for pre-existing process
     NSString *torPidFilePath = [[[self serverDataFolder] stringByAppendingPathComponent:@"tor"] stringByAppendingPathExtension:@"pid"];
     NSString *torPid = [[NSString alloc] initWithContentsOfFile:torPidFilePath encoding:NSUTF8StringEncoding error:NULL];
@@ -38,7 +52,7 @@ static id sharedBMTorProcess = nil;
             NSLog(@"killing old tor process with pid: %@", torPid);
             
             // Kill process
-            kill( [torPid intValue], SIGKILL);
+            kill([torPid intValue], SIGKILL);
         }
     }
     
@@ -53,11 +67,14 @@ static id sharedBMTorProcess = nil;
     [_torTask setLaunchPath:torPath];
     
     NSFileHandle *nullFileHandle = [NSFileHandle fileHandleWithNullDevice];
-    [_torTask setStandardOutput:nullFileHandle];
+    [_torTask setStandardOutput:[NSFileHandle fileHandleWithStandardOutput]];
+    //[_torTask setStandardOutput:nullFileHandle];
     [_torTask setStandardInput: (NSFileHandle *) _inpipe];
-    [_torTask setStandardError:nullFileHandle];
+    [_torTask setStandardError:[NSFileHandle fileHandleWithStandardOutput]];
     
     [_torTask setArguments:@[ @"-f", torConfigPath, @"--DataDirectory", torDataDirectory, @"--PidFile", torPidFilePath, @"--SOCKSPort", self.torPort ]];
+    
+    NSLog(@"*** launching Tor on port %@", self.torPort);
     
     [_torTask launch];
     
