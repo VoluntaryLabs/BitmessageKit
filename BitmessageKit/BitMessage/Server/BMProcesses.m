@@ -126,20 +126,25 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     size_t mycount = 0;
     GetBSDProcessList(&mylist, &mycount);
     int k;
+    
     for(k = 0; k < mycount; k++)
     {
         kinfo_proc *proc = NULL;
         proc = &mylist[k];
+        
         if(proc->kp_proc.p_pid == pid)
         {
             NSString *fullName = [[self infoForPID:proc->kp_proc.p_pid] objectForKey:(id)kCFBundleNameKey];
             if (fullName == nil) fullName = [NSString stringWithFormat:@"%s",proc->kp_proc.p_comm];
-            if([fullName isEqualToString:name]) {
+            
+            if([fullName isEqualToString:name])
+            {
                 free(mylist);
                 return YES;
             }
         }
     }
+    
     free(mylist);
     return NO;
 }

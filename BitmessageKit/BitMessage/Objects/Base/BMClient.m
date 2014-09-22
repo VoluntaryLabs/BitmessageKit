@@ -220,6 +220,11 @@ static BMClient *sharedBMClient;
 
 - (void)refresh
 {
+    if (_server == nil || !_server.isRunning)
+    {
+        [NSException raise:@"Bitmessage server down" format:nil];
+    }
+    
     //NSLog(@"refresh received");
     [self.messages.received refresh];
     //NSLog(@"refresh sent");

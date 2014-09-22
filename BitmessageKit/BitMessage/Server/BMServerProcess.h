@@ -14,6 +14,7 @@
 
 + (BMServerProcess *)sharedBMServerProcess;
 
+@property (assign, nonatomic) BOOL useTor;
 @property (strong) BMTorProcess *torProcess;
 
 //@property (strong) NSTask *torTask;
