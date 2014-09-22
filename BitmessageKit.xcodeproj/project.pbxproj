@@ -1103,7 +1103,7 @@
 				INFOPLIST_FILE = "BitmessageKit/BitmessageKit-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d4f85f70-dcbb-4467-b0f1-c5a3d96dc888";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -1123,7 +1123,7 @@
 				INFOPLIST_FILE = "BitmessageKit/BitmessageKit-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d4f85f70-dcbb-4467-b0f1-c5a3d96dc888";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
