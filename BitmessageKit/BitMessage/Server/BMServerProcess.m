@@ -173,8 +173,8 @@ static BMServerProcess *shared = nil;
     NSString * pybitmessagePath = [mainBundle pathForResource:@"bitmessagemain" ofType:@"py" inDirectory: @"pybitmessage"];
     [_pyBitmessageTask setLaunchPath:pythonPath];
     
-    //NSFileHandle *output = [NSFileHandle fileHandleWithNullDevice];
-    NSFileHandle *output = [NSFileHandle fileHandleWithStandardOutput];
+    NSFileHandle *output = [NSFileHandle fileHandleWithNullDevice];
+    //NSFileHandle *output = [NSFileHandle fileHandleWithStandardOutput];
     [_pyBitmessageTask setStandardInput: (NSFileHandle *) _inpipe];
     [_pyBitmessageTask setStandardOutput:output];
     [_pyBitmessageTask setStandardError:output];

@@ -61,16 +61,24 @@ static id sharedBMTorProcess = nil;
     
     // Set the path to the python executable
     NSBundle *mainBundle = [NSBundle bundleForClass:self.class];
-    NSString * torPath = [mainBundle pathForResource:@"tor" ofType:@"" inDirectory: @"tor"];
-    NSString * torConfigPath = [mainBundle pathForResource:@"torrc" ofType:@"" inDirectory: @"tor"];
-    NSString * torDataDirectory = [[self serverDataFolder] stringByAppendingPathComponent: @".tor"];
+    NSString *torPath = [mainBundle pathForResource:@"tor" ofType:@"" inDirectory: @"tor"];
+    NSString *torConfigPath = [mainBundle pathForResource:@"torrc" ofType:@"" inDirectory: @"tor"];
+    NSString *torDataDirectory = [[self serverDataFolder] stringByAppendingPathComponent: @".tor"];
     [_torTask setLaunchPath:torPath];
     
-    NSFileHandle *nullFileHandle = [NSFileHandle fileHandleWithNullDevice];
-    [_torTask setStandardOutput:[NSFileHandle fileHandleWithStandardOutput]];
-    //[_torTask setStandardOutput:nullFileHandle];
+    //NSFileHandle *nullFileHandle = [NSFileHandle fileHandleWithNullDevice];
     [_torTask setStandardInput: (NSFileHandle *) _inpipe];
-    [_torTask setStandardError:[NSFileHandle fileHandleWithStandardOutput]];
+    
+    if (YES)
+    {
+        [_torTask setStandardOutput:[NSFileHandle fileHandleWithNullDevice]];
+        [_torTask setStandardError:[NSFileHandle fileHandleWithNullDevice]];
+    }
+    else
+    {
+        [_torTask setStandardOutput:[NSFileHandle fileHandleWithStandardOutput]];
+        [_torTask setStandardError:[NSFileHandle fileHandleWithStandardOutput]];
+    }
     
     [_torTask setArguments:@[ @"-f", torConfigPath, @"--DataDirectory", torDataDirectory, @"--PidFile", torPidFilePath, @"--SOCKSPort", self.torPort ]];
     
