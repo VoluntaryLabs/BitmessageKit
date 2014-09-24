@@ -1,4 +1,4 @@
-softwareVersion = '0.4.2'
+softwareVersion = '0.4.3'
 verbose = 1
 maximumAgeOfAnObjectThatIAmWillingToAccept = 216000  # Equals two days and 12 hours.
 lengthOfTimeToLeaveObjectsInInventory = 237600 # Equals two days and 18 hours. This should be longer than maximumAgeOfAnObjectThatIAmWillingToAccept so that we don't process messages twice.
@@ -21,6 +21,7 @@ import stat
 import threading
 import time
 from os import path, environ
+from struct import Struct
 
 # Project imports.
 from addresses import *
@@ -70,6 +71,8 @@ numberOfMessagesProcessed = 0
 numberOfBroadcastsProcessed = 0
 numberOfPubkeysProcessed = 0
 numberOfInventoryLookupsPerformed = 0
+numberOfBytesReceived = 0
+numberOfBytesSent = 0
 daemon = False
 inventorySets = {} # key = streamNumer, value = a set which holds the inventory object hashes that we are aware of. This is used whenever we receive an inv message from a peer to check to see what items are new to us. We don't delete things out of it; instead, the singleCleaner thread clears and refills it every couple hours.
 needToWriteKnownNodesToDisk = False # If True, the singleCleaner will write it to disk eventually.
@@ -92,9 +95,45 @@ namecoinDefaultRpcPort = "8336"
 # binary distributions vs source distributions.
 frozen = getattr(sys,'frozen', None)
 
+# If the trustedpeer option is specified in keys.dat then this will
+# contain a Peer which will be connected to instead of using the
+# addresses advertised by other peers. The client will only connect to
+# this peer and the timing attack mitigation will be disabled in order
+# to download data faster. The expected use case is where the user has
+# a fast connection to a trusted server where they run a BitMessage
+# daemon permanently. If they then run a second instance of the client
+# on a local machine periodically when they want to check for messages
+# it will sync with the network a lot faster without compromising
+# security.
+trustedPeer = None
+
+#Compiled struct for packing/unpacking headers
+#New code should use CreatePacket instead of Header.pack
+Header = Struct('!L12sL4s')
+
+#Create a packet
+def CreatePacket(command, payload=''):
+    payload_length = len(payload)
+    if payload_length == 0:
+        checksum = '\xCF\x83\xE1\x35'
+    else:
+        checksum = hashlib.sha512(payload).digest()[0:4]
+    
+    b = bytearray(Header.size + payload_length)
+    Header.pack_into(b, 0, 0xE9BEB4D9, command, payload_length, checksum)
+    b[Header.size:] = payload
+    return bytes(b)
+
 def isInSqlInventory(hash):
     queryreturn = sqlQuery('''select hash from inventory where hash=?''', hash)
     return queryreturn != []
+
+def encodeHost(host):
+    if host.find(':') == -1:
+        return '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xFF\xFF' + \
+            socket.inet_aton(host)
+    else:
+        return socket.inet_pton(socket.AF_INET6, host)
 
 def assembleVersionMessage(remoteHost, remotePort, myStreamNumber):
     payload = ''
@@ -104,8 +143,7 @@ def assembleVersionMessage(remoteHost, remotePort, myStreamNumber):
 
     payload += pack(
         '>q', 1)  # boolservices of remote connection; ignored by the remote host.
-    payload += '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xFF\xFF' + \
-        socket.inet_aton(remoteHost)
+    payload += encodeHost(remoteHost)
     payload += pack('>H', remotePort)  # remote IPv6 and port
 
     payload += pack('>q', 1)  # bitflags of the services I offer.
@@ -123,11 +161,7 @@ def assembleVersionMessage(remoteHost, remotePort, myStreamNumber):
         1)  # The number of streams about which I care. PyBitmessage currently only supports 1 per connection.
     payload += encodeVarint(myStreamNumber)
 
-    datatosend = '\xe9\xbe\xb4\xd9'  # magic bits, slighly different from Bitcoin's magic bits.
-    datatosend = datatosend + 'version\x00\x00\x00\x00\x00'  # version command
-    datatosend = datatosend + pack('>L', len(payload))  # payload length
-    datatosend = datatosend + hashlib.sha512(payload).digest()[0:4]
-    return datatosend + payload
+    return CreatePacket('version', payload)
 
 def lookupAppdataFolder():
     APPNAME = "PyBitmessage"
@@ -295,7 +329,7 @@ def isProofOfWorkSufficient(
 def doCleanShutdown():
     global shutdown
     shutdown = 1 #Used to tell proof of work worker threads and the objectProcessorThread to exit.
-    broadcastToSendDataQueues((0, 'shutdown', 'all'))   
+    broadcastToSendDataQueues((0, 'shutdown', 'no data'))   
     with shared.objectProcessorQueueSizeLock:
         data = 'no data'
         shared.objectProcessorQueueSize += len(data)

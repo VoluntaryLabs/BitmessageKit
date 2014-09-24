@@ -12,12 +12,14 @@ from pyelliptic.openssl import OpenSSL
 import highlevelcrypto
 from addresses import *
 import helper_generic
+from helper_generic import addDataPadding
 import helper_bitcoin
 import helper_inbox
 import helper_sent
 from helper_sql import *
 import tr
 from debug import logger
+import l10n
 
 
 class objectProcessor(threading.Thread):
@@ -420,8 +422,7 @@ class objectProcessor(threading.Thread):
             del shared.ackdataForWhichImWatching[data[readPosition:]]
             sqlExecute('UPDATE sent SET status=? WHERE ackdata=?',
                        'ackreceived', data[readPosition:])
-            shared.UISignalQueue.put(('updateSentItemStatusByAckdata', (data[readPosition:], tr.translateText("MainWindow",'Acknowledgement of the message received. %1').arg(unicode(
-                time.strftime(shared.config.get('bitmessagesettings', 'timeformat'), time.localtime(int(time.time()))), 'utf-8')))))
+            shared.UISignalQueue.put(('updateSentItemStatusByAckdata', (data[readPosition:], tr.translateText("MainWindow",'Acknowledgement of the message received. %1').arg(l10n.formatTimestamp()))))
             return
         else:
             logger.info('This was NOT an acknowledgement bound for me.')
@@ -594,22 +595,29 @@ class objectProcessor(threading.Thread):
             if queryreturn == []:
                 logger.info('Message ignored because address not in whitelist.')
                 blockMessage = True
-        if not blockMessage:
-            toLabel = shared.config.get(toAddress, 'label')
-            if toLabel == '':
-                toLabel = toAddress
+        
+        toLabel = shared.config.get(toAddress, 'label')
+        if toLabel == '':
+            toLabel = toAddress
 
-            if messageEncodingType == 2:
-                subject, body = self.decodeType2Message(message)
-                logger.info('Message subject (first 100 characters): %s' % repr(subject)[:100])
-            elif messageEncodingType == 1:
-                body = message
-                subject = ''
-            elif messageEncodingType == 0:
-                logger.info('messageEncodingType == 0. Doing nothing with the message. They probably just sent it so that we would store their public key or send their ack data for them.') 
-            else:
-                body = 'Unknown encoding type.\n\n' + repr(message)
-                subject = ''
+        if messageEncodingType == 2:
+            subject, body = self.decodeType2Message(message)
+            logger.info('Message subject (first 100 characters): %s' % repr(subject)[:100])
+        elif messageEncodingType == 1:
+            body = message
+            subject = ''
+        elif messageEncodingType == 0:
+            logger.info('messageEncodingType == 0. Doing nothing with the message. They probably just sent it so that we would store their public key or send their ack data for them.')
+            subject = ''
+            body = '' 
+        else:
+            body = 'Unknown encoding type.\n\n' + repr(message)
+            subject = ''
+        # Let us make sure that we haven't already received this message
+        if helper_inbox.isMessageAlreadyInInbox(toAddress, fromAddress, subject, body, messageEncodingType):
+            logger.info('This msg is already in our inbox. Ignoring it.')
+            blockMessage = True
+        if not blockMessage:
             if messageEncodingType != 0:
                 t = (inventoryHash, toAddress, fromAddress, subject, int(
                     time.time()), body, 'inbox', messageEncodingType, 0)
@@ -659,13 +667,13 @@ class objectProcessor(threading.Thread):
                 shared.workerQueue.put(('sendbroadcast', ''))
 
         if self.ackDataHasAVaildHeader(ackData):
-            if ackData[4:16] == 'getpubkey\x00\x00\x00':
+            if ackData[4:16] == addDataPadding('getpubkey'):
                 shared.checkAndSharegetpubkeyWithPeers(ackData[24:])
-            elif ackData[4:16] == 'pubkey\x00\x00\x00\x00\x00\x00':
+            elif ackData[4:16] == addDataPadding('pubkey'):
                 shared.checkAndSharePubkeyWithPeers(ackData[24:])
-            elif ackData[4:16] == 'msg\x00\x00\x00\x00\x00\x00\x00\x00\x00':
+            elif ackData[4:16] == addDataPadding('msg'):
                 shared.checkAndShareMsgWithPeers(ackData[24:])
-            elif ackData[4:16] == 'broadcast\x00\x00\x00':
+            elif ackData[4:16] == addDataPadding('broadcast'):
                 shared.checkAndShareBroadcastWithPeers(ackData[24:])
 
         # Display timing data
@@ -807,25 +815,28 @@ class objectProcessor(threading.Thread):
 
                 toAddress = '[Broadcast subscribers]'
                 if messageEncodingType != 0:
-
-                    t = (inventoryHash, toAddress, fromAddress, subject, int(
-                        time.time()), body, 'inbox', messageEncodingType, 0)
-                    helper_inbox.insert(t)
-
-                    shared.UISignalQueue.put(('displayNewInboxMessage', (
-                        inventoryHash, toAddress, fromAddress, subject, body)))
-
-                    # If we are behaving as an API then we might need to run an
-                    # outside command to let some program know that a new
-                    # message has arrived.
-                    if shared.safeConfigGetBoolean('bitmessagesettings', 'apienabled'):
-                        try:
-                            apiNotifyPath = shared.config.get(
-                                'bitmessagesettings', 'apinotifypath')
-                        except:
-                            apiNotifyPath = ''
-                        if apiNotifyPath != '':
-                            call([apiNotifyPath, "newBroadcast"])
+                    # Let us make sure that we haven't already received this message
+                    if helper_inbox.isMessageAlreadyInInbox(toAddress, fromAddress, subject, body, messageEncodingType):
+                        logger.info('This broadcast is already in our inbox. Ignoring it.')
+                    else:
+                        t = (inventoryHash, toAddress, fromAddress, subject, int(
+                            time.time()), body, 'inbox', messageEncodingType, 0)
+                        helper_inbox.insert(t)
+    
+                        shared.UISignalQueue.put(('displayNewInboxMessage', (
+                            inventoryHash, toAddress, fromAddress, subject, body)))
+    
+                        # If we are behaving as an API then we might need to run an
+                        # outside command to let some program know that a new
+                        # message has arrived.
+                        if shared.safeConfigGetBoolean('bitmessagesettings', 'apienabled'):
+                            try:
+                                apiNotifyPath = shared.config.get(
+                                    'bitmessagesettings', 'apinotifypath')
+                            except:
+                                apiNotifyPath = ''
+                            if apiNotifyPath != '':
+                                call([apiNotifyPath, "newBroadcast"])
 
                 # Display timing data
                 logger.debug('Time spent processing this interesting broadcast: %s' % (time.time() - messageProcessingStartTime,))
@@ -952,25 +963,27 @@ class objectProcessor(threading.Thread):
 
             toAddress = '[Broadcast subscribers]'
             if messageEncodingType != 0:
-
-                t = (inventoryHash, toAddress, fromAddress, subject, int(
-                    time.time()), body, 'inbox', messageEncodingType, 0)
-                helper_inbox.insert(t)
-
-                shared.UISignalQueue.put(('displayNewInboxMessage', (
-                    inventoryHash, toAddress, fromAddress, subject, body)))
-
-                # If we are behaving as an API then we might need to run an
-                # outside command to let some program know that a new message
-                # has arrived.
-                if shared.safeConfigGetBoolean('bitmessagesettings', 'apienabled'):
-                    try:
-                        apiNotifyPath = shared.config.get(
-                            'bitmessagesettings', 'apinotifypath')
-                    except:
-                        apiNotifyPath = ''
-                    if apiNotifyPath != '':
-                        call([apiNotifyPath, "newBroadcast"])
+                if helper_inbox.isMessageAlreadyInInbox(toAddress, fromAddress, subject, body, messageEncodingType):
+                    logger.info('This broadcast is already in our inbox. Ignoring it.')
+                else:
+                    t = (inventoryHash, toAddress, fromAddress, subject, int(
+                        time.time()), body, 'inbox', messageEncodingType, 0)
+                    helper_inbox.insert(t)
+    
+                    shared.UISignalQueue.put(('displayNewInboxMessage', (
+                        inventoryHash, toAddress, fromAddress, subject, body)))
+    
+                    # If we are behaving as an API then we might need to run an
+                    # outside command to let some program know that a new message
+                    # has arrived.
+                    if shared.safeConfigGetBoolean('bitmessagesettings', 'apienabled'):
+                        try:
+                            apiNotifyPath = shared.config.get(
+                                'bitmessagesettings', 'apinotifypath')
+                        except:
+                            apiNotifyPath = ''
+                        if apiNotifyPath != '':
+                            call([apiNotifyPath, "newBroadcast"])
 
             # Display timing data
             logger.info('Time spent processing this interesting broadcast: %s' % (time.time() - messageProcessingStartTime,))
@@ -1095,25 +1108,27 @@ class objectProcessor(threading.Thread):
 
             toAddress = '[Broadcast subscribers]'
             if messageEncodingType != 0:
-
-                t = (inventoryHash, toAddress, fromAddress, subject, int(
-                    time.time()), body, 'inbox', messageEncodingType, 0)
-                helper_inbox.insert(t)
-
-                shared.UISignalQueue.put(('displayNewInboxMessage', (
-                    inventoryHash, toAddress, fromAddress, subject, body)))
-
-                # If we are behaving as an API then we might need to run an
-                # outside command to let some program know that a new message
-                # has arrived.
-                if shared.safeConfigGetBoolean('bitmessagesettings', 'apienabled'):
-                    try:
-                        apiNotifyPath = shared.config.get(
-                            'bitmessagesettings', 'apinotifypath')
-                    except:
-                        apiNotifyPath = ''
-                    if apiNotifyPath != '':
-                        call([apiNotifyPath, "newBroadcast"])
+                if helper_inbox.isMessageAlreadyInInbox(toAddress, fromAddress, subject, body, messageEncodingType):
+                    logger.info('This broadcast is already in our inbox. Ignoring it.')
+                else:
+                    t = (inventoryHash, toAddress, fromAddress, subject, int(
+                        time.time()), body, 'inbox', messageEncodingType, 0)
+                    helper_inbox.insert(t)
+    
+                    shared.UISignalQueue.put(('displayNewInboxMessage', (
+                        inventoryHash, toAddress, fromAddress, subject, body)))
+    
+                    # If we are behaving as an API then we might need to run an
+                    # outside command to let some program know that a new message
+                    # has arrived.
+                    if shared.safeConfigGetBoolean('bitmessagesettings', 'apienabled'):
+                        try:
+                            apiNotifyPath = shared.config.get(
+                                'bitmessagesettings', 'apinotifypath')
+                        except:
+                            apiNotifyPath = ''
+                        if apiNotifyPath != '':
+                            call([apiNotifyPath, "newBroadcast"])
 
             # Display timing data
             logger.debug('Time spent processing this interesting broadcast: %s' % (time.time() - messageProcessingStartTime,))
@@ -1149,25 +1164,27 @@ class objectProcessor(threading.Thread):
                 shared.workerQueue.put(('sendmessage', ''))
 
     def ackDataHasAVaildHeader(self, ackData):
-        if len(ackData) < 24:
+        if len(ackData) < shared.Header.size:
             logger.info('The length of ackData is unreasonably short. Not sending ackData.')
             return False
-        if ackData[0:4] != '\xe9\xbe\xb4\xd9':
+        
+        magic,command,payload_length,checksum = shared.Header.unpack(ackData[:shared.Header.size])
+        if magic != 0xE9BEB4D9:
             logger.info('Ackdata magic bytes were wrong. Not sending ackData.')
             return False
-        ackDataPayloadLength, = unpack('>L', ackData[16:20])
-        if len(ackData) - 24 != ackDataPayloadLength:
+        payload = ackData[shared.Header.size:]
+        if len(payload) != payload_length:
             logger.info('ackData payload length doesn\'t match the payload length specified in the header. Not sending ackdata.')
             return False
-        if ackData[20:24] != hashlib.sha512(ackData[24:]).digest()[0:4]:  # test the checksum in the message.
+        if payload_length > 180000000: # If the size of the message is greater than 180MB, ignore it.
+            return False
+        if checksum != hashlib.sha512(payload).digest()[0:4]:  # test the checksum in the message.
             logger.info('ackdata checksum wrong. Not sending ackdata.')
             return False
-        if ackDataPayloadLength > 180000000: # If the size of the message is greater than 180MB, ignore it.
-            return False
-        if (ackData[4:16] != 'getpubkey\x00\x00\x00' and
-            ackData[4:16] != 'pubkey\x00\x00\x00\x00\x00\x00' and
-            ackData[4:16] != 'msg\x00\x00\x00\x00\x00\x00\x00\x00\x00' and
-            ackData[4:16] != 'broadcast\x00\x00\x00'):
+        if (command != addDataPadding('getpubkey') and
+            command != addDataPadding('pubkey') and
+            command != addDataPadding('msg') and
+            command != addDataPadding('broadcast')):
             return False
         return True
 

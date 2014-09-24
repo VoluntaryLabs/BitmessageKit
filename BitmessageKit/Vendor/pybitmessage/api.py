@@ -365,10 +365,9 @@ class MySimpleXMLRPCRequestHandler(SimpleXMLRPCRequestHandler):
         elif method == 'createChan':
             if len(params) == 0:
                 raise APIError(0, 'I need parameters.')
-            elif len(params) == 2:
-                passphrase, difficulty = params
+            elif len(params) == 1:
+                passphrase, = params
             passphrase = self._decode(passphrase, "base64")
-            difficulty = int(difficulty)
             if len(passphrase) == 0:
                 raise APIError(1, 'The specified passphrase is blank.')
             # It would be nice to make the label the passphrase but it is
@@ -383,7 +382,7 @@ class MySimpleXMLRPCRequestHandler(SimpleXMLRPCRequestHandler):
             streamNumber = 1
             shared.apiAddressGeneratorReturnQueue.queue.clear()
             logger.debug('Requesting that the addressGenerator create chan %s.', passphrase)
-            shared.addressGeneratorQueue.put(('createChan', addressVersionNumber, streamNumber, label, passphrase, difficulty))
+            shared.addressGeneratorQueue.put(('createChan', addressVersionNumber, streamNumber, label, passphrase))
             queueReturn = shared.apiAddressGeneratorReturnQueue.get()
             if len(queueReturn) == 0:
                 raise APIError(24, 'Chan address is already present.')

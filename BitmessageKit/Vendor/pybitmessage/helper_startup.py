@@ -6,12 +6,22 @@ import locale
 import random
 import string
 import platform
-from os import environ
 from distutils.version import StrictVersion
 
 from namecoin import ensureNamecoinOptions
 
 storeConfigFilesInSameDirectoryAsProgramByDefault = False  # The user may de-select Portable Mode in the settings if they want the config files to stay in the application data folder.
+
+def _loadTrustedPeer():
+    try:
+        trustedPeer = shared.config.get('bitmessagesettings', 'trustedpeer')
+    except ConfigParser.Error:
+        # This probably means the trusted peer wasn't specified so we
+        # can just leave it as None
+        return
+
+    host, port = trustedPeer.split(':')
+    shared.trustedPeer = shared.Peer(host, int(port))
 
 def loadConfig():
     if shared.appdata:
@@ -47,17 +57,6 @@ def loadConfig():
         # This appears to be the first time running the program; there is
         # no config file (or it cannot be accessed). Create config file.
         shared.config.add_section('bitmessagesettings')
-        
-        #Preconfigure password
-        shared.config.set('bitmessagesettings', 'daemon', 'true')
-        shared.config.set('bitmessagesettings', 'apienabled', 'true')
-        shared.config.set('bitmessagesettings', 'apiinterface', '127.0.0.1')
-        shared.config.set('bitmessagesettings', 'apiport', '8442')
-        shared.config.set('bitmessagesettings', 'apiusername', environ['PYBITMESSAGE_USER'])
-        shared.config.set('bitmessagesettings', 'apipassword', environ['PYBITMESSAGE_PASSWORD'])
-
-
-
         shared.config.set('bitmessagesettings', 'settingsversion', '8')
         shared.config.set('bitmessagesettings', 'port', '8444')
         shared.config.set(
@@ -102,6 +101,7 @@ def loadConfig():
         shared.config.set('bitmessagesettings', 'userlocale', 'system')
         shared.config.set('bitmessagesettings', 'useidenticons', 'True')
         shared.config.set('bitmessagesettings', 'identiconsuffix', ''.join(random.choice("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz") for x in range(12))) # a twelve character pseudo-password to salt the identicons
+        shared.config.set('bitmessagesettings', 'replybelow', 'False')
         
          #start:UI setting to stop trying to send messages after X days/months
         shared.config.set(
@@ -133,6 +133,8 @@ def loadConfig():
             os.umask(0o077)
         with open(shared.appdata + 'keys.dat', 'wb') as configfile:
             shared.config.write(configfile)
+
+    _loadTrustedPeer()
 
 def isOurOperatingSystemLimitedToHavingVeryFewHalfOpenConnections():
     try:
