@@ -17,6 +17,7 @@
 {
     self = [super init];
     self.shouldSelectChildOnAdd = YES;
+    self.shouldSortChildren = YES;
     return self;
 }
 

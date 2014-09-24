@@ -62,4 +62,16 @@
     return set;
 }
 
+- (NSSet *)childrenLabelSet
+{
+    NSMutableSet *set = [NSMutableSet set];
+    
+    for (BMIdentity *identity in self.children)
+    {
+        [set addObject:identity.label];
+    }
+    
+    return set;
+}
+
 @end

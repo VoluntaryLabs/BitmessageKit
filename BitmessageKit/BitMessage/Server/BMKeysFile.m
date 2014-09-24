@@ -164,7 +164,8 @@
 - (BOOL)setSOCKSPort:(NSString *)aString
 {
     [self read];
-    [self.settings setObject:aString forKey:@"socksport"];;
+    [self.settings setObject:aString forKey:@"socksport"];
+    NSLog(@"setting Key.dat socks port '%@'", aString);
     [self write];
     return YES;
 }

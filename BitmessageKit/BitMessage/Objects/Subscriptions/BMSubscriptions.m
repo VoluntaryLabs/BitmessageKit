@@ -17,6 +17,7 @@
 {
     self = [super init];
     self.shouldSelectChildOnAdd = YES;
+    self.shouldSortChildren = YES;
     [self fetch];
     return self;
 }
@@ -115,6 +116,5 @@
 {
     return 300.0;
 }
-
 
 @end

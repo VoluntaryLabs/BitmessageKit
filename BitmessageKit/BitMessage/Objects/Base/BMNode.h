@@ -21,5 +21,6 @@
 - (void)completeMergeChildren;
 
 - (NSSet *)childrenAddressSet;
+- (NSSet *)childrenLabelSet;
 
 @end

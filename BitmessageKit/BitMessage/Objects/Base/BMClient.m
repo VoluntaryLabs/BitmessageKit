@@ -125,52 +125,54 @@ static BMClient *sharedBMClient;
     return nil;
 }
 
-- (NSMutableArray *)fromAddressLabels
+- (NSSet *)identityAddressLabels
 {
-    NSMutableArray *addressLabels = [NSMutableArray array];
-    
-    for (BMAddressed *child in self.identities.children)
-    {
-        [addressLabels addObject:child.label];
-    }
-    
-    return addressLabels;
+    return self.identities.childrenLabelSet;
 }
 
-- (NSMutableArray *)allAddressed
+- (NSSet *)fromAddressLabels
 {
-    NSMutableArray *results = [self noneIdentityAddressed];
+    NSMutableSet *fromLabels = [NSMutableSet set];
+    [fromLabels unionSet:self.identities.childrenLabelSet];
+    [fromLabels unionSet:self.subscriptions.childrenLabelSet];
+    [fromLabels unionSet:self.channels.childrenLabelSet];
+    return fromLabels;
+}
+
+- (NSSet *)allAddressed
+{
+    NSMutableSet *results = [NSMutableSet setWithSet:[self nonIdentityAddressed]];
     [results addObjectsFromArray:self.identities.children];
     return results;
 }
 
-- (NSMutableArray *)noneIdentityAddressed
+- (NSSet *)nonIdentityAddressed
 {
-    NSMutableArray *results = [NSMutableArray array];
+    NSMutableSet *results = [NSMutableSet set];
     [results addObjectsFromArray:self.contacts.children];
     [results addObjectsFromArray:self.subscriptions.children];
     [results addObjectsFromArray:self.channels.children];
     return results;
 }
 
-- (NSMutableArray *)toAddressLabels
+- (NSSet *)toAddressLabels
 {
-    NSMutableArray *addressLabels = [NSMutableArray array];
+    NSMutableSet *toLabels = [NSMutableSet set];
     
-    for (BMAddressed *child in self.noneIdentityAddressed)
+    for (BMAddressed *child in self.nonIdentityAddressed)
     {
-        [addressLabels addObject:child.label];
+        [toLabels addObject:child.label];
     }
     
-    return addressLabels;
+    return toLabels;
 }
 
-- (NSMutableArray *)allAddressLabels
+- (NSSet *)allAddressLabels
 {
-    NSMutableArray *all = [NSMutableArray array];
-    [all addObjectsFromArray:self.fromAddressLabels];
-    [all addObjectsFromArray:self.toAddressLabels];
-    return all;
+    NSMutableSet *allLabels = [NSMutableSet set];
+    [allLabels unionSet:self.fromAddressLabels];
+    [allLabels unionSet:self.toAddressLabels];
+    return allLabels;
 }
 
 - (BOOL)hasNoIdentites

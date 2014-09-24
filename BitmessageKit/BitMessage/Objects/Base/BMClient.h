@@ -55,9 +55,9 @@
 - (NSString *)labelForAddress:(NSString *)addressString; // returns address if none found
 - (NSString *)addressForLabel:(NSString *)labelString; // returns address if none found
 
-- (NSMutableArray *)fromAddressLabels;
-- (NSMutableArray *)toAddressLabels;
-- (NSMutableArray *)allAddressLabels;
+- (NSSet *)fromAddressLabels;
+- (NSSet *)toAddressLabels;
+- (NSSet *)allAddressLabels;
 
 - (BOOL)hasNoIdentites;
 
