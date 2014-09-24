@@ -30,7 +30,9 @@ static BMServerProcess *shared = nil;
 - (id)init
 {
     self = [super init];
+    
     self.useTor = YES;
+    self.debug = NO;
     
     // Get custom ports to prevent conflicts between bit* apps
     NSBundle *mainBundle = [NSBundle mainBundle];
@@ -47,6 +49,7 @@ static BMServerProcess *shared = nil;
     {
         _torProcess = [[BMTorProcess alloc] init];
         _torProcess.torPort = [mainBundle objectForInfoDictionaryKey:@"TorPort"];
+        assert(_torProcess.torPort != nil);
         _torProcess.serverDataFolder = self.serverDataFolder;
     }
     
@@ -174,14 +177,22 @@ static BMServerProcess *shared = nil;
     [_pyBitmessageTask setLaunchPath:pythonPath];
     
     //NSFileHandle *output = [NSFileHandle fileHandleWithNullDevice];
-    NSFileHandle *output = [NSFileHandle fileHandleWithStandardOutput];
     [_pyBitmessageTask setStandardInput: (NSFileHandle *) _inpipe];
-    [_pyBitmessageTask setStandardOutput:output];
-    [_pyBitmessageTask setStandardError:output];
     
-    [_pyBitmessageTask setArguments:@[ pybitmessagePath ]];
+    if (self.debug)
+    {
+        [_pyBitmessageTask setStandardOutput:[NSFileHandle fileHandleWithStandardOutput]];
+        [_pyBitmessageTask setStandardError:[NSFileHandle fileHandleWithStandardOutput]];
+    }
+    else
+    {
+        [_pyBitmessageTask setStandardOutput:[NSFileHandle fileHandleWithNullDevice]];
+        [_pyBitmessageTask setStandardError:[NSFileHandle fileHandleWithNullDevice]];
+    }
+    
+    [_pyBitmessageTask setArguments:@[pybitmessagePath]];
    
-    NSLog(@"*** launching _pyBitmessage");
+    NSLog(@"*** launching _pyBitmessage ***");
     
     [_pyBitmessageTask launch];
     [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];

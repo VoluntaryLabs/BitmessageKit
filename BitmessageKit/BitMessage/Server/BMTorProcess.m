@@ -23,6 +23,13 @@ static id sharedBMTorProcess = nil;
     return sharedBMTorProcess;
 }
 
+- (id)init
+{
+    self = [super init];
+    self.debug = NO;
+    return self;
+}
+
 /*
 - (NSString *)torPidFilePath
 {
@@ -40,6 +47,7 @@ static id sharedBMTorProcess = nil;
 - (void)launch
 {
     NSLog(@"*** launching Tor ***");
+    
     // Check for pre-existing process
     NSString *torPidFilePath = [[[self serverDataFolder] stringByAppendingPathComponent:@"tor"] stringByAppendingPathExtension:@"pid"];
     NSString *torPid = [[NSString alloc] initWithContentsOfFile:torPidFilePath encoding:NSUTF8StringEncoding error:NULL];
@@ -65,16 +73,26 @@ static id sharedBMTorProcess = nil;
     NSString * torConfigPath = [mainBundle pathForResource:@"torrc" ofType:@"" inDirectory: @"tor"];
     NSString * torDataDirectory = [[self serverDataFolder] stringByAppendingPathComponent: @".tor"];
     [_torTask setLaunchPath:torPath];
-    
-    NSFileHandle *nullFileHandle = [NSFileHandle fileHandleWithNullDevice];
-    [_torTask setStandardOutput:[NSFileHandle fileHandleWithStandardOutput]];
-    //[_torTask setStandardOutput:nullFileHandle];
+
     [_torTask setStandardInput: (NSFileHandle *) _inpipe];
-    [_torTask setStandardError:[NSFileHandle fileHandleWithStandardOutput]];
     
-    [_torTask setArguments:@[ @"-f", torConfigPath, @"--DataDirectory", torDataDirectory, @"--PidFile", torPidFilePath, @"--SOCKSPort", self.torPort ]];
+    if (self.debug)
+    {
+        [_torTask setStandardOutput:[NSFileHandle fileHandleWithStandardOutput]];
+        [_torTask setStandardError:[NSFileHandle fileHandleWithStandardOutput]];
+    }
+    else
+    {
+        [_torTask setStandardOutput:[NSFileHandle fileHandleWithNullDevice]];
+        [_torTask setStandardError:[NSFileHandle fileHandleWithNullDevice]];
+    }
     
-    NSLog(@"*** launching Tor on port %@", self.torPort);
+    [_torTask setArguments:@[ @"-f", torConfigPath,
+                              @"--DataDirectory", torDataDirectory,
+                              @"--PidFile", torPidFilePath,
+                              @"--SOCKSPort", self.torPort ]];
+    
+    NSLog(@"*** launching Tor on port %@ ***", self.torPort);
     
     [_torTask launch];
     

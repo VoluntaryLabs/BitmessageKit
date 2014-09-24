@@ -10,6 +10,7 @@
 
 @interface BMTorProcess : NSObject
 
+@property (assign, nonatomic) BOOL debug;
 @property (strong) NSTask *torTask;
 @property (strong) NSString *serverDataFolder;
 @property (retain, nonatomic) NSString *torPort;
