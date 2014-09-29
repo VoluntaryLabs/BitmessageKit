@@ -19,7 +19,7 @@ import helper_sent
 from helper_sql import *
 import tr
 from debug import logger
-import l10n
+#import l10n
 
 
 class objectProcessor(threading.Thread):
