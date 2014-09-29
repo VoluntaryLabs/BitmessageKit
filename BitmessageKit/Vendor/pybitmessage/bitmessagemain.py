@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 # Copyright (c) 2012 Jonathan Warren
 # Copyright (c) 2012 The Bitmessage developers
 # Distributed under the MIT/X11 software license. See the accompanying
@@ -9,10 +9,33 @@
 
 # The software version variable is now held in shared.py
 
+
+import sys
+#Version check
+#Older versions of Python don't support the print function while Python 3 doesn't
+#like the print statement, so we use sys.stdout for the version check. After this
+#check we can then use the print function in the remainder of this file. Currently
+#in order to use logging, a lot of unnecessary code needs to be executed which could
+#potentially render this version check useless. So logging won't be used here until
+#there is a more efficient way to configure logging
+if sys.hexversion >= 0x3000000:
+    msg = "PyBitmessage does not support Python 3. Python 2.7.3 or later is required. Your version: %s" % sys.version
+    #logger.critical(msg)
+    sys.stdout.write(msg)
+    sys.exit(0)
+if sys.hexversion < 0x20703F0:
+    msg = "You should use Python 2.7.3 or greater (but not Python 3). Your version: %s" % sys.version
+    #logger.critical(msg)
+    sys.stdout.write(msg)
+    sys.exit(0)
+
 import signal  # Used to capture a Ctrl-C keypress so that Bitmessage can shutdown gracefully.
 # The next 3 are used for the API
 import singleton
 import os
+import socket
+import ctypes
+from struct import pack
 
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 from api import MySimpleXMLRPCRequestHandler
@@ -42,15 +65,7 @@ import helper_generic
 
 from subprocess import call
 import time
-
-# OSX python version check
-import sys
-if sys.platform == 'darwin':
-    if float("{1}.{2}".format(*sys.version_info)) < 7.5:
-        msg = "You should use python 2.7.5 or greater. Your version: %s", "{0}.{1}.{2}".format(*sys.version_info)
-        logger.critical(msg)
-        print msg
-        sys.exit(0)
+    
 
 def connectToStream(streamNumber):
     shared.streamsInWhichIAmParticipating[streamNumber] = 'no data'
@@ -71,6 +86,56 @@ def connectToStream(streamNumber):
         a.setup(streamNumber, selfInitiatedConnections)
         a.start()
 
+def _fixWinsock():
+    if not ('win32' in sys.platform) and not ('win64' in sys.platform):
+        return
+
+    # Python 2 on Windows doesn't define a wrapper for
+    # socket.inet_ntop but we can make one ourselves using ctypes
+    if not hasattr(socket, 'inet_ntop'):
+        addressToString = ctypes.windll.ws2_32.WSAAddressToStringA
+        def inet_ntop(family, host):
+            if family == socket.AF_INET:
+                if len(host) != 4:
+                    raise ValueError("invalid IPv4 host")
+                host = pack("hH4s8s", socket.AF_INET, 0, host, "\0" * 8)
+            elif family == socket.AF_INET6:
+                if len(host) != 16:
+                    raise ValueError("invalid IPv6 host")
+                host = pack("hHL16sL", socket.AF_INET6, 0, 0, host, 0)
+            else:
+                raise ValueError("invalid address family")
+            buf = "\0" * 64
+            lengthBuf = pack("I", len(buf))
+            addressToString(host, len(host), None, buf, lengthBuf)
+            return buf[0:buf.index("\0")]
+        socket.inet_ntop = inet_ntop
+
+    # Same for inet_pton
+    if not hasattr(socket, 'inet_pton'):
+        stringToAddress = ctypes.windll.ws2_32.WSAStringToAddressA
+        def inet_pton(family, host):
+            buf = "\0" * 28
+            lengthBuf = pack("I", len(buf))
+            if stringToAddress(str(host),
+                               int(family),
+                               None,
+                               buf,
+                               lengthBuf) != 0:
+                raise socket.error("illegal IP address passed to inet_pton")
+            if family == socket.AF_INET:
+                return buf[4:8]
+            elif family == socket.AF_INET6:
+                return buf[8:24]
+            else:
+                raise ValueError("invalid address family")
+        socket.inet_pton = inet_pton
+
+    # These sockopts are needed on for IPv6 support
+    if not hasattr(socket, 'IPPROTO_IPV6'):
+        socket.IPPROTO_IPV6 = 41
+    if not hasattr(socket, 'IPV6_V6ONLY'):
+        socket.IPV6_V6ONLY = 27
 
 # This thread, of which there is only one, runs the API.
 class singleAPI(threading.Thread):
@@ -95,9 +160,16 @@ if shared.useVeryEasyProofOfWorkForTesting:
 
 class Main:
     def start(self, daemon=False):
+        _fixWinsock()
+
         shared.daemon = daemon
         # is the application already running?  If yes then exit.
         thisapp = singleton.singleinstance()
+
+        # get curses flag
+        curses = False
+        if '-c' in sys.argv:
+            curses = True
 
         signal.signal(signal.SIGINT, helper_generic.signal_handler)
         # signal.signal(signal.SIGINT, signal.SIG_DFL)
@@ -139,7 +211,7 @@ class Main:
                 apiNotifyPath = ''
             if apiNotifyPath != '':
                 with shared.printLock:
-                    print 'Trying to call', apiNotifyPath
+                    print('Trying to call', apiNotifyPath)
 
                 call([apiNotifyPath, "startingUp"])
             singleAPIThread = singleAPI()
@@ -154,30 +226,36 @@ class Main:
         singleListenerThread.start()
 
         if daemon == False and shared.safeConfigGetBoolean('bitmessagesettings', 'daemon') == False:
-            try:
-                from PyQt4 import QtCore, QtGui
-            except Exception as err:
-                print 'PyBitmessage requires PyQt unless you want to run it as a daemon and interact with it using the API. You can download PyQt from http://www.riverbankcomputing.com/software/pyqt/download   or by searching Google for \'PyQt Download\'. If you want to run in daemon mode, see https://bitmessage.org/wiki/Daemon'
-                print 'Error message:', err
-                os._exit(0)
+            if curses == False:
+                try:
+                    from PyQt4 import QtCore, QtGui
+                except Exception as err:
+                    print('PyBitmessage requires PyQt unless you want to run it as a daemon and interact with it using the API. You can download PyQt from http://www.riverbankcomputing.com/software/pyqt/download   or by searching Google for \'PyQt Download\'. If you want to run in daemon mode, see https://bitmessage.org/wiki/Daemon')
+                    print('Error message:', err)
+                    print('You can also run PyBitmessage with the new curses interface by providing \'-c\' as a commandline argument.')
+                    os._exit(0)
 
-            import bitmessageqt
-            bitmessageqt.run()
+                import bitmessageqt
+                bitmessageqt.run()
+            else:
+                print('Running with curses')
+                import bitmessagecurses
+                bitmessagecurses.runwrapper()
         else:
             shared.config.remove_option('bitmessagesettings', 'dontconnect')
 
             if daemon:
                 with shared.printLock:
-                    print 'Running as a daemon. The main program should exit this thread.'
+                    print('Running as a daemon. The main program should exit this thread.')
             else:
                 with shared.printLock:
-                    print 'Running as a daemon. You can use Ctrl+C to exit.'
+                    print('Running as a daemon. You can use Ctrl+C to exit.')
                 while True:
                     time.sleep(20)
 
     def stop(self):
         with shared.printLock:
-            print 'Stopping Bitmessage Deamon.'
+            print('Stopping Bitmessage Deamon.')
         shared.doCleanShutdown()
 
 
