@@ -32,7 +32,7 @@ static BMServerProcess *shared = nil;
     self = [super init];
     
     self.useTor = YES;
-    self.debug = NO;
+    self.debug = YES;
     
     // Get custom ports to prevent conflicts between bit* apps
     NSBundle *mainBundle = [NSBundle mainBundle];
