@@ -22,6 +22,8 @@
 - (BOOL)setSOCKSPort:(NSString *)aString;
 - (BOOL)setApiUsername:(NSString *)aString;
 - (BOOL)setApiPassword:(NSString *)aString;
+- (BOOL)setPow:(NSUInteger)aPow;
+
 - (BOOL)setLabel:(NSString *)aLabel onAddress:(NSString *)anAddress;
 
 - (BOOL)doesExist;

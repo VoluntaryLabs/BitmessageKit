@@ -96,8 +96,7 @@ static BMServerProcess *shared = nil;
     [self.keysFile setApiPort:self.apiPort];
     [self.keysFile setPort:self.port];
     [self randomizeLogin];
-    
-
+    [self.keysFile setPow:1024];
 }
 
 - (void)assertIsRunning

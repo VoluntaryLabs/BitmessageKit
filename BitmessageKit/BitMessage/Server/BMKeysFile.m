@@ -202,6 +202,14 @@
     return YES;
 }
 
+- (BOOL)setPow:(NSUInteger)aPow
+{
+    [self read];
+    [self.settings setObject:[NSString stringWithFormat:@"%i", (int)aPow] forKey:@"defaultnoncetrialsperbyte"];
+    [self write];
+    return YES;
+}
+
 
 - (BOOL)setLabel:(NSString *)aLabel onAddress:(NSString *)anAddress
 {
