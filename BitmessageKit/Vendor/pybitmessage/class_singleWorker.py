@@ -13,7 +13,7 @@ from debug import logger
 from helper_sql import *
 import helper_inbox
 from helper_generic import addDataPadding
-import l10n
+#import l10n
 
 # This thread, of which there is only one, does the heavy lifting:
 # calculating POWs.
