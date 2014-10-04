@@ -18,11 +18,19 @@
 - (void)setupForNonTor;
 
 - (BOOL)setApiPort:(NSUInteger)aPort;
+
 - (BOOL)setPort:(NSUInteger)aPort;
+
 - (BOOL)setSOCKSPort:(NSString *)aString;
+
+
 - (BOOL)setApiUsername:(NSString *)aString;
+
 - (BOOL)setApiPassword:(NSString *)aString;
-- (BOOL)setPow:(NSUInteger)aPow;
+
+- (BOOL)setDefaultnoncetrialsperbyte:(NSUInteger)aPow;
+- (NSNumber *)defaultnoncetrialsperbyte;
+
 
 - (BOOL)setLabel:(NSString *)aLabel onAddress:(NSString *)anAddress;
 

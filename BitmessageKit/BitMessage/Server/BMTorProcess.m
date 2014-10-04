@@ -8,6 +8,7 @@
 
 #import "BMTorProcess.h"
 #import "BMProcesses.h"
+#import "ProcessKiller.h"
 
 @implementation BMTorProcess
 
@@ -48,7 +49,10 @@ static id sharedBMTorProcess = nil;
 {
     NSLog(@"*** launching Tor ***");
     
+    [ProcessKiller sharedProcessKiller]; // ensure tasks from previous app runs are killed
+    
     // Check for pre-existing process
+    /*
     NSString *torPidFilePath = [[[self serverDataFolder] stringByAppendingPathComponent:@"tor"] stringByAppendingPathExtension:@"pid"];
     NSString *torPid = [[NSString alloc] initWithContentsOfFile:torPidFilePath encoding:NSUTF8StringEncoding error:NULL];
     
@@ -63,6 +67,7 @@ static id sharedBMTorProcess = nil;
             kill([torPid intValue], SIGKILL);
         }
     }
+     */
     
     _torTask = [[NSTask alloc] init];
     _inpipe = [NSPipe pipe];
@@ -89,7 +94,7 @@ static id sharedBMTorProcess = nil;
     
     [_torTask setArguments:@[ @"-f", torConfigPath,
                               @"--DataDirectory", torDataDirectory,
-                              @"--PidFile", torPidFilePath,
+                              //@"--PidFile", torPidFilePath,
                               @"--SOCKSPort", self.torPort ]];
     
     NSLog(@"*** launching Tor on port %@ ***", self.torPort);
@@ -99,6 +104,10 @@ static id sharedBMTorProcess = nil;
     if (![_torTask isRunning])
     {
         NSLog(@"tor task not running after launch");
+    }
+    else
+    {
+        [ProcessKiller.sharedProcessKiller onRestartKillTask:_torTask];
     }
 }
 
@@ -113,6 +122,5 @@ static id sharedBMTorProcess = nil;
 {
     return (_torTask && [_torTask isRunning]);
 }
-
 
 @end

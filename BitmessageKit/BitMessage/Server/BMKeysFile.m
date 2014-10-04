@@ -91,30 +91,52 @@
 {
     NSMutableString *data = [NSMutableString string];
     
+    NSDictionary *settings = [self.dict objectForKey:self.settingsKey];
+    assert(settings != nil);
+    
+    if (settings)
+    {
+        NSLog(@"will write %lu settings", (unsigned long)settings.allKeys.count);
+        
+    }
+    
     for (NSString *key in [self.dict allKeys])
     {
         NSDictionary *subDict = [self.dict objectForKey:key];
         [data appendString:@"\n"];
         [data appendString:key];
+        printf(">%s", key.UTF8String);
         [data appendString:@"\n"];
         
         for (NSString *subKey in [subDict allKeys])
         {
             NSDictionary *subValue = [subDict objectForKey:subKey];
-            [data appendString:[NSString stringWithFormat:@"%@ = %@\n", subKey, subValue]];
+            NSString *pair = [NSString stringWithFormat:@"%@ = %@\n", subKey, subValue];
+            [data appendString:pair];
+            printf(">    %s", pair.UTF8String);
+
         }
     }
     
+    printf("\n\n----------------------------------------------------------\n\n");
+    printf("    '%s", data.UTF8String);
+
     [self writeString:data];
+}
+
+- (NSString *)settingsKey
+{
+    return @"[bitmessagesettings]";
 }
 
 - (NSMutableDictionary *)settings
 {
-    NSMutableDictionary *settings = [self.dict objectForKey:@"[bitmessagesettings]"];
+    NSMutableDictionary *settings = [self.dict objectForKey:self.settingsKey];
     
     if (!settings)
     {
         settings = [NSMutableDictionary dictionary];
+        [self.dict setObject:settings forKey:self.settingsKey];
     }
     
     return settings;
@@ -124,90 +146,90 @@
 
 - (void)setupForDaemon
 {
-    [self read];
-    [self.settings setObject:@"true" forKey:@"daemon"];
-    [self.settings setObject:@"8442" forKey:@"apiport"];
-    [self.settings setObject:@"true" forKey:@"apienabled"];
-    [self.settings setObject:@"false" forKey:@"startonlogon"];
-    //[self.settings setObject:@"true" forKey:@"keysencrypted"];
-    //[self.settings setObject:@"true" forKey:@"messagesencrypted"];
-    [self write];
+    [self setSettingsObject:@"true" forKey:@"daemon"];
+    [self setSettingsObject:@"8442" forKey:@"apiport"];
+    [self setSettingsObject:@"true" forKey:@"apienabled"];
+    [self setSettingsObject:@"false" forKey:@"startonlogon"];
+    //[self setSettingsObject:@"true" forKey:@"keysencrypted"];
+    //[self setSettingsObject:@"true" forKey:@"messagesencrypted"];
 }
 
 - (void)setupForNonDaemon
 {
+    [self setSettingsObject:@"false" forKey:@"daemon"];
+}
+
+- (void)setSettingsObject:(NSString *)value forKey:(NSString *)aKey
+{
     [self read];
-    [self.settings setObject:@"false" forKey:@"daemon"];
+    if (value == nil)
+    {
+        value = @"";
+    }
+    
+    [self.settings setObject:value forKey:aKey];
     [self write];
 }
 
 - (void)setupForNonTor
 {
-    [self read];
-    [self.settings setObject:@"" forKey:@"socksport"];
-    [self.settings setObject:@"" forKey:@"sockshostname"];
-    [self.settings setObject:@"none" forKey:@"socksproxytype"];
+    [self setSettingsObject:@"" forKey:@"sockshostname"];
+    [self setSettingsObject:@"none" forKey:@"socksproxytype"];
     [self setSOCKSPort:@""];
-    [self write];
 }
 
 - (void)setupForTor
 {
-    [self read];
-    
-    [self.settings setObject:@"127.0.0.1" forKey:@"sockshostname"];
-    [self.settings setObject:@"SOCKS5" forKey:@"socksproxytype"];
+    [self setSettingsObject:@"127.0.0.1" forKey:@"sockshostname"];
+    [self setSettingsObject:@"SOCKS5" forKey:@"socksproxytype"];
     //[self setSOCKSPort:@""]; // should be set elsewhere to match tor
-    [self write];
 }
 
 - (BOOL)setSOCKSPort:(NSString *)aString
 {
-    [self read];
-    [self.settings setObject:aString forKey:@"socksport"];
+    if (aString == nil || [aString isEqualToString:@""])
+    {
+        aString = @"0";
+    }
+    
+    [self setSettingsObject:aString forKey:@"socksport"];
     NSLog(@"setting Key.dat socks port '%@'", aString);
-    [self write];
     return YES;
 }
 
 - (BOOL)setApiUsername:(NSString *)aString
 {
-    [self read];
-    [self.settings setObject:aString forKey:@"apiusername"];
-    [self write];
+    [self setSettingsObject:aString forKey:@"apiusername"];
     return YES;
 }
 
 - (BOOL)setApiPassword:(NSString *)aString
 {
-    [self read];
-    [self.settings setObject:aString forKey:@"apipassword"];
-    [self write];
+    [self setSettingsObject:aString forKey:@"apipassword"];
     return YES;
 }
 
 - (BOOL)setApiPort:(NSUInteger)aPort
 {
-    [self read];
-    [self.settings setObject:[NSString stringWithFormat:@"%i", (int)aPort] forKey:@"apiport"];
-    [self write];
+    [self setSettingsObject:[NSString stringWithFormat:@"%i", (int)aPort] forKey:@"apiport"];
     return YES;
 }
 
 - (BOOL)setPort:(NSUInteger)aPort
 {
-    [self read];
-    [self.settings setObject:[NSString stringWithFormat:@"%i", (int)aPort] forKey:@"port"];
-    [self write];
+    [self setSettingsObject:[NSString stringWithFormat:@"%i", (int)aPort] forKey:@"port"];
     return YES;
 }
 
-- (BOOL)setPow:(NSUInteger)aPow
+- (BOOL)setDefaultnoncetrialsperbyte:(NSUInteger)aPow
 {
-    [self read];
-    [self.settings setObject:[NSString stringWithFormat:@"%i", (int)aPow] forKey:@"defaultnoncetrialsperbyte"];
-    [self write];
+    [self setSettingsObject:[NSString stringWithFormat:@"%i", (int)aPow] forKey:@"defaultnoncetrialsperbyte"];
     return YES;
+}
+
+- (NSNumber *)defaultnoncetrialsperbyte
+{
+    return [self.settings objectForKey:@"defaultnoncetrialsperbyte"];
 }
 
 

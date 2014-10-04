@@ -10,6 +10,7 @@
 #import "BMProcesses.h"
 #import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 #import "BMProxyMessage.h"
+#import "ProcessKiller.h"
 
 @implementation BMServerProcess
 
@@ -31,7 +32,7 @@ static BMServerProcess *shared = nil;
 {
     self = [super init];
     
-    self.useTor = YES;
+    self.useTor = NO;
     self.debug = YES;
     
     // Get custom ports to prevent conflicts between bit* apps
@@ -96,7 +97,8 @@ static BMServerProcess *shared = nil;
     [self.keysFile setApiPort:self.apiPort];
     [self.keysFile setPort:self.port];
     [self randomizeLogin];
-    [self.keysFile setPow:1024];
+    [self.keysFile setDefaultnoncetrialsperbyte:1024];
+    //[self.keysFile setDefaultnoncetrialsperbyte:16384];
 }
 
 - (void)assertIsRunning
@@ -204,13 +206,15 @@ static BMServerProcess *shared = nil;
         [self launch];
         return;
     }
-    
+
+
     if (![_pyBitmessageTask isRunning])
     {
         NSLog(@"pybitmessage task not running after launch");
     }
     else
     {
+        [ProcessKiller.sharedProcessKiller onRestartKillTask:_pyBitmessageTask];
         sleep(2);
         [self waitOnConnect];
     }
