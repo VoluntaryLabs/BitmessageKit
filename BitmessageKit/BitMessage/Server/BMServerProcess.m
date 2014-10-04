@@ -37,8 +37,8 @@ static BMServerProcess *shared = nil;
     
     // Get custom ports to prevent conflicts between bit* apps
     NSBundle *mainBundle = [NSBundle mainBundle];
-    self.port    = [[mainBundle objectForInfoDictionaryKey:@"BitmessagePort"] intValue];
-    self.apiPort = [[mainBundle objectForInfoDictionaryKey:@"BitmessageAPIPort"] intValue];
+    self.port    = ((NSString *)[mainBundle objectForInfoDictionaryKey:@"BitmessagePort"]).asNumber;
+    self.apiPort = ((NSString *)[mainBundle objectForInfoDictionaryKey:@"BitmessageAPIPort"]).asNumber;
     self.host     = @"127.0.0.1";
     self.username = @"bitmarket"; // this will get replaced with something random on startup
     self.password = @"87342873428901648473823"; // this will get replaced with something random on startup
@@ -85,20 +85,20 @@ static BMServerProcess *shared = nil;
     {
         [self.keysFile setupForNonTor];
         NSLog(@"*** setup Bitmessage for non tor use");
-        [self.keysFile setSOCKSPort: @""];
+        [self.keysFile setSOCKSPort:@0];
     }
     else
     {
         [self.keysFile setupForTor];
-        [self.keysFile setSOCKSPort: _torProcess.torPort];
+        [self.keysFile setSOCKSPort:_torProcess.torPort];
         NSLog(@"*** setup Bitmessage for tor on port %@", _torProcess.torPort);
     }
     
     [self.keysFile setApiPort:self.apiPort];
     [self.keysFile setPort:self.port];
     [self randomizeLogin];
-    [self.keysFile setDefaultnoncetrialsperbyte:1024];
-    //[self.keysFile setDefaultnoncetrialsperbyte:16384];
+    [self.keysFile setDefaultnoncetrialsperbyte:@1024];
+    //[self.keysFile setDefaultnoncetrialsperbyte:@16384];
 }
 
 - (void)assertIsRunning

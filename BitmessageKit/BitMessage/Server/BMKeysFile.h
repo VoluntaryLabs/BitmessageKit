@@ -17,18 +17,22 @@
 - (void)setupForTor;
 - (void)setupForNonTor;
 
-- (BOOL)setApiPort:(NSUInteger)aPort;
+- (void)setApiPort:(NSNumber *)aPort;
+- (NSString *)apiport;
 
-- (BOOL)setPort:(NSUInteger)aPort;
+- (void)setPort:(NSNumber *)aPort;
+- (NSString *)port;
 
-- (BOOL)setSOCKSPort:(NSString *)aString;
+- (void)setSOCKSPort:(NSNumber *)aString;
+- (NSString *)socksport;
 
+- (void)setApiUsername:(NSString *)aString;
+- (NSString *)apiusername;
 
-- (BOOL)setApiUsername:(NSString *)aString;
+- (void)setApiPassword:(NSString *)aString;
+- (NSString *)apipassword;
 
-- (BOOL)setApiPassword:(NSString *)aString;
-
-- (BOOL)setDefaultnoncetrialsperbyte:(NSUInteger)aPow;
+- (void)setDefaultnoncetrialsperbyte:(NSNumber *)aPow;
 - (NSNumber *)defaultnoncetrialsperbyte;
 
 

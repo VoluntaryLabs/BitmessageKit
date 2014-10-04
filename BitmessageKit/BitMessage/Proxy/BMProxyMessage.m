@@ -38,7 +38,7 @@
 
 - (void)composeRequest
 {
-    NSString *urlString = [NSString stringWithFormat:@"http://%@:%i/", self.host, self.port];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@:%@/", self.host, self.port];
     self.requestUrl = [NSURL URLWithString:urlString];
     self.request = [[XMLRPCRequest alloc] initWithURL:self.requestUrl];
     

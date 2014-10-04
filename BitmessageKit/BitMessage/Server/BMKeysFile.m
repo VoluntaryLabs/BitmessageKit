@@ -144,10 +144,36 @@
 
 // --- setting ----
 
+- (void)setSettingsNumber:(NSNumber *)value forKey:(NSString *)aKey
+{
+    [self read];
+    
+    if (value == nil)
+    {
+        value = @0;
+    }
+    
+    [self.settings setObject:value forKey:aKey];
+    [self write];
+}
+
+- (void)setSettingsObject:(NSString *)value forKey:(NSString *)aKey
+{
+    [self read];
+    
+    if (value == nil)
+    {
+        value = @"";
+    }
+    
+    [self.settings setObject:value forKey:aKey];
+    [self write];
+}
+
 - (void)setupForDaemon
 {
     [self setSettingsObject:@"true" forKey:@"daemon"];
-    [self setSettingsObject:@"8442" forKey:@"apiport"];
+    [self setSettingsNumber:@8442 forKey:@"apiport"];
     [self setSettingsObject:@"true" forKey:@"apienabled"];
     [self setSettingsObject:@"false" forKey:@"startonlogon"];
     //[self setSettingsObject:@"true" forKey:@"keysencrypted"];
@@ -159,23 +185,13 @@
     [self setSettingsObject:@"false" forKey:@"daemon"];
 }
 
-- (void)setSettingsObject:(NSString *)value forKey:(NSString *)aKey
-{
-    [self read];
-    if (value == nil)
-    {
-        value = @"";
-    }
-    
-    [self.settings setObject:value forKey:aKey];
-    [self write];
-}
+
 
 - (void)setupForNonTor
 {
     [self setSettingsObject:@"" forKey:@"sockshostname"];
     [self setSettingsObject:@"none" forKey:@"socksproxytype"];
-    [self setSOCKSPort:@""];
+    [self setSOCKSPort:nil];
 }
 
 - (void)setupForTor
@@ -185,51 +201,87 @@
     //[self setSOCKSPort:@""]; // should be set elsewhere to match tor
 }
 
-- (BOOL)setSOCKSPort:(NSString *)aString
+- (NSNumber *)getSettingsNumber:(NSString *)key
 {
-    if (aString == nil || [aString isEqualToString:@""])
+    NSString *value = [self.settings objectForKey:key];
+    return [NSNumber numberWithInt:value.intValue];
+}
+
+// socksport
+
+- (void)setSOCKSPort:(NSNumber *)aNumber
+{
+    if (aNumber == nil)
     {
-        aString = @"0";
+        aNumber = @0;
     }
     
-    [self setSettingsObject:aString forKey:@"socksport"];
-    NSLog(@"setting Key.dat socks port '%@'", aString);
-    return YES;
+    [self setSettingsNumber:aNumber forKey:@"socksport"];
 }
 
-- (BOOL)setApiUsername:(NSString *)aString
+- (NSNumber *)socksport
+{
+    return [self getSettingsNumber:@"socksport"];
+}
+
+// apiusername
+
+- (void)setApiUsername:(NSString *)aString
 {
     [self setSettingsObject:aString forKey:@"apiusername"];
-    return YES;
 }
 
-- (BOOL)setApiPassword:(NSString *)aString
+- (NSString *)apiusername
+{
+    return [self.settings objectForKey:@"apiusername"];
+}
+
+// apipassword
+
+- (void)setApiPassword:(NSString *)aString
 {
     [self setSettingsObject:aString forKey:@"apipassword"];
-    return YES;
 }
 
-- (BOOL)setApiPort:(NSUInteger)aPort
+- (NSString *)apipassword
 {
-    [self setSettingsObject:[NSString stringWithFormat:@"%i", (int)aPort] forKey:@"apiport"];
-    return YES;
+    return [self.settings objectForKey:@"apipassword"];
 }
 
-- (BOOL)setPort:(NSUInteger)aPort
+// apiport
+
+- (void)setApiPort:(NSNumber *)aPort
 {
-    [self setSettingsObject:[NSString stringWithFormat:@"%i", (int)aPort] forKey:@"port"];
-    return YES;
+    [self setSettingsNumber:aPort forKey:@"apiport"];
 }
 
-- (BOOL)setDefaultnoncetrialsperbyte:(NSUInteger)aPow
+- (NSNumber *)apiport
 {
-    [self setSettingsObject:[NSString stringWithFormat:@"%i", (int)aPow] forKey:@"defaultnoncetrialsperbyte"];
-    return YES;
+    return [self getSettingsNumber:@"apiport"];
+}
+
+// port
+
+- (void)setPort:(NSNumber *)aPort
+{
+    [self setSettingsNumber:aPort forKey:@"port"];
+}
+
+- (NSNumber *)port
+{
+    return [self getSettingsNumber:@"port"];
+}
+
+// defaultnoncetrialsperbyte
+
+- (void)setDefaultnoncetrialsperbyte:(NSNumber *)aPow
+{
+    [self setSettingsNumber:aPow forKey:@"defaultnoncetrialsperbyte"];
 }
 
 - (NSNumber *)defaultnoncetrialsperbyte
 {
-    return [self.settings objectForKey:@"defaultnoncetrialsperbyte"];
+    return [self getSettingsNumber:@"defaultnoncetrialsperbyte"];
 }
 
 

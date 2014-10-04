@@ -12,7 +12,7 @@
 @interface BMProxyMessage : NSObject // <XMLRPCConnectionDelegate>
 
 @property (retain, nonatomic) NSString *host;
-@property (assign) int port;
+@property (retain, nonatomic) NSNumber *port;
 @property (retain, nonatomic) NSString *username;
 @property (retain, nonatomic) NSString *password;
 @property (retain, nonatomic) NSURL *requestUrl;

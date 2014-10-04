@@ -23,8 +23,8 @@
 @property (strong) NSPipe *inpipe;
 
 @property (retain, nonatomic) NSString *host;
-@property (assign) int port;
-@property (assign) int apiPort;
+@property (assign) NSNumber *port;
+@property (assign) NSNumber *apiPort;
 //@property (retain, nonatomic) NSString *torPort;
 
 @property (strong, nonatomic) NSString *username;
