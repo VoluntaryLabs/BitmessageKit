@@ -133,7 +133,7 @@
 		AA27EF2E19A80199000E0339 /* BMProcesses.m in Sources */ = {isa = PBXBuildFile; fileRef = AA27EF2C19A80199000E0339 /* BMProcesses.m */; };
 		AA27EF3519A802D2000E0339 /* BMTorProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = AA27EF3319A802D2000E0339 /* BMTorProcess.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA27EF3619A802D2000E0339 /* BMTorProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = AA27EF3419A802D2000E0339 /* BMTorProcess.m */; };
-		AA3EDCB219DF56990066F862 /* ProcessKiller.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3EDCB019DF56990066F862 /* ProcessKiller.h */; };
+		AA3EDCB219DF56990066F862 /* ProcessKiller.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3EDCB019DF56990066F862 /* ProcessKiller.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA3EDCB319DF56990066F862 /* ProcessKiller.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3EDCB119DF56990066F862 /* ProcessKiller.m */; };
 		AA5DFE02190DF03B00383283 /* NavNodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5DFDFD190DF03B00383283 /* NavNodeKit.framework */; };
 		AA5DFE04190DF03B00383283 /* FoundationCategoriesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5DFDFF190DF03B00383283 /* FoundationCategoriesKit.framework */; };
@@ -748,7 +748,6 @@
 				AA153C2E18FEFC45007B4785 /* ZKLog.h in Headers */,
 				AA153C1318FEFC45007B4785 /* NSFileHandle+ZKAdditions.h in Headers */,
 				8EDE5C1018F594EA009A726A /* BMIdentity.h in Headers */,
-				AA3EDCB219DF56990066F862 /* ProcessKiller.h in Headers */,
 				8EDE5C1418F594EA009A726A /* BMMessageGroup.h in Headers */,
 				8EDE5C2218F594EA009A726A /* BMSubscriptions.h in Headers */,
 				8ED41FC018F596310025A51B /* XMLRPC.h in Headers */,
@@ -773,6 +772,7 @@
 				AA27EF3519A802D2000E0339 /* BMTorProcess.h in Headers */,
 				AA27EF2D19A80199000E0339 /* BMProcesses.h in Headers */,
 				AA9A6579199EDA9700993E8B /* BMUnreadCountable.h in Headers */,
+				AA3EDCB219DF56990066F862 /* ProcessKiller.h in Headers */,
 				AA153C1118FEFC45007B4785 /* NSDictionary+ZKAdditions.h in Headers */,
 				AA153C3618FF057D007B4785 /* BitmessageKit.h in Headers */,
 			);
