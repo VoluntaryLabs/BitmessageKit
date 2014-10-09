@@ -96,8 +96,7 @@
     
     if (settings)
     {
-        NSLog(@"will write %lu settings", (unsigned long)settings.allKeys.count);
-        
+//        NSLog(@"will write %lu settings", (unsigned long)settings.allKeys.count);
     }
     
     for (NSString *key in [self.dict allKeys])
@@ -105,7 +104,7 @@
         NSDictionary *subDict = [self.dict objectForKey:key];
         [data appendString:@"\n"];
         [data appendString:key];
-        printf(">%s", key.UTF8String);
+        //printf(">%s", key.UTF8String);
         [data appendString:@"\n"];
         
         for (NSString *subKey in [subDict allKeys])
@@ -113,13 +112,13 @@
             NSDictionary *subValue = [subDict objectForKey:subKey];
             NSString *pair = [NSString stringWithFormat:@"%@ = %@\n", subKey, subValue];
             [data appendString:pair];
-            printf(">    %s", pair.UTF8String);
+            //printf(">    %s", pair.UTF8String);
 
         }
     }
     
-    printf("\n\n----------------------------------------------------------\n\n");
-    printf("    '%s", data.UTF8String);
+    //printf("\n\n----------------------------------------------------------\n\n");
+    //printf("    '%s", data.UTF8String);
 
     [self writeString:data];
 }
