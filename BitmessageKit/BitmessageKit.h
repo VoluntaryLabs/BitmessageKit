@@ -24,7 +24,7 @@
 #import "BMKeysFile.h"
 #import "BMReceivedMessage.h"
 #import "BMMessage.h"
-#import "BMArchive.h"
+//#import "BMArchive.h"
 #import "BMChannel.h"
 #import "BMProxyMessage.h"
 #import "BMDatabase.h"

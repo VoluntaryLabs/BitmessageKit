@@ -8,7 +8,7 @@
 
 #import "BMClient.h"
 #import "BMAddressed.h"
-#import "BMArchive.h"
+//#import "BMArchive.h"
 
 @implementation BMClient
 
@@ -251,6 +251,7 @@ static BMClient *sharedBMClient;
     return @"bmbox";
 }
 
+/*
 - (void)archiveToUrl:(NSURL *)url
 {
     NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
@@ -272,6 +273,7 @@ static BMClient *sharedBMClient;
     [self startServer];
     [self deepFetch];
 }
+*/
 
 // addresses
 
