@@ -40,8 +40,8 @@ static BMServerProcess *shared = nil;
     self.port    = ((NSString *)[mainBundle objectForInfoDictionaryKey:@"BitmessagePort"]).asNumber;
     self.apiPort = ((NSString *)[mainBundle objectForInfoDictionaryKey:@"BitmessageAPIPort"]).asNumber;
     self.host     = @"127.0.0.1";
-    self.username = @"bitmarket"; // this will get replaced with something random on startup
-    self.password = @"87342873428901648473823"; // this will get replaced with something random on startup
+    self.username = @"username"; // this will get replaced with something random on startup
+    self.password = @"password"; // this will get replaced with something random on startup
     
     self.dataPath =
         [NSString stringWithString:[[NSFileManager defaultManager] applicationSupportDirectory]];
@@ -84,7 +84,7 @@ static BMServerProcess *shared = nil;
     if (!self.useTor)
     {
         [self.keysFile setupForNonTor];
-        NSLog(@"*** setup Bitmessage for non tor use");
+        NSLog(@"*** WARNING: setting up Bitmessage for non tor use");
         [self.keysFile setSOCKSPort:@0];
     }
     else
@@ -155,7 +155,7 @@ static BMServerProcess *shared = nil;
     _inpipe = [NSPipe pipe];
     NSDictionary *environmentDict = [[NSProcessInfo processInfo] environment];
     NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithDictionary:environmentDict];
-    NSLog(@"%@", [environment valueForKey:@"PATH"]);
+    //NSLog(@"%@", [environment valueForKey:@"PATH"]);
     
     // Set environment variables containing api username and password
     [environment setObject:self.username forKey:@"PYBITMESSAGE_USER"];
@@ -192,7 +192,10 @@ static BMServerProcess *shared = nil;
     
     [_pyBitmessageTask setArguments:@[pybitmessagePath]];
    
-    NSLog(@"*** launching _pyBitmessage ***");
+    if (self.debug)
+    {
+        NSLog(@"*** launching _pyBitmessage ***");
+    }
     
     [_pyBitmessageTask launch];
     [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
@@ -228,7 +231,11 @@ static BMServerProcess *shared = nil;
     {
         if ([self canConnect])
         {
-            NSLog(@"connected to server");
+            if (self.debug)
+            {
+                NSLog(@"connected to server");
+            }
+            
             [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
             return YES;
         }
@@ -244,7 +251,11 @@ static BMServerProcess *shared = nil;
 
 - (void)terminate
 {
-    NSLog(@"Killing pybitmessage process...");
+    if (self.debug)
+    {
+        NSLog(@"Killing pybitmessage process...");
+    }
+    
     [_pyBitmessageTask terminate];
     self.pyBitmessageTask = nil;
 
