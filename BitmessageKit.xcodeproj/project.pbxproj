@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8EBC9BAE191803D700FE71FA /* tor in Resources */ = {isa = PBXBuildFile; fileRef = 8EBC9BAD191803D700FE71FA /* tor */; };
 		8ED41FA518F595DA0025A51B /* pybitmessage in Resources */ = {isa = PBXBuildFile; fileRef = 8ED41FA418F595DA0025A51B /* pybitmessage */; };
 		8ED41FBC18F596310025A51B /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ED41FA718F596310025A51B /* NSData+Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8ED41FBD18F596310025A51B /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED41FA818F596310025A51B /* NSData+Base64.m */; };
@@ -87,12 +86,6 @@
 		8EDE5C2F18F594EA009A726A /* JSONDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5BF018F594EA009A726A /* JSONDB.m */; };
 		AA0E58E418FEE4830095DEBD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0E58E318FEE4830095DEBD /* libz.dylib */; };
 		AA153C3618FF057D007B4785 /* BitmessageKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EDE5B8A18F59414009A726A /* BitmessageKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AA27EF2D19A80199000E0339 /* BMProcesses.h in Headers */ = {isa = PBXBuildFile; fileRef = AA27EF2B19A80199000E0339 /* BMProcesses.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AA27EF2E19A80199000E0339 /* BMProcesses.m in Sources */ = {isa = PBXBuildFile; fileRef = AA27EF2C19A80199000E0339 /* BMProcesses.m */; };
-		AA27EF3519A802D2000E0339 /* BMTorProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = AA27EF3319A802D2000E0339 /* BMTorProcess.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AA27EF3619A802D2000E0339 /* BMTorProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = AA27EF3419A802D2000E0339 /* BMTorProcess.m */; };
-		AA3EDCB219DF56990066F862 /* ProcessKiller.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3EDCB019DF56990066F862 /* ProcessKiller.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AA3EDCB319DF56990066F862 /* ProcessKiller.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3EDCB119DF56990066F862 /* ProcessKiller.m */; };
 		AA4F111B19EB228900CD08A5 /* FoundationCategoriesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4F10ED19EB21FF00CD08A5 /* FoundationCategoriesKit.framework */; };
 		AA4F111C19EB228900CD08A5 /* NavKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4F10F919EB220600CD08A5 /* NavKit.framework */; };
 		AA4F111D19EB228900CD08A5 /* NavNodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4F110519EB220F00CD08A5 /* NavNodeKit.framework */; };
@@ -208,7 +201,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8EBC9BAD191803D700FE71FA /* tor */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tor; path = BitmessageKit/Vendor/tor; sourceTree = "<group>"; };
 		8ED41FA218F595BF0025A51B /* static-python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "static-python"; path = "BitmessageKit/Vendor/static-python"; sourceTree = "<group>"; };
 		8ED41FA418F595DA0025A51B /* pybitmessage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybitmessage; path = BitmessageKit/Vendor/pybitmessage; sourceTree = "<group>"; };
 		8ED41FA718F596310025A51B /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "BitmessageKit/Vendor/xmlrpc/NSData+Base64.h"; sourceTree = "<group>"; };
@@ -295,19 +287,11 @@
 		8EDE5BEF18F594EA009A726A /* JSONDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONDB.h; sourceTree = "<group>"; };
 		8EDE5BF018F594EA009A726A /* JSONDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONDB.m; sourceTree = "<group>"; };
 		AA0E58E318FEE4830095DEBD /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		AA27EF2B19A80199000E0339 /* BMProcesses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMProcesses.h; sourceTree = "<group>"; };
-		AA27EF2C19A80199000E0339 /* BMProcesses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMProcesses.m; sourceTree = "<group>"; };
-		AA27EF3319A802D2000E0339 /* BMTorProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMTorProcess.h; sourceTree = "<group>"; };
-		AA27EF3419A802D2000E0339 /* BMTorProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMTorProcess.m; sourceTree = "<group>"; };
-		AA3EDCB019DF56990066F862 /* ProcessKiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessKiller.h; sourceTree = "<group>"; };
-		AA3EDCB119DF56990066F862 /* ProcessKiller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessKiller.m; sourceTree = "<group>"; };
 		AA4F10E719EB21FF00CD08A5 /* FoundationCategoriesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FoundationCategoriesKit.xcodeproj; path = submodules/FoundationCategoriesKit/FoundationCategoriesKit.xcodeproj; sourceTree = "<group>"; };
 		AA4F10F019EB220600CD08A5 /* NavKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NavKit.xcodeproj; path = submodules/NavKit/NavKit.xcodeproj; sourceTree = "<group>"; };
 		AA4F10FF19EB220F00CD08A5 /* NavNodeKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NavNodeKit.xcodeproj; path = submodules/NavNodeKit/NavNodeKit.xcodeproj; sourceTree = "<group>"; };
 		AA4F110819EB221300CD08A5 /* SystemInfoKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SystemInfoKit.xcodeproj; path = submodules/SystemInfoKit/SystemInfoKit.xcodeproj; sourceTree = "<group>"; };
 		AA4F111119EB221800CD08A5 /* TorServerKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TorServerKit.xcodeproj; path = submodules/TorServerKit/TorServerKit.xcodeproj; sourceTree = "<group>"; };
-		AA5DFDFD190DF03B00383283 /* NavNodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NavNodeKit.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BitMarkets-eenrgxhlyrwgqccvbetldvfypzkj/Build/Products/Debug/NavNodeKit.framework"; sourceTree = "<group>"; };
-		AA5DFDFF190DF03B00383283 /* FoundationCategoriesKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FoundationCategoriesKit.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BitMarkets-eenrgxhlyrwgqccvbetldvfypzkj/Build/Products/Debug/FoundationCategoriesKit.framework"; sourceTree = "<group>"; };
 		AA9A656E199ECF5800993E8B /* BMMergable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMMergable.h; sourceTree = "<group>"; };
 		AA9A656F199ECF5800993E8B /* BMMergable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMMergable.m; sourceTree = "<group>"; };
 		AA9A6577199EDA9700993E8B /* BMUnreadCountable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMUnreadCountable.h; sourceTree = "<group>"; };
@@ -396,8 +380,6 @@
 		8EDE5B7C18F59414009A726A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AA5DFDFD190DF03B00383283 /* NavNodeKit.framework */,
-				AA5DFDFF190DF03B00383283 /* FoundationCategoriesKit.framework */,
 				AA0E58E318FEE4830095DEBD /* libz.dylib */,
 				8EDE5B7D18F59414009A726A /* Cocoa.framework */,
 				8EDE5B9218F59414009A726A /* XCTest.framework */,
@@ -584,12 +566,6 @@
 				8EDE5BEE18F594EA009A726A /* BMServerProcess.m */,
 				8EDE5BEF18F594EA009A726A /* JSONDB.h */,
 				8EDE5BF018F594EA009A726A /* JSONDB.m */,
-				AA27EF2B19A80199000E0339 /* BMProcesses.h */,
-				AA27EF2C19A80199000E0339 /* BMProcesses.m */,
-				AA27EF3319A802D2000E0339 /* BMTorProcess.h */,
-				AA27EF3419A802D2000E0339 /* BMTorProcess.m */,
-				AA3EDCB019DF56990066F862 /* ProcessKiller.h */,
-				AA3EDCB119DF56990066F862 /* ProcessKiller.m */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -604,7 +580,6 @@
 		8EDE5C8B18F5953B009A726A /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				8EBC9BAD191803D700FE71FA /* tor */,
 				8ED41FA618F596030025A51B /* xmlrpc */,
 				8ED41FA418F595DA0025A51B /* pybitmessage */,
 				8ED41FA218F595BF0025A51B /* static-python */,
@@ -713,10 +688,7 @@
 				8EDE5C1C18F594EA009A726A /* BMSentMessage.h in Headers */,
 				8ED41FC618F596310025A51B /* XMLRPCDefaultEncoder.h in Headers */,
 				AA9A6570199ECF5800993E8B /* BMMergable.h in Headers */,
-				AA27EF3519A802D2000E0339 /* BMTorProcess.h in Headers */,
-				AA27EF2D19A80199000E0339 /* BMProcesses.h in Headers */,
 				AA9A6579199EDA9700993E8B /* BMUnreadCountable.h in Headers */,
-				AA3EDCB219DF56990066F862 /* ProcessKiller.h in Headers */,
 				AA153C3618FF057D007B4785 /* BitmessageKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -896,7 +868,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EBC9BAE191803D700FE71FA /* tor in Resources */,
 				AAE31DBD18FF11A000405754 /* static-python in Resources */,
 				8ED41FA518F595DA0025A51B /* pybitmessage in Resources */,
 				8EDE5B8818F59414009A726A /* InfoPlist.strings in Resources */,
@@ -929,7 +900,6 @@
 				8EDE5C0118F594EA009A726A /* BMAddressed.m in Sources */,
 				8ED41FC718F596310025A51B /* XMLRPCDefaultEncoder.m in Sources */,
 				8ED41FCC18F596310025A51B /* XMLRPCEventBasedParserDelegate.m in Sources */,
-				AA27EF3619A802D2000E0339 /* BMTorProcess.m in Sources */,
 				8EDE5C2B18F594EA009A726A /* BMKeysFile.m in Sources */,
 				8ED41FBF18F596310025A51B /* NSStringAdditions.m in Sources */,
 				8EDE5C1518F594EA009A726A /* BMMessageGroup.m in Sources */,
@@ -938,7 +908,6 @@
 				8EDE5C1318F594EA009A726A /* BMMessage.m in Sources */,
 				8EDE5C0B18F594EA009A726A /* BMContact.m in Sources */,
 				8ED41FBD18F596310025A51B /* NSData+Base64.m in Sources */,
-				AA3EDCB319DF56990066F862 /* ProcessKiller.m in Sources */,
 				8EDE5BFF18F594EA009A726A /* BMAddress.m in Sources */,
 				AA9A657A199EDA9700993E8B /* BMUnreadCountable.m in Sources */,
 				8EDE5C1F18F594EA009A726A /* BMSentMessages.m in Sources */,
@@ -950,7 +919,6 @@
 				8EDE5C1B18F594EA009A726A /* BMReceivedMessages.m in Sources */,
 				8EDE5C0F18F594EA009A726A /* BMIdentities.m in Sources */,
 				8EDE5C2518F594EA009A726A /* BMProxyMessage.m in Sources */,
-				AA27EF2E19A80199000E0339 /* BMProcesses.m in Sources */,
 				8ED41FCE18F596310025A51B /* XMLRPCRequest.m in Sources */,
 				8EDE5C2918F594EA009A726A /* BMDatabase.m in Sources */,
 				8EDE5C0318F594EA009A726A /* BMClient.m in Sources */,

@@ -32,13 +32,13 @@
 		<key>37DC2010DB38C43B485C614639C29BF85EB11897</key>
 		<string>../../../NavNodeKit</string>
 		<key>4DE41FEEEAE7CC654240CA8A6C6B99C937943D6B</key>
-		<string>../../submodules/TorServerKit/</string>
+		<string>../../submodules/TorServerKit</string>
 		<key>9A6B58CD5208BE6D5393BF80C035522180CCFD29</key>
 		<string>../../..</string>
 		<key>AE54CF568057E049D07E8D7A462718F01736434E</key>
-		<string>../../submodules/SystemInfoKit/</string>
+		<string>../../submodules/SystemInfoKit</string>
 		<key>D10B41A2BDB0833500745D63A772EBCD5E799E05</key>
-		<string>../../submodules/NavKit/</string>
+		<string>../../submodules/NavKit</string>
 		<key>D196C8C20E8DD9EA1BCA8C3DA2BF4C27CFC08EF7</key>
 		<string>../..</string>
 		<key>EAAFDC9479D1EB80E5F305F4B217979549BDCF86</key>

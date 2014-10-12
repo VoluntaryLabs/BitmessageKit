@@ -7,10 +7,9 @@
 //
 
 #import "BMServerProcess.h"
-#import "BMProcesses.h"
+#import <SystemInfoKit/SystemInfoKit.h>
 #import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 #import "BMProxyMessage.h"
-#import "ProcessKiller.h"
 
 @implementation BMServerProcess
 
@@ -32,7 +31,7 @@ static BMServerProcess *shared = nil;
 {
     self = [super init];
     
-    self.useTor = NO;
+    self.useTor = YES;
     self.debug = NO;
     
     // Get custom ports to prevent conflicts between bit* apps
@@ -48,9 +47,9 @@ static BMServerProcess *shared = nil;
 
     if (self.useTor)
     {
-        _torProcess = [[BMTorProcess alloc] init];
-        _torProcess.torPort = [mainBundle objectForInfoDictionaryKey:@"TorPort"];
-        assert(_torProcess.torPort != nil);
+        _torProcess = [[TorProcess alloc] init];
+        _torProcess.torSocksPort = [mainBundle objectForInfoDictionaryKey:@"torSocksPort"];
+        assert(_torProcess.torSocksPort != nil);
         _torProcess.serverDataFolder = self.serverDataFolder;
     }
     
@@ -90,8 +89,8 @@ static BMServerProcess *shared = nil;
     else
     {
         [self.keysFile setupForTor];
-        [self.keysFile setSOCKSPort:_torProcess.torPort];
-        NSLog(@"*** setup Bitmessage for tor on port %@", _torProcess.torPort);
+        [self.keysFile setSOCKSPort:_torProcess.torSocksPort];
+        NSLog(@"*** setup Bitmessage for tor on port %@", _torProcess.torSocksPort);
     }
     
     [self.keysFile setApiPort:self.apiPort];
@@ -217,7 +216,7 @@ static BMServerProcess *shared = nil;
     }
     else
     {
-        [ProcessKiller.sharedProcessKiller onRestartKillTask:_pyBitmessageTask];
+        [SIProcessKiller.sharedSIProcessKiller onRestartKillTask:_pyBitmessageTask];
         sleep(2);
         [self waitOnConnect];
     }

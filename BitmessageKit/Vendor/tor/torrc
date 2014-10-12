@@ -1,4 +1,0 @@
-SocksPort 9050 # Default: Bind to localhost:9050 for local connections.
-Log notice stderr
-ExitPolicy reject *:* # no exits allowed
-

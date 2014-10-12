@@ -34,7 +34,6 @@
 #import "BMSentMessages.h"
 #import "BMContacts.h"
 #import "BMServerProcess.h"
-#import "BMTorProcess.h"
 #import "BMNode.h"
 #import "BMReceivedMessages.h"
 #import "BMContact.h"

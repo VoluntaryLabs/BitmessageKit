@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BMKeysFile.h"
-#import "BMTorProcess.h"
+#import <TorServerKit/TorServerKit.h>
 
 @interface BMServerProcess : NSObject
 
@@ -16,7 +16,7 @@
 
 @property (assign, nonatomic) BOOL debug;
 @property (assign, nonatomic) BOOL useTor;
-@property (strong) BMTorProcess *torProcess;
+@property (strong) TorProcess *torProcess;
 
 //@property (strong) NSTask *torTask;
 @property (strong) NSTask *pyBitmessageTask;
@@ -25,7 +25,7 @@
 @property (retain, nonatomic) NSString *host;
 @property (assign) NSNumber *port;
 @property (assign) NSNumber *apiPort;
-//@property (retain, nonatomic) NSString *torPort;
+//@property (retain, nonatomic) NSString *torSocksPort;
 
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *password;
