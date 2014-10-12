@@ -10,31 +10,67 @@
 	<string>BitmessageKit</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>43754F18-60E1-4F93-BEBF-D9DCEB304096</key>
+		<key>37DC2010DB38C43B485C614639C29BF85EB11897</key>
+		<string>github.com:Voluntarynet/NavNodeKit.git</string>
+		<key>9A6B58CD5208BE6D5393BF80C035522180CCFD29</key>
+		<string>github.com:Voluntarynet/Bitpost.git</string>
+		<key>D196C8C20E8DD9EA1BCA8C3DA2BF4C27CFC08EF7</key>
 		<string>https://github.com/stevedekorte/BitmessageKit.git</string>
+		<key>EAAFDC9479D1EB80E5F305F4B217979549BDCF86</key>
+		<string>github.com:Voluntarynet/FoundationCategoriesKit.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>BitmessageKit.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>43754F18-60E1-4F93-BEBF-D9DCEB304096</key>
+		<key>37DC2010DB38C43B485C614639C29BF85EB11897</key>
+		<string>../../../NavNodeKit</string>
+		<key>9A6B58CD5208BE6D5393BF80C035522180CCFD29</key>
+		<string>../../../..</string>
+		<key>D196C8C20E8DD9EA1BCA8C3DA2BF4C27CFC08EF7</key>
 		<string>../..</string>
+		<key>EAAFDC9479D1EB80E5F305F4B217979549BDCF86</key>
+		<string>../../../FoundationCategoriesKit</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/stevedekorte/BitmessageKit.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>43754F18-60E1-4F93-BEBF-D9DCEB304096</string>
+	<string>D196C8C20E8DD9EA1BCA8C3DA2BF4C27CFC08EF7</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>43754F18-60E1-4F93-BEBF-D9DCEB304096</string>
+			<string>9A6B58CD5208BE6D5393BF80C035522180CCFD29</string>
+			<key>IDESourceControlWCCName</key>
+			<string>..</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D196C8C20E8DD9EA1BCA8C3DA2BF4C27CFC08EF7</string>
 			<key>IDESourceControlWCCName</key>
 			<string>BitmessageKit</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EAAFDC9479D1EB80E5F305F4B217979549BDCF86</string>
+			<key>IDESourceControlWCCName</key>
+			<string>FoundationCategoriesKit</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>37DC2010DB38C43B485C614639C29BF85EB11897</string>
+			<key>IDESourceControlWCCName</key>
+			<string>NavNodeKit</string>
 		</dict>
 	</array>
 </dict>
