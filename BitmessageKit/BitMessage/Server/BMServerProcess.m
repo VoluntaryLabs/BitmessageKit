@@ -103,16 +103,24 @@ static BMServerProcess *shared = nil;
         NSLog(@"*** setup Bitmessage for Tor on port %@", _torProcess.torSocksPort);
     }
     
+    NSMutableArray *openPorts = [SINetwork.sharedSINetwork openPortsBetween:@9000 and:@9100];
+    
     // chose open ports
-    [self.keysFile setApiPort:[SINetwork.sharedSINetwork firstOpenPortBetween:@9000 and:@10000]];
-    [self.keysFile setPort:[SINetwork.sharedSINetwork firstOpenPortBetween:@9000 and:@10000]];
+    [self.keysFile setPort:[openPorts popFirst]];
+    [self.keysFile setApiPort:[openPorts popFirst]];
     
     // randomize login
-    [self.keysFile setApiUsername:NSNumber.entropyNumber.asString];
-    [self.keysFile setApiPassword:NSNumber.entropyNumber.asString];
+    [self.keysFile setApiUsername:NSNumber.entropyNumber.asUnsignedIntegerString];
+    [self.keysFile setApiPassword:NSNumber.entropyNumber.asUnsignedIntegerString];
     
     [self.keysFile setDefaultnoncetrialsperbyte:@1024];
     //[self.keysFile setDefaultnoncetrialsperbyte:@16384];
+    
+    NSLog(@"Bitmessage keys.dat:");
+    NSLog(@"    port: %@", self.port);
+    NSLog(@"    apiport: %@", self.apiPort);
+    NSLog(@"    username: %@", self.username);
+    NSLog(@"    password: %@", self.password);
 }
 
 - (void)assertIsRunning
@@ -260,9 +268,9 @@ static BMServerProcess *shared = nil;
     if (_bitmessageTask)
     {
         NSLog(@"Killing bitmessage process...");
+        [SIProcessKiller.sharedSIProcessKiller removeKillTask:_bitmessageTask];
         [_bitmessageTask terminate];
         self.bitmessageTask = nil;
-        [SIProcessKiller.sharedSIProcessKiller removeKillTask:_bitmessageTask];
     }
 
     [self.torProcess terminate];
