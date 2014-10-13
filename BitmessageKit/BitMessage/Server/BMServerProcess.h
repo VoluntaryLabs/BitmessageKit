@@ -18,20 +18,22 @@
 @property (assign, nonatomic) BOOL useTor;
 @property (strong) TorProcess *torProcess;
 
-//@property (strong) NSTask *torTask;
-@property (strong) NSTask *pyBitmessageTask;
+@property (strong) NSTask *bitmessageTask;
 @property (strong) NSPipe *inpipe;
 
-@property (retain, nonatomic) NSString *host;
-@property (assign) NSNumber *port;
-@property (assign) NSNumber *apiPort;
-//@property (retain, nonatomic) NSString *torSocksPort;
-
-@property (strong, nonatomic) NSString *username;
-@property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) BMKeysFile *keysFile;
 @property (strong, nonatomic) NSString *dataPath;
 
+
+// keys.dat config
+
+- (NSString *)host;
+- (NSNumber *)port;
+- (NSNumber *)apiPort;
+- (NSString *)username;
+- (NSString *)password;
+
+// running
 
 - (void)launch;
 - (BOOL)isRunning;

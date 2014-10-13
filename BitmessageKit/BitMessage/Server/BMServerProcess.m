@@ -35,12 +35,8 @@ static BMServerProcess *shared = nil;
     self.debug = NO;
     
     // Get custom ports to prevent conflicts between bit* apps
-    NSBundle *mainBundle = [NSBundle mainBundle];
-    self.port    = ((NSString *)[mainBundle objectForInfoDictionaryKey:@"BitmessagePort"]).asNumber;
-    self.apiPort = ((NSString *)[mainBundle objectForInfoDictionaryKey:@"BitmessageAPIPort"]).asNumber;
-    self.host     = @"127.0.0.1";
-    self.username = @"username"; // this will get replaced with something random on startup
-    self.password = @"password"; // this will get replaced with something random on startup
+    //NSBundle *mainBundle = [NSBundle mainBundle];
+
     
     self.dataPath =
         [NSString stringWithString:[[NSFileManager defaultManager] applicationSupportDirectory]];
@@ -48,32 +44,44 @@ static BMServerProcess *shared = nil;
     if (self.useTor)
     {
         _torProcess = [[TorProcess alloc] init];
-        _torProcess.torSocksPort = [mainBundle objectForInfoDictionaryKey:@"torSocksPort"];
-        assert(_torProcess.torSocksPort != nil);
+        //_torProcess.torSocksPort = [mainBundle objectForInfoDictionaryKey:@"torSocksPort"];
+        //assert(_torProcess.torSocksPort != nil);
         _torProcess.serverDataFolder = self.serverDataFolder;
     }
     
     self.keysFile = [[BMKeysFile alloc] init];
     //[self setupKeysDat];
-    
     return self;
 }
 
-- (long)entropy
+// keys.dat config
+
+- (NSString *)host
 {
-    // yeah, this isn't great
-    unsigned int entropy = (unsigned int)time(NULL) + (unsigned int)clock();
-    srandom(entropy);
-    return random();
+    return @"127.0.0.1";
 }
 
-- (void)randomizeLogin
+- (NSNumber *)port
 {
-    self.username = [NSString stringWithFormat:@"%i", (int)self.entropy];
-    self.password = [NSString stringWithFormat:@"%i", (int)self.entropy];
-    [self.keysFile setApiUsername:self.username];
-    [self.keysFile setApiPassword:self.password];
+    return self.keysFile.port.asNumber;
 }
+
+- (NSNumber *)apiPort
+{
+    return self.keysFile.apiport.asNumber;
+}
+
+- (NSString *)username
+{
+    return self.keysFile.apiusername;
+}
+
+- (NSString *)password
+{
+    return self.keysFile.apipassword;
+}
+
+// keys.dat
 
 - (void)setupKeysDat
 {
@@ -83,19 +91,26 @@ static BMServerProcess *shared = nil;
     if (!self.useTor)
     {
         [self.keysFile setupForNonTor];
-        NSLog(@"*** WARNING: setting up Bitmessage for non tor use");
+        NSLog(@"*** WARNING: setting up Bitmessage for non Tor use");
         [self.keysFile setSOCKSPort:@0];
     }
     else
     {
         [self.keysFile setupForTor];
+        assert(_torProcess.isRunning);
+        assert(_torProcess.torSocksPort != nil); // need to launch tor first so it picks a port
         [self.keysFile setSOCKSPort:_torProcess.torSocksPort];
-        NSLog(@"*** setup Bitmessage for tor on port %@", _torProcess.torSocksPort);
+        NSLog(@"*** setup Bitmessage for Tor on port %@", _torProcess.torSocksPort);
     }
     
-    [self.keysFile setApiPort:self.apiPort];
-    [self.keysFile setPort:self.port];
-    [self randomizeLogin];
+    // chose open ports
+    [self.keysFile setApiPort:[SINetwork.sharedSINetwork firstOpenPortBetween:@9000 and:@10000]];
+    [self.keysFile setPort:[SINetwork.sharedSINetwork firstOpenPortBetween:@9000 and:@10000]];
+    
+    // randomize login
+    [self.keysFile setApiUsername:NSNumber.entropyNumber.asString];
+    [self.keysFile setApiPassword:NSNumber.entropyNumber.asString];
+    
     [self.keysFile setDefaultnoncetrialsperbyte:@1024];
     //[self.keysFile setDefaultnoncetrialsperbyte:@16384];
 }
@@ -142,7 +157,6 @@ static BMServerProcess *shared = nil;
     }
     
 
-    
     BOOL hasRunBefore = self.keysFile.doesExist;
     
     if (hasRunBefore)
@@ -150,7 +164,7 @@ static BMServerProcess *shared = nil;
         [self setupKeysDat];
     }
     
-    _pyBitmessageTask = [[NSTask alloc] init];
+    _bitmessageTask = [[NSTask alloc] init];
     _inpipe = [NSPipe pipe];
     NSDictionary *environmentDict = [[NSProcessInfo processInfo] environment];
     NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithDictionary:environmentDict];
@@ -160,43 +174,36 @@ static BMServerProcess *shared = nil;
     [environment setObject:self.username forKey:@"PYBITMESSAGE_USER"];
     [environment setObject:self.password forKey:@"PYBITMESSAGE_PASSWORD"];
     [environment setObject:self.dataPath forKey:@"BITMESSAGE_HOME"];
-   /*
-    self.host     = @"127.0.0.1";
-    self.port     = 8444+10;
-    self.apiPort  = 8442+10;
-    self.username = @"bitmarket"; // this will get replaced with something random on startup
-    self.password = @"87342873428901648473823"; // this will get replaced with something random on startup
- */
-    
-    [_pyBitmessageTask setEnvironment: environment];
+
+    [_bitmessageTask setEnvironment: environment];
     
     // Set the path to the python executable
     NSBundle *mainBundle = [NSBundle bundleForClass:self.class];
     NSString * pythonPath = [mainBundle pathForResource:@"python" ofType:@"exe" inDirectory: @"static-python"];
     NSString * pybitmessagePath = [mainBundle pathForResource:@"bitmessagemain" ofType:@"py" inDirectory: @"pybitmessage"];
-    [_pyBitmessageTask setLaunchPath:pythonPath];
+    [_bitmessageTask setLaunchPath:pythonPath];
     
-    [_pyBitmessageTask setStandardInput: (NSFileHandle *) _inpipe];
+    [_bitmessageTask setStandardInput: (NSFileHandle *) _inpipe];
     
     if (self.debug)
     {
-        [_pyBitmessageTask setStandardOutput:[NSFileHandle fileHandleWithStandardOutput]];
-        [_pyBitmessageTask setStandardError:[NSFileHandle fileHandleWithStandardOutput]];
+        [_bitmessageTask setStandardOutput:[NSFileHandle fileHandleWithStandardOutput]];
+        [_bitmessageTask setStandardError:[NSFileHandle fileHandleWithStandardOutput]];
     }
     else
     {
-        [_pyBitmessageTask setStandardOutput:[NSFileHandle fileHandleWithNullDevice]];
-        [_pyBitmessageTask setStandardError:[NSFileHandle fileHandleWithNullDevice]];
+        [_bitmessageTask setStandardOutput:[NSFileHandle fileHandleWithNullDevice]];
+        [_bitmessageTask setStandardError:[NSFileHandle fileHandleWithNullDevice]];
     }
     
-    [_pyBitmessageTask setArguments:@[pybitmessagePath]];
+    [_bitmessageTask setArguments:@[pybitmessagePath]];
    
     if (self.debug)
     {
         NSLog(@"*** launching _pyBitmessage ***");
     }
     
-    [_pyBitmessageTask launch];
+    [_bitmessageTask launch];
     [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
     
     if (!hasRunBefore)
@@ -210,13 +217,13 @@ static BMServerProcess *shared = nil;
     }
 
 
-    if (![_pyBitmessageTask isRunning])
+    if (![_bitmessageTask isRunning])
     {
         NSLog(@"pybitmessage task not running after launch");
     }
     else
     {
-        [SIProcessKiller.sharedSIProcessKiller onRestartKillTask:_pyBitmessageTask];
+        [SIProcessKiller.sharedSIProcessKiller onRestartKillTask:_bitmessageTask];
         sleep(2);
         [self waitOnConnect];
     }
@@ -250,23 +257,20 @@ static BMServerProcess *shared = nil;
 
 - (void)terminate
 {
-    if (self.debug)
+    if (_bitmessageTask)
     {
-        NSLog(@"Killing pybitmessage process...");
+        NSLog(@"Killing bitmessage process...");
+        [_bitmessageTask terminate];
+        self.bitmessageTask = nil;
+        [SIProcessKiller.sharedSIProcessKiller removeKillTask:_bitmessageTask];
     }
-    
-    [_pyBitmessageTask terminate];
-    self.pyBitmessageTask = nil;
 
-    if (self.torProcess)
-    {
-        [self.torProcess terminate];
-    }
+    [self.torProcess terminate];
 }
 
 - (BOOL)isRunning
 {
-    if (!_pyBitmessageTask.isRunning)
+    if (!_bitmessageTask.isRunning)
     {
         return NO;
     }

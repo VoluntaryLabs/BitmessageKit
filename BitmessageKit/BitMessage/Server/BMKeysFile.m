@@ -17,12 +17,11 @@
 {
     return [[BMServerProcess sharedBMServerProcess] serverDataFolder];
 }
+
 - (NSString *)path
 {
     return [self.folder stringByAppendingPathComponent:@"keys.dat"];
 }
-
-
 
 - (void)checkServer
 {
