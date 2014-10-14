@@ -34,24 +34,75 @@ static BMServerProcess *shared = nil;
     self.useTor = YES;
     self.debug = NO;
     
-    // Get custom ports to prevent conflicts between bit* apps
-    //NSBundle *mainBundle = [NSBundle mainBundle];
-
-    
-    self.dataPath =
-        [NSString stringWithString:[[NSFileManager defaultManager] applicationSupportDirectory]];
-
     if (self.useTor)
     {
         _torProcess = [[TorProcess alloc] init];
-        //_torProcess.torSocksPort = [mainBundle objectForInfoDictionaryKey:@"torSocksPort"];
-        //assert(_torProcess.torSocksPort != nil);
-        _torProcess.serverDataFolder = self.serverDataFolder;
     }
     
     self.keysFile = [[BMKeysFile alloc] init];
-    //[self setupKeysDat];
+
+    [self moveOldBitmessageFilesIfNeeded];
+    
     return self;
+}
+
+- (NSBundle *)bundle
+{
+    return [NSBundle bundleForClass:self.class];
+}
+
+- (void)moveOldBitmessageFilesIfNeeded
+{
+    NSString *oldDataPath = [[NSFileManager defaultManager] applicationSupportDirectory];
+    NSString *newDataPath = [self bundleDataPath];
+
+    NSArray *fileNames = @[@"debug.log",
+                           @"keys.dat",
+                           @"keys_backups",
+                           @"knownnodes.dat",
+                           @"messages.dat",
+                           @"readMessagesDB.json",
+                           @"deletedMessagesDB.json"];
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    
+    for (NSString *fileName in fileNames)
+    {
+        BOOL isDir;
+        NSString *filePath = [oldDataPath stringByAppendingPathComponent:fileName];
+        
+        if ([fm fileExistsAtPath:filePath isDirectory:&isDir])
+        {
+            NSString *newFilePath = [newDataPath stringByAppendingPathComponent:fileName];
+            NSError *error;
+            [fm moveItemAtPath:filePath toPath:newFilePath error:&error];
+            
+            if (error)
+            {
+                NSLog(@"warning: %@", error);
+            }
+        }
+    }
+}
+
+- (NSString *)justBundleDataPath
+{
+    NSString *supportFolder = [[NSFileManager defaultManager] applicationSupportDirectory];
+    NSString *bundleName = [self.bundle.bundleIdentifier componentsSeparatedByString:@"."].lastObject;
+    NSString *path = [supportFolder stringByAppendingPathComponent:bundleName];
+    return path;
+}
+
+- (NSString *)bundleDataPath
+{
+    NSString *path = self.justBundleDataPath;
+        
+    NSError *error;
+    [[NSFileManager defaultManager] createDirectoryAtPath:path
+                              withIntermediateDirectories:YES
+                                               attributes:nil
+                                                    error:&error];
+    return path;
 }
 
 // keys.dat config
@@ -115,12 +166,7 @@ static BMServerProcess *shared = nil;
     
     [self.keysFile setDefaultnoncetrialsperbyte:@1024];
     //[self.keysFile setDefaultnoncetrialsperbyte:@16384];
-    
-    NSLog(@"Bitmessage keys.dat:");
-    NSLog(@"    port: %@", self.port);
-    NSLog(@"    apiport: %@", self.apiPort);
-    NSLog(@"    username: %@", self.username);
-    NSLog(@"    password: %@", self.password);
+
 }
 
 - (void)assertIsRunning
@@ -172,6 +218,16 @@ static BMServerProcess *shared = nil;
         [self setupKeysDat];
     }
     
+    
+    //if (self.debug)
+    {
+        NSLog(@"launching Bitmessage with keys.dat:");
+        NSLog(@"    port: %@", self.port);
+        NSLog(@"    apiport: %@", self.apiPort);
+        NSLog(@"    username: %@", self.username);
+        NSLog(@"    password: %@", self.password);
+    }
+    
     _bitmessageTask = [[NSTask alloc] init];
     _inpipe = [NSPipe pipe];
     NSDictionary *environmentDict = [[NSProcessInfo processInfo] environment];
@@ -179,19 +235,28 @@ static BMServerProcess *shared = nil;
     //NSLog(@"%@", [environment valueForKey:@"PATH"]);
     
     // Set environment variables containing api username and password
-    [environment setObject:self.username forKey:@"PYBITMESSAGE_USER"];
-    [environment setObject:self.password forKey:@"PYBITMESSAGE_PASSWORD"];
-    [environment setObject:self.dataPath forKey:@"BITMESSAGE_HOME"];
+    if (hasRunBefore)
+    {
+        [environment setObject:self.username forKey:@"PYBITMESSAGE_USER"];
+        [environment setObject:self.password forKey:@"PYBITMESSAGE_PASSWORD"];
+    }
+    else
+    {
+        [environment setObject:@"default" forKey:@"PYBITMESSAGE_USER"];
+        [environment setObject:@"default" forKey:@"PYBITMESSAGE_PASSWORD"];
+    }
+    
+    [environment setObject:self.bundleDataPath forKey:@"BITMESSAGE_HOME"];
 
     [_bitmessageTask setEnvironment: environment];
     
     // Set the path to the python executable
     NSBundle *mainBundle = [NSBundle bundleForClass:self.class];
-    NSString * pythonPath = [mainBundle pathForResource:@"python" ofType:@"exe" inDirectory: @"static-python"];
+    NSString * pythonPath       = [mainBundle pathForResource:@"python" ofType:@"exe" inDirectory: @"static-python"];
     NSString * pybitmessagePath = [mainBundle pathForResource:@"bitmessagemain" ofType:@"py" inDirectory: @"pybitmessage"];
     [_bitmessageTask setLaunchPath:pythonPath];
     
-    [_bitmessageTask setStandardInput: (NSFileHandle *) _inpipe];
+    //[_bitmessageTask setStandardInput: (NSFileHandle *) _inpipe];
     
     if (self.debug)
     {
@@ -301,11 +366,6 @@ static BMServerProcess *shared = nil;
     [message sendSync];
     NSString *response = [message responseValue];
     return [response isEqualToString:@"hello-world"];
-}
-
-- (NSString *)serverDataFolder
-{
-    return self.dataPath;
 }
 
 @end

@@ -260,7 +260,7 @@ static BMClient *sharedBMClient;
                               [NSString stringWithFormat:@"bitmessage.%i.%@",
                                (int)timeStamp, self.archiveSuffix]];
     [self stopServer];
-    NSString *serverFolder = [[BMServerProcess sharedBMServerProcess] serverDataFolder];
+    NSString *serverFolder = [[BMServerProcess sharedBMServerProcess] bundleDataPath];
     [[[BMArchive alloc] init] archiveFromPath:serverFolder toPath:archivedPath];
     [self startServer];
 }
@@ -268,7 +268,7 @@ static BMClient *sharedBMClient;
 - (void)unarchiveFromUrl:(NSURL *)url
 {
     [self stopServer];
-    NSString *serverFolder = [[BMServerProcess sharedBMServerProcess] serverDataFolder];
+    NSString *serverFolder = [[BMServerProcess sharedBMServerProcess] bundleDataPath];
     [[[BMArchive alloc] init] unarchiveFromPath:[url path] toPath:serverFolder];
     [self startServer];
     [self deepFetch];

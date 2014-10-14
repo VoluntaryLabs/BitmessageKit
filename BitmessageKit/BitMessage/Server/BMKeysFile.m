@@ -15,7 +15,7 @@
 
 - (NSString *)folder
 {
-    return [[BMServerProcess sharedBMServerProcess] serverDataFolder];
+    return [[BMServerProcess sharedBMServerProcess] bundleDataPath];
 }
 
 - (NSString *)path

@@ -22,7 +22,6 @@
 @property (strong) NSPipe *inpipe;
 
 @property (strong, nonatomic) BMKeysFile *keysFile;
-@property (strong, nonatomic) NSString *dataPath;
 
 
 // keys.dat config
@@ -47,6 +46,6 @@
 
 - (BOOL)setLabel:(NSString *)aLabel onAddress:(NSString *)anAddress;
 
-- (NSString *)serverDataFolder;
+- (NSString *)bundleDataPath;
 
 @end

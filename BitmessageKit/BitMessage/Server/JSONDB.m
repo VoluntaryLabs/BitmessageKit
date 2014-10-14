@@ -54,7 +54,7 @@
     }
     else if ([_location isEqualToString:JSONDB_IN_SERVER_FOLDER])
     {
-        NSString *folder = [[BMServerProcess sharedBMServerProcess] serverDataFolder];
+        NSString *folder = [[BMServerProcess sharedBMServerProcess] bundleDataPath];
         NSString *path = [folder stringByAppendingPathComponent:fileName];
         return path;
     }
