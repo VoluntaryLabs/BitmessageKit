@@ -67,10 +67,11 @@
 - (void)stopServer; // call when app quits
 
 // archive
-
+/*
 - (NSString *)archiveSuffix;
 - (void)archiveToUrl:(NSURL *)url;
 - (void)unarchiveFromUrl:(NSURL *)url;
+*/
 
 // addresses
 

@@ -289,7 +289,6 @@ static BMServerProcess *shared = nil;
         return;
     }
 
-
     if (![_bitmessageTask isRunning])
     {
         NSLog(@"pybitmessage task not running after launch");
@@ -364,6 +363,7 @@ static BMServerProcess *shared = nil;
     [message setParameters:params];
     //message.debug = YES;
     [message sendSync];
+    
     NSString *response = [message responseValue];
     return [response isEqualToString:@"hello-world"];
 }
