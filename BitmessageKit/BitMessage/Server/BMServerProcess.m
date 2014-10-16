@@ -224,8 +224,8 @@ static BMServerProcess *shared = nil;
         NSLog(@"launching Bitmessage with keys.dat:");
         NSLog(@"    port: %@", self.port);
         NSLog(@"    apiport: %@", self.apiPort);
-        NSLog(@"    username: %@", self.username);
-        NSLog(@"    password: %@", self.password);
+        //NSLog(@"    username: %@", self.username);
+        //NSLog(@"    password: %@", self.password);
     }
     
     _bitmessageTask = [[NSTask alloc] init];
