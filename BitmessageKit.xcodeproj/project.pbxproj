@@ -181,6 +181,20 @@
 			remoteGlobalIDString = AA0F303819B9C94E0010FD4A;
 			remoteInfo = TorServerKitTests;
 		};
+		AA7CE00A19F0879C00E9EFAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA7CE00319F0879C00E9EFAC /* FoundationCategoriesKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AAE31E8D18FF1E3F00405754;
+			remoteInfo = FoundationCategoriesKit;
+		};
+		AA7CE00C19F0879C00E9EFAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA7CE00319F0879C00E9EFAC /* FoundationCategoriesKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AAE31EA418FF1E3F00405754;
+			remoteInfo = FoundationCategoriesKitTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -292,6 +306,7 @@
 		AA4F10FF19EB220F00CD08A5 /* NavNodeKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NavNodeKit.xcodeproj; path = submodules/NavNodeKit/NavNodeKit.xcodeproj; sourceTree = "<group>"; };
 		AA4F110819EB221300CD08A5 /* SystemInfoKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SystemInfoKit.xcodeproj; path = submodules/SystemInfoKit/SystemInfoKit.xcodeproj; sourceTree = "<group>"; };
 		AA4F111119EB221800CD08A5 /* TorServerKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TorServerKit.xcodeproj; path = submodules/TorServerKit/TorServerKit.xcodeproj; sourceTree = "<group>"; };
+		AA7CE00319F0879C00E9EFAC /* FoundationCategoriesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FoundationCategoriesKit.xcodeproj; path = submodules/FoundationCategoriesKit/FoundationCategoriesKit.xcodeproj; sourceTree = "<group>"; };
 		AA9A656E199ECF5800993E8B /* BMMergable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMMergable.h; sourceTree = "<group>"; };
 		AA9A656F199ECF5800993E8B /* BMMergable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMMergable.m; sourceTree = "<group>"; };
 		AA9A6577199EDA9700993E8B /* BMUnreadCountable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMUnreadCountable.h; sourceTree = "<group>"; };
@@ -590,6 +605,7 @@
 		AA4F10E619EB21F100CD08A5 /* submodules */ = {
 			isa = PBXGroup;
 			children = (
+				AA7CE00319F0879C00E9EFAC /* FoundationCategoriesKit.xcodeproj */,
 				AA4F111119EB221800CD08A5 /* TorServerKit.xcodeproj */,
 				AA4F110819EB221300CD08A5 /* SystemInfoKit.xcodeproj */,
 				AA4F10FF19EB220F00CD08A5 /* NavNodeKit.xcodeproj */,
@@ -640,6 +656,15 @@
 			children = (
 				AA4F111819EB221800CD08A5 /* TorServerKit.framework */,
 				AA4F111A19EB221800CD08A5 /* TorServerKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA7CE00419F0879C00E9EFAC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA7CE00B19F0879C00E9EFAC /* FoundationCategoriesKit.framework */,
+				AA7CE00D19F0879C00E9EFAC /* FoundationCategoriesKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -766,6 +791,10 @@
 					ProjectRef = AA4F10E719EB21FF00CD08A5 /* FoundationCategoriesKit.xcodeproj */;
 				},
 				{
+					ProductGroup = AA7CE00419F0879C00E9EFAC /* Products */;
+					ProjectRef = AA7CE00319F0879C00E9EFAC /* FoundationCategoriesKit.xcodeproj */;
+				},
+				{
 					ProductGroup = AA4F10F119EB220600CD08A5 /* Products */;
 					ProjectRef = AA4F10F019EB220600CD08A5 /* NavKit.xcodeproj */;
 				},
@@ -859,6 +888,20 @@
 			fileType = wrapper.cfbundle;
 			path = TorServerKitTests.xctest;
 			remoteRef = AA4F111919EB221800CD08A5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AA7CE00B19F0879C00E9EFAC /* FoundationCategoriesKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FoundationCategoriesKit.framework;
+			remoteRef = AA7CE00A19F0879C00E9EFAC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AA7CE00D19F0879C00E9EFAC /* FoundationCategoriesKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = FoundationCategoriesKitTests.xctest;
+			remoteRef = AA7CE00C19F0879C00E9EFAC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
