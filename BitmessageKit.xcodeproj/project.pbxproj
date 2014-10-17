@@ -100,6 +100,8 @@
 		AA9A6571199ECF5800993E8B /* BMMergable.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9A656F199ECF5800993E8B /* BMMergable.m */; };
 		AA9A6579199EDA9700993E8B /* BMUnreadCountable.h in Headers */ = {isa = PBXBuildFile; fileRef = AA9A6577199EDA9700993E8B /* BMUnreadCountable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA9A657A199EDA9700993E8B /* BMUnreadCountable.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9A6578199EDA9700993E8B /* BMUnreadCountable.m */; };
+		AAA9FA6919F0B38600D5858C /* BMAboutNode.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA9FA6719F0B38600D5858C /* BMAboutNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAA9FA6A19F0B38600D5858C /* BMAboutNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA9FA6819F0B38600D5858C /* BMAboutNode.m */; };
 		AAE31DBD18FF11A000405754 /* static-python in Resources */ = {isa = PBXBuildFile; fileRef = AAE31DBC18FF11A000405754 /* static-python */; };
 /* End PBXBuildFile section */
 
@@ -311,6 +313,8 @@
 		AA9A656F199ECF5800993E8B /* BMMergable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMMergable.m; sourceTree = "<group>"; };
 		AA9A6577199EDA9700993E8B /* BMUnreadCountable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMUnreadCountable.h; sourceTree = "<group>"; };
 		AA9A6578199EDA9700993E8B /* BMUnreadCountable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMUnreadCountable.m; sourceTree = "<group>"; };
+		AAA9FA6719F0B38600D5858C /* BMAboutNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMAboutNode.h; sourceTree = "<group>"; };
+		AAA9FA6819F0B38600D5858C /* BMAboutNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMAboutNode.m; sourceTree = "<group>"; };
 		AAE31DBC18FF11A000405754 /* static-python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "static-python"; path = "Vendor/static-python"; sourceTree = "<group>"; };
 		AAE31DBE18FF11BA00405754 /* pybitmessage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybitmessage; path = Vendor/pybitmessage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -456,10 +460,10 @@
 		8EDE5BA818F594EA009A726A /* BitMessage */ = {
 			isa = PBXGroup;
 			children = (
+				AAA9FA6619F0B38600D5858C /* Info */,
 				8EDE5BB618F594EA009A726A /* Objects */,
 				8EDE5BE318F594EA009A726A /* Proxy */,
 				8EDE5BE818F594EA009A726A /* Server */,
-				8EDE5BF118F594EA009A726A /* Task */,
 			);
 			path = BitMessage;
 			sourceTree = "<group>";
@@ -585,13 +589,6 @@
 			path = Server;
 			sourceTree = "<group>";
 		};
-		8EDE5BF118F594EA009A726A /* Task */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Task;
-			sourceTree = "<group>";
-		};
 		8EDE5C8B18F5953B009A726A /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
@@ -669,6 +666,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		AAA9FA6619F0B38600D5858C /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				AAA9FA6719F0B38600D5858C /* BMAboutNode.h */,
+				AAA9FA6819F0B38600D5858C /* BMAboutNode.m */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -713,6 +719,7 @@
 				8EDE5C1C18F594EA009A726A /* BMSentMessage.h in Headers */,
 				8ED41FC618F596310025A51B /* XMLRPCDefaultEncoder.h in Headers */,
 				AA9A6570199ECF5800993E8B /* BMMergable.h in Headers */,
+				AAA9FA6919F0B38600D5858C /* BMAboutNode.h in Headers */,
 				AA9A6579199EDA9700993E8B /* BMUnreadCountable.h in Headers */,
 				AA153C3618FF057D007B4785 /* BitmessageKit.h in Headers */,
 			);
@@ -944,6 +951,7 @@
 				8ED41FC718F596310025A51B /* XMLRPCDefaultEncoder.m in Sources */,
 				8ED41FCC18F596310025A51B /* XMLRPCEventBasedParserDelegate.m in Sources */,
 				8EDE5C2B18F594EA009A726A /* BMKeysFile.m in Sources */,
+				AAA9FA6A19F0B38600D5858C /* BMAboutNode.m in Sources */,
 				8ED41FBF18F596310025A51B /* NSStringAdditions.m in Sources */,
 				8EDE5C1518F594EA009A726A /* BMMessageGroup.m in Sources */,
 				AA9A6571199ECF5800993E8B /* BMMergable.m in Sources */,

@@ -9,6 +9,7 @@
 #import "BMClient.h"
 #import "BMAddressed.h"
 //#import "BMArchive.h"
+#import "BMAboutNode.h"
 
 @implementation BMClient
 
@@ -66,6 +67,7 @@ static BMClient *sharedBMClient;
     [self registerForNotifications];
     [self.messages.received changedUnreadCount];
     
+    self.aboutNode = [[BMAboutNode alloc] init];
     return self;
 }
 
@@ -293,6 +295,5 @@ static BMClient *sharedBMClient;
     
     return set;
 }
-
 
 @end

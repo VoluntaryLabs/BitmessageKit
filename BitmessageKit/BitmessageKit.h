@@ -10,6 +10,7 @@
 
 
 #import "BMNode.h"
+#import "BMAboutNode.h"
 
 #import "BMMergable.h"
 #import "BMUnreadCountable.h"

@@ -27,10 +27,6 @@
 
 #import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 #import "BMServerProcess.h"
-// market
-
-//#import "MKMarkets.h"
-
 
 @interface BMClient : BMNode
 
@@ -45,19 +41,23 @@
 @property (strong, nonatomic) BMChannels *channels;
 @property (strong, nonatomic) BMDatabase *readMessagesDB;
 @property (strong, nonatomic) BMDatabase *deletedMessagesDB;
-
-//@property (strong, nonatomic) MKMarkets *markets;
+@property (strong, nonatomic) NavInfoNode *aboutNode;
 
 
 + (BMClient *)sharedBMClient;
 
 - (void)refresh;
+
+// labels and addresses
+
 - (NSString *)labelForAddress:(NSString *)addressString; // returns address if none found
 - (NSString *)addressForLabel:(NSString *)labelString; // returns address if none found
 
 - (NSSet *)fromAddressLabels;
 - (NSSet *)toAddressLabels;
 - (NSSet *)allAddressLabels;
+
+- (NSSet *)receivingAddressSet;
 
 - (BOOL)hasNoIdentites;
 
@@ -66,15 +66,11 @@
 //- (void)startServer;
 - (void)stopServer; // call when app quits
 
-// archive
 /*
+// archive
 - (NSString *)archiveSuffix;
 - (void)archiveToUrl:(NSURL *)url;
 - (void)unarchiveFromUrl:(NSURL *)url;
 */
-
-// addresses
-
-- (NSSet *)receivingAddressSet;
 
 @end
