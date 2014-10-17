@@ -34,7 +34,7 @@
 {
     NavInfoNode *about = self;
     about.shouldSortChildren = NO;
-    about.nodeTitle = @"Bitpost";
+    about.nodeTitle = @"BitmessageKit";
     about.nodeSuggestedWidth = 150;
     
     
