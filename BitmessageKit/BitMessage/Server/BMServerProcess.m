@@ -42,7 +42,9 @@ static BMServerProcess *shared = nil;
     self.keysFile = [[BMKeysFile alloc] init];
 
     [self moveOldBitmessageFilesIfNeeded];
-    
+
+    [SIProcessKiller sharedSIProcessKiller]; // to end old processes
+
     return self;
 }
 
@@ -148,6 +150,8 @@ static BMServerProcess *shared = nil;
     else
     {
         [self.keysFile setupForTor];
+        _torProcess.debug = self.debug;
+        [_torProcess launch];
         assert(_torProcess.isRunning);
         assert(_torProcess.torSocksPort != nil); // need to launch tor first so it picks a port
         [self.keysFile setSOCKSPort:_torProcess.torSocksPort];
@@ -288,6 +292,8 @@ static BMServerProcess *shared = nil;
         [self launch];
         return;
     }
+    
+    sleep(2);
 
     if (![_bitmessageTask isRunning])
     {
@@ -321,6 +327,8 @@ static BMServerProcess *shared = nil;
         NSLog(@"waiting to connect to server...");
         sleep(1);
     }
+    
+    [NSException raise:@"unable to connect to Bitmessage server" format:nil];
     
     [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
     
