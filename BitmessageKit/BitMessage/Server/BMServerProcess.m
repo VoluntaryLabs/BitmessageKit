@@ -358,14 +358,23 @@ static BMServerProcess *shared = nil;
 - (BOOL)canConnect
 {
     BMProxyMessage *message = [[BMProxyMessage alloc] init];
+    [message setMethodName:@"listAddressBookEntries"];
+    NSArray *params = [NSArray arrayWithObjects:nil];
+    [message setParameters:params];
+    [message sendSync];
+    
+    /*
+    BMProxyMessage *message = [[BMProxyMessage alloc] init];
     [message setMethodName:@"helloWorld"];
     NSArray *params = [NSArray arrayWithObjects:@"hello", @"world", nil];
     [message setParameters:params];
     //message.debug = YES;
     [message sendSync];
+    */
     
-    NSString *response = [message responseValue];
-    return [response isEqualToString:@"hello-world"];
+    NSObject *response = [message parsedResponseValue];
+    //NSLog(@"canConnect response = '%@'", response);
+    return response && [response isKindOfClass:NSDictionary.class];
 }
 
 @end
