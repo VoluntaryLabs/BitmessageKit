@@ -318,7 +318,7 @@ static BMServerProcess *shared = nil;
         return;
     }
     
-    sleep(2);
+    //sleep(2);
 
     if (![_bitmessageTask isRunning])
     {
