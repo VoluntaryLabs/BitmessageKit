@@ -48,4 +48,6 @@
 
 - (NSString *)bundleDataPath;
 
+- (NSString *)pybitmessageVersion;
+
 @end

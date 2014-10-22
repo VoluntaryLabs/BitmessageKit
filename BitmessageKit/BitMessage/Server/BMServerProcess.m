@@ -107,6 +107,31 @@ static BMServerProcess *shared = nil;
     return path;
 }
 
+- (NSString *)pybitmessageVersion
+{
+    NSString *versionFilePath = [self.bundle pathForResource:@"build_osx" ofType:@"py" inDirectory: @"pybitmessage"];
+    
+    NSError *error;
+    NSString *contents = [NSString stringWithContentsOfFile:versionFilePath encoding:NSUTF8StringEncoding error:&error];
+    
+    if (error == nil)
+    {
+        NSArray *lines = [contents componentsSeparatedByString:@"\n"];
+        
+        for (NSString *line in lines)
+        {
+            if ([line hasPrefix:@"version"])
+            {
+                NSString *version = [[line after:@"\""] before:@"\""];
+                return version;
+            }
+        }
+    }
+    
+    return nil;
+}
+
+
 // keys.dat config
 
 - (NSString *)host
@@ -256,8 +281,8 @@ static BMServerProcess *shared = nil;
     
     // Set the path to the python executable
     NSBundle *mainBundle = [NSBundle bundleForClass:self.class];
-    NSString * pythonPath       = [mainBundle pathForResource:@"python" ofType:@"exe" inDirectory: @"static-python"];
-    NSString * pybitmessagePath = [mainBundle pathForResource:@"bitmessagemain" ofType:@"py" inDirectory: @"pybitmessage"];
+    NSString *pythonPath       = [mainBundle pathForResource:@"python" ofType:@"exe" inDirectory: @"static-python"];
+    NSString *pybitmessagePath = [mainBundle pathForResource:@"bitmessagemain" ofType:@"py" inDirectory: @"pybitmessage"];
     [_bitmessageTask setLaunchPath:pythonPath];
     
     //[_bitmessageTask setStandardInput: (NSFileHandle *) _inpipe];
