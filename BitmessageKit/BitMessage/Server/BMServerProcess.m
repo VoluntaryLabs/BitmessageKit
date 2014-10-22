@@ -32,7 +32,7 @@ static BMServerProcess *shared = nil;
     self = [super init];
     
     self.useTor = YES;
-    self.debug = NO;
+    self.debug = YES;
     
     if (self.useTor)
     {
@@ -176,7 +176,6 @@ static BMServerProcess *shared = nil;
     {
         [self.keysFile setupForTor];
         _torProcess.debug = self.debug;
-        [_torProcess launch];
         assert(_torProcess.isRunning);
         assert(_torProcess.torSocksPort != nil); // need to launch tor first so it picks a port
         [self.keysFile setSOCKSPort:_torProcess.torSocksPort];
