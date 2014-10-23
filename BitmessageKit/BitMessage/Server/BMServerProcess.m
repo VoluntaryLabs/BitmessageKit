@@ -45,6 +45,10 @@ static BMServerProcess *shared = nil;
 
     [SIProcessKiller sharedSIProcessKiller]; // to end old processes
 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(terminate)
+                                                 name:NSApplicationWillTerminateNotification
+                                               object:nil];
     return self;
 }
 
