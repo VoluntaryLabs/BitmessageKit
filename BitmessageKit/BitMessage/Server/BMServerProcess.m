@@ -32,7 +32,7 @@ static BMServerProcess *shared = nil;
     self = [super init];
     
     self.useTor = YES;
-    self.debug = YES;
+    self.debug = NO;
     
     if (self.useTor)
     {
