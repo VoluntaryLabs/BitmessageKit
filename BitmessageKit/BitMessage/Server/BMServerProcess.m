@@ -186,11 +186,14 @@ static BMServerProcess *shared = nil;
         NSLog(@"*** setup Bitmessage for Tor on port %@", _torProcess.torSocksPort);
     }
     
-    NSMutableArray *openPorts = [SINetwork.sharedSINetwork BindablePortsBetween:@9000 and:@9100];
+//    NSMutableArray *openPorts = [SINetwork.sharedSINetwork bindablePortsBetween:@9000 and:@9100];
+    NSNumber *maxPort = @9100;
+    NSNumber *port = [SINetwork.sharedSINetwork firstBindablePortBetween:@9000 and:maxPort];
+    NSNumber *apiPort = [SINetwork.sharedSINetwork firstBindablePortBetween:@(port.intValue+1) and:maxPort];
     
     // chose open ports
-    [self.keysFile setPort:[openPorts popFirst]];
-    [self.keysFile setApiPort:[openPorts popFirst]];
+    [self.keysFile setPort:port];
+    [self.keysFile setApiPort:apiPort];
     
     // randomize login
     [self.keysFile setApiUsername:NSNumber.entropyNumber.asUnsignedIntegerString];
