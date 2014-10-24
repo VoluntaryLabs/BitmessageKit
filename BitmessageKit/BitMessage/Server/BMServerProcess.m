@@ -186,7 +186,7 @@ static BMServerProcess *shared = nil;
         NSLog(@"*** setup Bitmessage for Tor on port %@", _torProcess.torSocksPort);
     }
     
-    NSMutableArray *openPorts = [SINetwork.sharedSINetwork openPortsBetween:@9000 and:@9100];
+    NSMutableArray *openPorts = [SINetwork.sharedSINetwork BindablePortsBetween:@9000 and:@9100];
     
     // chose open ports
     [self.keysFile setPort:[openPorts popFirst]];
