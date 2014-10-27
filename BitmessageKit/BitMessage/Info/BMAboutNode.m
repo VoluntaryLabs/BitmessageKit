@@ -191,7 +191,16 @@
         {
             NavInfoNode *nonce = [[NavInfoNode alloc] init];
             nonce.nodeTitle = @"Port";
-            nonce.nodeSubtitle = [NSString stringWithFormat:@"%@", BMClient.sharedBMClient.server.port];
+            
+            if (BMClient.sharedBMClient.server.useTor)
+            {
+                nonce.nodeSubtitle = @"(routing via tor socks port)";
+            }
+            else
+            {
+                nonce.nodeSubtitle = [NSString stringWithFormat:@"%@", BMClient.sharedBMClient.server.port];
+            }
+            
             [status addChild:nonce];
         }
         
