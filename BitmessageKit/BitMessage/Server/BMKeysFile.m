@@ -37,8 +37,9 @@
 
     NSError *error;
     NSStringEncoding encoding;
-    NSString *data = [NSString stringWithContentsOfFile:[NSURL fileURLWithPath:self.path]
-                                           usedEncoding:&encoding error:&error];
+    NSString *data = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:self.path]
+                                           usedEncoding:&encoding
+                                                 error:&error];
     return data;
 }
 
