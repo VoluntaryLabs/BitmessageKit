@@ -7,7 +7,6 @@
 //
 
 #import "BMServerProcess.h"
-#import <SystemInfoKit/SystemInfoKit.h>
 #import <FoundationCategoriesKit/FoundationCategoriesKit.h>
 #import "BMProxyMessage.h"
 
@@ -186,14 +185,13 @@ static BMServerProcess *shared = nil;
         NSLog(@"*** setup Bitmessage for Tor on port %@", _torProcess.torSocksPort);
     }
     
-//    NSMutableArray *openPorts = [SINetwork.sharedSINetwork bindablePortsBetween:@9000 and:@9100];
-    NSNumber *maxPort = @9100;
-    NSNumber *port = [SINetwork.sharedSINetwork firstBindablePortBetween:@9000 and:maxPort];
-    NSNumber *apiPort = [SINetwork.sharedSINetwork firstBindablePortBetween:@(port.intValue+1) and:maxPort];
+    SIPort *startPort = [SIPort portWithNumber:_torProcess.torSocksPort];
+    SIPort *port = startPort.nextBindablePort;
+    SIPort *apiPort = port.nextBindablePort;
     
     // chose open ports
-    [self.keysFile setPort:port];
-    [self.keysFile setApiPort:apiPort];
+    [self.keysFile setPort:port.portNumber];
+    [self.keysFile setApiPort:apiPort.portNumber];
     
     // randomize login
     [self.keysFile setApiUsername:NSNumber.entropyNumber.asUnsignedIntegerString];
@@ -238,11 +236,6 @@ static BMServerProcess *shared = nil;
     if (self.useTor && !self.torProcess.isRunning)
     {
         [self.torProcess launch];
-
-        if (!self.torProcess.isRunning)
-        {
-            [NSException raise:@"tor not running" format:nil];
-        }
     }
     
 
@@ -263,7 +256,7 @@ static BMServerProcess *shared = nil;
         //NSLog(@"    password: %@", self.password);
     }
     
-    _bitmessageTask = [[NSTask alloc] init];
+    _bitmessageTask = [[SITask alloc] init];
     _inpipe = [NSPipe pipe];
     NSDictionary *environmentDict = [[NSProcessInfo processInfo] environment];
     NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithDictionary:environmentDict];
@@ -311,7 +304,14 @@ static BMServerProcess *shared = nil;
         NSLog(@"*** launching _pyBitmessage ***");
     }
     
+    if (hasRunBefore)
+    {
+        //[_bitmessageTask addWaitOnConnectToPortNumber:self.port];
+        [_bitmessageTask addWaitOnConnectToPortNumber:self.apiPort];
+    }
+    
     [_bitmessageTask launch];
+    
     [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
     
     if (!hasRunBefore)
@@ -332,7 +332,6 @@ static BMServerProcess *shared = nil;
     }
     else
     {
-        [SIProcessKiller.sharedSIProcessKiller onRestartKillTask:_bitmessageTask];
         sleep(2);
         [self waitOnConnect];
     }
@@ -371,7 +370,6 @@ static BMServerProcess *shared = nil;
     if (_bitmessageTask)
     {
         NSLog(@"Killing bitmessage process...");
-        [SIProcessKiller.sharedSIProcessKiller removeKillTask:_bitmessageTask];
         [_bitmessageTask terminate];
         self.bitmessageTask = nil;
     }

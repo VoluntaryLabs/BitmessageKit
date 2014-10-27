@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BMKeysFile.h"
 #import <TorServerKit/TorServerKit.h>
+#import <SystemInfoKit/SystemInfoKit.h>
+#import "BMKeysFile.h"
 
 @interface BMServerProcess : NSObject
 
@@ -17,12 +18,9 @@
 @property (assign, nonatomic) BOOL debug;
 @property (assign, nonatomic) BOOL useTor;
 @property (strong) TorProcess *torProcess;
-
-@property (strong) NSTask *bitmessageTask;
+@property (strong) SITask *bitmessageTask;
 @property (strong) NSPipe *inpipe;
-
 @property (strong, nonatomic) BMKeysFile *keysFile;
-
 
 // keys.dat config
 
