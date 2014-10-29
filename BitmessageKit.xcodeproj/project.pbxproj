@@ -102,6 +102,7 @@
 		AA9A657A199EDA9700993E8B /* BMUnreadCountable.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9A6578199EDA9700993E8B /* BMUnreadCountable.m */; };
 		AAA9FA6919F0B38600D5858C /* BMAboutNode.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA9FA6719F0B38600D5858C /* BMAboutNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAA9FA6A19F0B38600D5858C /* BMAboutNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA9FA6819F0B38600D5858C /* BMAboutNode.m */; };
+		AAC342051A006CFD00EF9A53 /* BitmessageKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC342031A006CFD00EF9A53 /* BitmessageKit.m */; };
 		AAE31DBD18FF11A000405754 /* static-python in Resources */ = {isa = PBXBuildFile; fileRef = AAE31DBC18FF11A000405754 /* static-python */; };
 /* End PBXBuildFile section */
 
@@ -315,6 +316,7 @@
 		AA9A6578199EDA9700993E8B /* BMUnreadCountable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMUnreadCountable.m; sourceTree = "<group>"; };
 		AAA9FA6719F0B38600D5858C /* BMAboutNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMAboutNode.h; sourceTree = "<group>"; };
 		AAA9FA6819F0B38600D5858C /* BMAboutNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMAboutNode.m; sourceTree = "<group>"; };
+		AAC342031A006CFD00EF9A53 /* BitmessageKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitmessageKit.m; sourceTree = "<group>"; };
 		AAE31DBC18FF11A000405754 /* static-python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "static-python"; path = "Vendor/static-python"; sourceTree = "<group>"; };
 		AAE31DBE18FF11BA00405754 /* pybitmessage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybitmessage; path = Vendor/pybitmessage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -671,6 +673,7 @@
 			children = (
 				AAA9FA6719F0B38600D5858C /* BMAboutNode.h */,
 				AAA9FA6819F0B38600D5858C /* BMAboutNode.m */,
+				AAC342031A006CFD00EF9A53 /* BitmessageKit.m */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -972,6 +975,7 @@
 				8EDE5C2518F594EA009A726A /* BMProxyMessage.m in Sources */,
 				8ED41FCE18F596310025A51B /* XMLRPCRequest.m in Sources */,
 				8EDE5C2918F594EA009A726A /* BMDatabase.m in Sources */,
+				AAC342051A006CFD00EF9A53 /* BitmessageKit.m in Sources */,
 				8EDE5C0318F594EA009A726A /* BMClient.m in Sources */,
 				8EDE5C2118F594EA009A726A /* BMSubscription.m in Sources */,
 				8EDE5C0918F594EA009A726A /* BMChannels.m in Sources */,

@@ -25,9 +25,10 @@
 
 - (NSString *)versionString
 {
-    NSDictionary *info = NSBundle.mainBundle.infoDictionary;
+    NSDictionary *info = [NSBundle bundleForClass:[self class]].infoDictionary;
     NSString *versionString = [info objectForKey:@"CFBundleVersion"];
-    return versionString;
+    //return versionString;
+    return [NSString stringWithFormat:@"version %@", versionString];
 }
 
 - (void)setup
@@ -35,14 +36,17 @@
     NavInfoNode *about = self;
     about.shouldSortChildren = NO;
     about.nodeTitle = @"BitmessageKit";
+    about.nodeSubtitle = self.versionString;
     about.nodeSuggestedWidth = 150;
     
     
+    /*
     NavInfoNode *version = [[NavInfoNode alloc] init];
     [about addChild:version];
     version.nodeTitle = @"Version";
     version.nodeSubtitle = self.versionString;
     version.nodeSuggestedWidth = 200;
+    */
     
     NavInfoNode *contributors = [[NavInfoNode alloc] init];
     [about addChild:contributors];

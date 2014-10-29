@@ -67,7 +67,7 @@ static BMClient *sharedBMClient;
     [self registerForNotifications];
     [self.messages.received changedUnreadCount];
     
-    self.aboutNode = [[BMAboutNode alloc] init];
+    self.nodeAbout = [[BMAboutNode alloc] init];
     return self;
 }
 

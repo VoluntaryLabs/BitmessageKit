@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <NavNodeKit/NavNodeKit.h>
 
 #import "BMNode.h"
 #import "BMAboutNode.h"
@@ -40,3 +40,7 @@
 #import "BMContact.h"
 #import "BMSentMessage.h"
 #import "JSONDB.h"
+
+@interface BitmessageKit : NavInfoNode
+
+@end
