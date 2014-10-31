@@ -198,7 +198,7 @@
             
             if (BMClient.sharedBMClient.server.useTor)
             {
-                nonce.nodeSubtitle = @"(routing via tor socks port)";
+                nonce.nodeSubtitle = @"routing via tor";
             }
             else
             {
