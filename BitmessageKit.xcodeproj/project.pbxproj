@@ -674,6 +674,7 @@
 			children = (
 				AAA9FA6719F0B38600D5858C /* BMAboutNode.h */,
 				AAA9FA6819F0B38600D5858C /* BMAboutNode.m */,
+				AAC342031A006CFD00EF9A53 /* BitmessageKit.m */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -976,6 +977,7 @@
 				8EDE5C2518F594EA009A726A /* BMProxyMessage.m in Sources */,
 				8ED41FCE18F596310025A51B /* XMLRPCRequest.m in Sources */,
 				8EDE5C2918F594EA009A726A /* BMDatabase.m in Sources */,
+				AAC342051A006CFD00EF9A53 /* BitmessageKit.m in Sources */,
 				8EDE5C0318F594EA009A726A /* BMClient.m in Sources */,
 				8EDE5C2118F594EA009A726A /* BMSubscription.m in Sources */,
 				8EDE5C0918F594EA009A726A /* BMChannels.m in Sources */,
@@ -1112,6 +1114,7 @@
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "./**";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -1132,6 +1135,7 @@
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "./**";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
