@@ -27,24 +27,23 @@
     [self setDifficulty:@"1"];
     //[self setNodeForceDisplayChildren:YES];
     self.nodeSuggestedWidth = 180;
+    
+    {
+        NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"message"];
+        [slot setVisibleName:@"message"];
+    }
+    
+    {
+        NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"delete"];
+        [slot setVisibleName:@"delete"];
+    }
+    
     return self;
 }
 
 - (BOOL)nodeForceDisplayChildren
 {
     return self.children.count > 0;
-}
-
-- (NSArray *)uiActions
-{
-    NSArray *uiActions = [NSMutableArray arrayWithObjects:@"message", nil];
-    return  [uiActions arrayByAddingObjectsFromArray:super.uiActions];
-}
-
-- (NSArray *)modelActions
-{
-    NSArray *modelActions = [NSMutableArray arrayWithObjects:@"delete", nil];
-    return  [modelActions arrayByAddingObjectsFromArray:super.modelActions];
 }
 
 // -----------------------------

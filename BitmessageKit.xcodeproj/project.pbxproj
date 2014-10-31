@@ -102,6 +102,7 @@
 		AA9A657A199EDA9700993E8B /* BMUnreadCountable.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9A6578199EDA9700993E8B /* BMUnreadCountable.m */; };
 		AAA9FA6919F0B38600D5858C /* BMAboutNode.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA9FA6719F0B38600D5858C /* BMAboutNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAA9FA6A19F0B38600D5858C /* BMAboutNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA9FA6819F0B38600D5858C /* BMAboutNode.m */; };
+		AAC342131A01AAE200EF9A53 /* BitmessageKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC342121A01AAE200EF9A53 /* BitmessageKit.m */; };
 		AAE31DBD18FF11A000405754 /* static-python in Resources */ = {isa = PBXBuildFile; fileRef = AAE31DBC18FF11A000405754 /* static-python */; };
 /* End PBXBuildFile section */
 
@@ -315,6 +316,7 @@
 		AA9A6578199EDA9700993E8B /* BMUnreadCountable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMUnreadCountable.m; sourceTree = "<group>"; };
 		AAA9FA6719F0B38600D5858C /* BMAboutNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMAboutNode.h; sourceTree = "<group>"; };
 		AAA9FA6819F0B38600D5858C /* BMAboutNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMAboutNode.m; sourceTree = "<group>"; };
+		AAC342121A01AAE200EF9A53 /* BitmessageKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BitmessageKit.m; path = BitmessageKit/BitmessageKit.m; sourceTree = SOURCE_ROOT; };
 		AAE31DBC18FF11A000405754 /* static-python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "static-python"; path = "Vendor/static-python"; sourceTree = "<group>"; };
 		AAE31DBE18FF11BA00405754 /* pybitmessage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybitmessage; path = Vendor/pybitmessage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -422,6 +424,7 @@
 			children = (
 				8EDE5BA818F594EA009A726A /* BitMessage */,
 				8EDE5B8A18F59414009A726A /* BitmessageKit.h */,
+				AAC342121A01AAE200EF9A53 /* BitmessageKit.m */,
 				8EDE5B8418F59414009A726A /* Supporting Files */,
 			);
 			path = BitmessageKit;
@@ -947,6 +950,7 @@
 				8EDE5C0518F594EA009A726A /* BMNode.m in Sources */,
 				8ED41FC218F596310025A51B /* XMLRPCConnection.m in Sources */,
 				8EDE5C1D18F594EA009A726A /* BMSentMessage.m in Sources */,
+				AAC342131A01AAE200EF9A53 /* BitmessageKit.m in Sources */,
 				8EDE5C0118F594EA009A726A /* BMAddressed.m in Sources */,
 				8ED41FC718F596310025A51B /* XMLRPCDefaultEncoder.m in Sources */,
 				8ED41FCC18F596310025A51B /* XMLRPCEventBasedParserDelegate.m in Sources */,

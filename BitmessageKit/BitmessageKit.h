@@ -40,3 +40,9 @@
 #import "BMContact.h"
 #import "BMSentMessage.h"
 #import "JSONDB.h"
+
+@interface BitmessageKit : NSObject
+
+- nodeAbout;
+
+@end
