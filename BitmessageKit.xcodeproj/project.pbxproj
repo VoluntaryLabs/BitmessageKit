@@ -316,7 +316,7 @@
 		AA9A6578199EDA9700993E8B /* BMUnreadCountable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMUnreadCountable.m; sourceTree = "<group>"; };
 		AAA9FA6719F0B38600D5858C /* BMAboutNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMAboutNode.h; sourceTree = "<group>"; };
 		AAA9FA6819F0B38600D5858C /* BMAboutNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMAboutNode.m; sourceTree = "<group>"; };
-		AAC342031A006CFD00EF9A53 /* BitmessageKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitmessageKit.m; sourceTree = "<group>"; };
+		AAC342031A006CFD00EF9A53 /* BitmessageKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BitmessageKit.m; path = BitMessage/Info/BitmessageKit.m; sourceTree = "<group>"; };
 		AAE31DBC18FF11A000405754 /* static-python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "static-python"; path = "Vendor/static-python"; sourceTree = "<group>"; };
 		AAE31DBE18FF11BA00405754 /* pybitmessage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybitmessage; path = Vendor/pybitmessage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -424,6 +424,7 @@
 			children = (
 				8EDE5BA818F594EA009A726A /* BitMessage */,
 				8EDE5B8A18F59414009A726A /* BitmessageKit.h */,
+				AAC342031A006CFD00EF9A53 /* BitmessageKit.m */,
 				8EDE5B8418F59414009A726A /* Supporting Files */,
 			);
 			path = BitmessageKit;
@@ -673,7 +674,6 @@
 			children = (
 				AAA9FA6719F0B38600D5858C /* BMAboutNode.h */,
 				AAA9FA6819F0B38600D5858C /* BMAboutNode.m */,
-				AAC342031A006CFD00EF9A53 /* BitmessageKit.m */,
 			);
 			path = Info;
 			sourceTree = "<group>";
