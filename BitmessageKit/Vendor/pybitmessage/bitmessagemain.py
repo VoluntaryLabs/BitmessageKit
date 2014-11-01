@@ -154,9 +154,9 @@ selfInitiatedConnections = {}
 
 if shared.useVeryEasyProofOfWorkForTesting:
     shared.networkDefaultProofOfWorkNonceTrialsPerByte = int(
-        shared.networkDefaultProofOfWorkNonceTrialsPerByte / 16)
+        shared.networkDefaultProofOfWorkNonceTrialsPerByte / 100)
     shared.networkDefaultPayloadLengthExtraBytes = int(
-        shared.networkDefaultPayloadLengthExtraBytes / 7000)
+        shared.networkDefaultPayloadLengthExtraBytes / 100)
 
 class Main:
     def start(self, daemon=False):
@@ -269,7 +269,7 @@ class Main:
 
 if __name__ == "__main__":
     mainprogram = Main()
-    mainprogram.start(True)
+    mainprogram.start()
 
 
 # So far, the creation of and management of the Bitmessage protocol and this
