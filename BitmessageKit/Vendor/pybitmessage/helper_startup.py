@@ -6,6 +6,7 @@ import locale
 import random
 import string
 import platform
+from os import environ
 from distutils.version import StrictVersion
 
 from namecoin import ensureNamecoinOptions
@@ -56,6 +57,17 @@ def loadConfig():
     if needToCreateKeysFile:
         # This appears to be the first time running the program; there is
         # no config file (or it cannot be accessed). Create config file.
+
+        #Preconfigure password
+        shared.config.set('bitmessagesettings', 'daemon', 'true')
+        shared.config.set('bitmessagesettings', 'apienabled', 'true')
+        shared.config.set('bitmessagesettings', 'apiinterface', '127.0.0.1')
+        shared.config.set('bitmessagesettings', 'apiport', '8442')
+        shared.config.set('bitmessagesettings', 'apiusername', environ['PYBITMESSAGE_USER'])
+        shared.config.set('bitmessagesettings', 'apipassword', environ['PYBITMESSAGE_PASSWORD'])
+
+
+
         shared.config.add_section('bitmessagesettings')
         shared.config.set('bitmessagesettings', 'settingsversion', '10')
         shared.config.set('bitmessagesettings', 'port', '8444')
@@ -139,11 +151,12 @@ def loadConfig():
     _loadTrustedPeer()
 
 def isOurOperatingSystemLimitedToHavingVeryFewHalfOpenConnections():
-    try:
-        VER_THIS=StrictVersion(platform.version())
-        if sys.platform[0:3]=="win":
-            return StrictVersion("5.1.2600")<=VER_THIS and StrictVersion("6.0.6000")>=VER_THIS
-        return False
-    except Exception as err:
-        print 'An Exception occurred within isOurOperatingSystemLimitedToHavingVeryFewHalfOpenConnections:', err
-        return False
+    return False
+#    try:
+#        VER_THIS=StrictVersion(platform.version())
+#        if sys.platform[0:3]=="win":
+#            return StrictVersion("5.1.2600")<=VER_THIS and StrictVersion("6.0.6000")>=VER_THIS
+#        return False
+#    except Exception as err:
+#        print 'An Exception occurred within isOurOperatingSystemLimitedToHavingVeryFewHalfOpenConnections:', err
+#        return False
