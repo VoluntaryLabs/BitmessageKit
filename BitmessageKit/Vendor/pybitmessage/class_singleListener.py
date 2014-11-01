@@ -1,6 +1,7 @@
 import threading
 import shared
 import socket
+import select
 from class_sendDataThread import *
 from class_receiveDataThread import *
 import helper_bootstrap
@@ -88,6 +89,11 @@ class singleListener(threading.Thread):
                 time.sleep(10)
 
             while True:
+                rdy_read, rdy_write, in_error = select.select([sock, sys.stdin],[],[])
+                if sys.stdin in rdy_read:
+                    print 'Parent Exit. Stopping Bitmessage Daemon.'
+                    shared.doCleanShutdown()
+
                 socketObject, sockaddr = sock.accept()
                 (HOST, PORT) = sockaddr[0:2]
 
