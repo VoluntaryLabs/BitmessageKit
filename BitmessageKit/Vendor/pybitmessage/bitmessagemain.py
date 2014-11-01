@@ -269,7 +269,7 @@ class Main:
 
 if __name__ == "__main__":
     mainprogram = Main()
-    mainprogram.start()
+    mainprogram.start(True)
 
 
 # So far, the creation of and management of the Bitmessage protocol and this

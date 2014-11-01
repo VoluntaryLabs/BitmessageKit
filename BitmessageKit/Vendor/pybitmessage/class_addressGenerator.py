@@ -22,10 +22,10 @@ class addressGenerator(threading.Thread):
             nonceTrialsPerByte = 0
             payloadLengthExtraBytes = 0
             if queueValue[0] == 'createChan':
-                command, addressVersionNumber, streamNumber, label, deterministicPassphrase = queueValue
+                command, addressVersionNumber, streamNumber, label, deterministicPassphrase, difficulty = queueValue
                 eighteenByteRipe = False
                 numberOfAddressesToMake = 1
-                numberOfNullBytesDemandedOnFrontOfRipeHash = 1
+                numberOfNullBytesDemandedOnFrontOfRipeHash = difficulty
             elif queueValue[0] == 'joinChan':
                 command, chanAddress, label, deterministicPassphrase = queueValue
                 eighteenByteRipe = False
