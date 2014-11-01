@@ -20,7 +20,7 @@ import helper_sent
 from helper_sql import *
 import tr
 from debug import logger
-import l10n
+#import l10n
 
 
 class objectProcessor(threading.Thread):
@@ -160,8 +160,8 @@ class objectProcessor(threading.Thread):
     def processpubkey(self, data):
         pubkeyProcessingStartTime = time.time()
         shared.numberOfPubkeysProcessed += 1
-        shared.UISignalQueue.put((
-            'updateNumberOfPubkeysProcessed', 'no data'))
+        #shared.UISignalQueue.put((
+            #'updateNumberOfPubkeysProcessed', 'no data'))
         embeddedTime, = unpack('>Q', data[8:16])
         readPosition = 20  # bypass the nonce, time, and object type
         addressVersion, varintLength = decodeVarint(
@@ -347,8 +347,8 @@ class objectProcessor(threading.Thread):
     def processmsg(self, data):
         messageProcessingStartTime = time.time()
         shared.numberOfMessagesProcessed += 1
-        shared.UISignalQueue.put((
-            'updateNumberOfMessagesProcessed', 'no data'))
+        #shared.UISignalQueue.put((
+            #'updateNumberOfMessagesProcessed', 'no data'))
         readPosition = 20 # bypass the nonce, time, and object type
         
         """
@@ -370,7 +370,7 @@ class objectProcessor(threading.Thread):
             del shared.ackdataForWhichImWatching[data[-32:]]
             sqlExecute('UPDATE sent SET status=? WHERE ackdata=?',
                        'ackreceived', data[-32:])
-            shared.UISignalQueue.put(('updateSentItemStatusByAckdata', (data[-32:], tr.translateText("MainWindow",'Acknowledgement of the message received. %1').arg(l10n.formatTimestamp()))))
+            # shared.UISignalQueue.put(('updateSentItemStatusByAckdata', (data[-32:], tr.translateText("MainWindow",'Acknowledgement of the message received. %1').arg(l10n.formatTimestamp()))))
             return
         else:
             logger.info('This was NOT an acknowledgement bound for me.')
@@ -595,8 +595,8 @@ class objectProcessor(threading.Thread):
                     time.time()), body, 'inbox', messageEncodingType, 0)
                 helper_inbox.insert(t)
 
-                shared.UISignalQueue.put(('displayNewInboxMessage', (
-                    inventoryHash, toAddress, fromAddress, subject, body)))
+                #shared.UISignalQueue.put(('displayNewInboxMessage', (
+                    #inventoryHash, toAddress, fromAddress, subject, body)))
 
             # If we are behaving as an API then we might need to run an
             # outside command to let some program know that a new message
@@ -634,8 +634,8 @@ class objectProcessor(threading.Thread):
                     time.time()), 'broadcastqueued', 1, 1, 'sent', 2)
                 helper_sent.insert(t)
 
-                shared.UISignalQueue.put(('displayNewSentMessage', (
-                    toAddress, '[Broadcast subscribers]', fromAddress, subject, message, ackdataForBroadcast)))
+                #shared.UISignalQueue.put(('displayNewSentMessage', (
+                    #toAddress, '[Broadcast subscribers]', fromAddress, subject, message, ackdataForBroadcast)))
                 shared.workerQueue.put(('sendbroadcast', ''))
 
         if self.ackDataHasAVaildHeader(ackData):
@@ -658,8 +658,8 @@ class objectProcessor(threading.Thread):
     def processbroadcast(self, data):
         messageProcessingStartTime = time.time()
         shared.numberOfBroadcastsProcessed += 1
-        shared.UISignalQueue.put((
-            'updateNumberOfBroadcastsProcessed', 'no data'))
+        #shared.UISignalQueue.put((
+            #'updateNumberOfBroadcastsProcessed', 'no data'))
         inventoryHash = calculateInventoryHash(data)
         readPosition = 20  # bypass the nonce, time, and object type
         broadcastVersion, broadcastVersionLength = decodeVarint(
@@ -810,8 +810,8 @@ class objectProcessor(threading.Thread):
                         time.time()), body, 'inbox', messageEncodingType, 0)
                     helper_inbox.insert(t)
     
-                    shared.UISignalQueue.put(('displayNewInboxMessage', (
-                        inventoryHash, toAddress, fromAddress, subject, body)))
+                    #shared.UISignalQueue.put(('displayNewInboxMessage', (
+                        #inventoryHash, toAddress, fromAddress, subject, body)))
     
                     # If we are behaving as an API then we might need to run an
                     # outside command to let some program know that a new message
@@ -963,8 +963,8 @@ class objectProcessor(threading.Thread):
                         time.time()), body, 'inbox', messageEncodingType, 0)
                     helper_inbox.insert(t)
     
-                    shared.UISignalQueue.put(('displayNewInboxMessage', (
-                        inventoryHash, toAddress, fromAddress, subject, body)))
+                    #shared.UISignalQueue.put(('displayNewInboxMessage', (
+                        #inventoryHash, toAddress, fromAddress, subject, body)))
     
                     # If we are behaving as an API then we might need to run an
                     # outside command to let some program know that a new message
