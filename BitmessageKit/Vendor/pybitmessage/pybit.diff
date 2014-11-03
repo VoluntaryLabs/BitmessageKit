@@ -1,0 +1,239 @@
+diff -u ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/api.py src/api.py
+--- ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/api.py	2014-11-01 10:50:26.000000000 -0700
++++ src/api.py	2014-11-01 10:49:40.000000000 -0700
+@@ -365,10 +365,9 @@
+         elif method == 'createChan':
+             if len(params) == 0:
+                 raise APIError(0, 'I need parameters.')
+-            elif len(params) == 2:
+-                passphrase, difficulty = params
++            elif len(params) == 1:
++                passphrase, = params
+             passphrase = self._decode(passphrase, "base64")
+-            difficulty = int(difficulty)
+             if len(passphrase) == 0:
+                 raise APIError(1, 'The specified passphrase is blank.')
+             # It would be nice to make the label the passphrase but it is
+@@ -383,7 +382,7 @@
+             streamNumber = 1
+             shared.apiAddressGeneratorReturnQueue.queue.clear()
+             logger.debug('Requesting that the addressGenerator create chan %s.', passphrase)
+-            shared.addressGeneratorQueue.put(('createChan', addressVersionNumber, streamNumber, label, passphrase, difficulty))
++            shared.addressGeneratorQueue.put(('createChan', addressVersionNumber, streamNumber, label, passphrase))
+             queueReturn = shared.apiAddressGeneratorReturnQueue.get()
+             if len(queueReturn) == 0:
+                 raise APIError(24, 'Chan address is already present.')
+Only in src: bitmessagecurses
+diff -u ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/bitmessagemain.py src/bitmessagemain.py
+--- ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/bitmessagemain.py	2014-11-01 10:50:26.000000000 -0700
++++ src/bitmessagemain.py	2014-11-01 10:49:40.000000000 -0700
+@@ -269,7 +269,7 @@
+ 
+ if __name__ == "__main__":
+     mainprogram = Main()
+-    mainprogram.start(True)
++    mainprogram.start()
+ 
+ 
+ # So far, the creation of and management of the Bitmessage protocol and this
+Only in src: bitmessageqt
+diff -u ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/class_addressGenerator.py src/class_addressGenerator.py
+--- ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/class_addressGenerator.py	2014-11-01 10:50:26.000000000 -0700
++++ src/class_addressGenerator.py	2014-11-01 09:45:00.000000000 -0700
+@@ -22,10 +22,10 @@
+             nonceTrialsPerByte = 0
+             payloadLengthExtraBytes = 0
+             if queueValue[0] == 'createChan':
+-                command, addressVersionNumber, streamNumber, label, deterministicPassphrase, difficulty = queueValue
++                command, addressVersionNumber, streamNumber, label, deterministicPassphrase = queueValue
+                 eighteenByteRipe = False
+                 numberOfAddressesToMake = 1
+-                numberOfNullBytesDemandedOnFrontOfRipeHash = difficulty
++                numberOfNullBytesDemandedOnFrontOfRipeHash = 1
+             elif queueValue[0] == 'joinChan':
+                 command, chanAddress, label, deterministicPassphrase = queueValue
+                 eighteenByteRipe = False
+diff -u ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/class_objectProcessor.py src/class_objectProcessor.py
+--- ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/class_objectProcessor.py	2014-11-01 10:50:26.000000000 -0700
++++ src/class_objectProcessor.py	2014-11-01 10:49:40.000000000 -0700
+@@ -19,7 +19,7 @@
+ from helper_sql import *
+ import tr
+ from debug import logger
+-#import l10n
++import l10n
+ 
+ 
+ class objectProcessor(threading.Thread):
+@@ -422,7 +422,7 @@
+             del shared.ackdataForWhichImWatching[data[readPosition:]]
+             sqlExecute('UPDATE sent SET status=? WHERE ackdata=?',
+                        'ackreceived', data[readPosition:])
+-                       #shared.UISignalQueue.put(('updateSentItemStatusByAckdata', (data[readPosition:], tr.translateText("MainWindow",'Acknowledgement of the message received. %1').arg(l10n.formatTimestamp()))))
++            shared.UISignalQueue.put(('updateSentItemStatusByAckdata', (data[readPosition:], tr.translateText("MainWindow",'Acknowledgement of the message received. %1').arg(l10n.formatTimestamp()))))
+             return
+         else:
+             logger.info('This was NOT an acknowledgement bound for me.')
+diff -u ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/class_singleListener.py src/class_singleListener.py
+--- ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/class_singleListener.py	2014-11-01 10:50:26.000000000 -0700
++++ src/class_singleListener.py	2014-11-01 10:49:40.000000000 -0700
+@@ -1,7 +1,6 @@
+ import threading
+ import shared
+ import socket
+-import select
+ from class_sendDataThread import *
+ from class_receiveDataThread import *
+ import helper_bootstrap
+@@ -89,12 +88,6 @@
+                 time.sleep(10)
+ 
+             while True:
+-
+-                rdy_read, rdy_write, in_error = select.select([sock, sys.stdin],[],[])
+-                if sys.stdin in rdy_read:
+-                  print 'Parent Exit. Stopping Bitmessage Daemon.'
+-                  shared.doCleanShutdown()
+-
+                 a, sockaddr = sock.accept()
+                 (HOST, PORT) = sockaddr[0:2]
+ 
+diff -u ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/class_singleWorker.py src/class_singleWorker.py
+--- ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/class_singleWorker.py	2014-11-01 10:50:26.000000000 -0700
++++ src/class_singleWorker.py	2014-11-01 10:49:40.000000000 -0700
+@@ -13,7 +13,7 @@
+ from helper_sql import *
+ import helper_inbox
+ from helper_generic import addDataPadding
+-#import l10n
++import l10n
+ 
+ # This thread, of which there is only one, does the heavy lifting:
+ # calculating POWs.
+@@ -441,7 +441,7 @@
+             shared.broadcastToSendDataQueues((
+                 streamNumber, 'advertiseobject', inventoryHash))
+ 
+-#shared.UISignalQueue.put(('updateSentItemStatusByAckdata', (ackdata, tr.translateText("MainWindow", "Broadcast sent on %1").arg(l10n.formatTimestamp()))))
++            shared.UISignalQueue.put(('updateSentItemStatusByAckdata', (ackdata, tr.translateText("MainWindow", "Broadcast sent on %1").arg(l10n.formatTimestamp()))))
+ 
+             # Update the status of the message in the 'sent' table to have
+             # a 'broadcastsent' status
+@@ -616,7 +616,7 @@
+                 if shared.isBitSetWithinBitfield(behaviorBitfield,30): # if receiver is a mobile device who expects that their address RIPE is included unencrypted on the front of the message..
+                     if not shared.safeConfigGetBoolean('bitmessagesettings','willinglysendtomobile'): # if we are Not willing to include the receiver's RIPE hash on the message..
+                         logger.info('The receiver is a mobile user but the sender (you) has not selected that you are willing to send to mobiles. Aborting send.')
+-                        #shared.UISignalQueue.put(('updateSentItemStatusByAckdata',(ackdata,tr.translateText("MainWindow",'Problem: Destination is a mobile device who requests that the destination be included in the message but this is disallowed in your settings.  %1').arg(l10n.formatTimestamp()))))
++                        shared.UISignalQueue.put(('updateSentItemStatusByAckdata',(ackdata,tr.translateText("MainWindow",'Problem: Destination is a mobile device who requests that the destination be included in the message but this is disallowed in your settings.  %1').arg(l10n.formatTimestamp()))))
+                         # if the human changes their setting and then sends another message or restarts their client, this one will send at that time.
+                         continue
+                 readPosition += 4  # to bypass the bitfield of behaviors
+@@ -654,8 +654,8 @@
+                             sqlExecute(
+                                 '''UPDATE sent SET status='toodifficult' WHERE ackdata=? ''',
+                                 ackdata)
+-                                #shared.UISignalQueue.put(('updateSentItemStatusByAckdata', (ackdata, tr.translateText("MainWindow", "Problem: The work demanded by the recipient (%1 and %2) is more difficult than you are willing to do.").arg(str(float(requiredAverageProofOfWorkNonceTrialsPerByte) / shared.networkDefaultProofOfWorkNonceTrialsPerByte)).arg(str(float(
+-                                #requiredPayloadLengthExtraBytes) / shared.networkDefaultPayloadLengthExtraBytes)).arg(l10n.formatTimestamp()))))
++                            shared.UISignalQueue.put(('updateSentItemStatusByAckdata', (ackdata, tr.translateText("MainWindow", "Problem: The work demanded by the recipient (%1 and %2) is more difficult than you are willing to do.").arg(str(float(requiredAverageProofOfWorkNonceTrialsPerByte) / shared.networkDefaultProofOfWorkNonceTrialsPerByte)).arg(str(float(
++                                requiredPayloadLengthExtraBytes) / shared.networkDefaultPayloadLengthExtraBytes)).arg(l10n.formatTimestamp()))))
+                             continue
+             else: # if we are sending a message to ourselves or a chan..
+                 with shared.printLock:
+@@ -666,7 +666,7 @@
+                     privEncryptionKeyBase58 = shared.config.get(
+                         toaddress, 'privencryptionkey')
+                 except Exception as err:
+-                    #shared.UISignalQueue.put(('updateSentItemStatusByAckdata',(ackdata,tr.translateText("MainWindow",'Problem: You are trying to send a message to yourself or a chan but your encryption key could not be found in the keys.dat file. Could not encrypt message. %1').arg(l10n.formatTimestamp()))))
++                    shared.UISignalQueue.put(('updateSentItemStatusByAckdata',(ackdata,tr.translateText("MainWindow",'Problem: You are trying to send a message to yourself or a chan but your encryption key could not be found in the keys.dat file. Could not encrypt message. %1').arg(l10n.formatTimestamp()))))
+                     with shared.printLock:
+                         sys.stderr.write(
+                             'Error within sendMsg. Could not read the keys from the keys.dat file for our own address. %s\n' % err)
+@@ -803,7 +803,7 @@
+                 encrypted = highlevelcrypto.encrypt(payload,"04"+pubEncryptionKeyBase256.encode('hex'))
+             except:
+                 sqlExecute('''UPDATE sent SET status='badkey' WHERE ackdata=?''', ackdata)
+-                #shared.UISignalQueue.put(('updateSentItemStatusByAckdata',(ackdata,tr.translateText("MainWindow",'Problem: The recipient\'s encryption key is no good. Could not encrypt message. %1').arg(l10n.formatTimestamp()))))
++                shared.UISignalQueue.put(('updateSentItemStatusByAckdata',(ackdata,tr.translateText("MainWindow",'Problem: The recipient\'s encryption key is no good. Could not encrypt message. %1').arg(l10n.formatTimestamp()))))
+                 continue
+             encryptedPayload = embeddedTime + encodeVarint(toStreamNumber) + encrypted
+             target = 2**64 / ((len(encryptedPayload)+requiredPayloadLengthExtraBytes+8) * requiredAverageProofOfWorkNonceTrialsPerByte)
+@@ -827,11 +827,11 @@
+             shared.inventory[inventoryHash] = (
+                 objectType, toStreamNumber, encryptedPayload, int(time.time()),'')
+             shared.inventorySets[toStreamNumber].add(inventoryHash)
+-#            if shared.config.has_section(toaddress):
+-#shared.UISignalQueue.put(('updateSentItemStatusByAckdata', (ackdata, tr.translateText("MainWindow", "Message sent. Sent on %1").arg(l10n.formatTimestamp()))))
+-#            else:
++            if shared.config.has_section(toaddress):
++                shared.UISignalQueue.put(('updateSentItemStatusByAckdata', (ackdata, tr.translateText("MainWindow", "Message sent. Sent on %1").arg(l10n.formatTimestamp()))))
++            else:
+                 # not sending to a chan or one of my addresses
+-#    shared.UISignalQueue.put(('updateSentItemStatusByAckdata', (ackdata, tr.translateText("MainWindow", "Message sent. Waiting for acknowledgement. Sent on %1").arg(l10n.formatTimestamp()))))
++                shared.UISignalQueue.put(('updateSentItemStatusByAckdata', (ackdata, tr.translateText("MainWindow", "Message sent. Waiting for acknowledgement. Sent on %1").arg(l10n.formatTimestamp()))))
+             print 'Broadcasting inv for my msg(within sendmsg function):', inventoryHash.encode('hex')
+             shared.broadcastToSendDataQueues((
+                 toStreamNumber, 'advertiseobject', inventoryHash))
+@@ -924,7 +924,7 @@
+ 
+         shared.UISignalQueue.put((
+             'updateStatusBar', tr.translateText("MainWindow",'Broacasting the public key request. This program will auto-retry if they are offline.')))
+-#shared.UISignalQueue.put(('updateSentItemStatusByHash', (ripe, tr.translateText("MainWindow",'Sending public key request. Waiting for reply. Requested at %1').arg(l10n.formatTimestamp()))))
++        shared.UISignalQueue.put(('updateSentItemStatusByHash', (ripe, tr.translateText("MainWindow",'Sending public key request. Waiting for reply. Requested at %1').arg(l10n.formatTimestamp()))))
+ 
+     def generateFullAckMessage(self, ackdata, toStreamNumber):
+         embeddedTime = pack('>Q', (int(time.time()) + random.randrange(
+diff -u ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/helper_startup.py src/helper_startup.py
+--- ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/helper_startup.py	2014-11-01 10:50:26.000000000 -0700
++++ src/helper_startup.py	2014-11-01 10:49:40.000000000 -0700
+@@ -6,7 +6,6 @@
+ import random
+ import string
+ import platform
+-from os import environ
+ from distutils.version import StrictVersion
+ 
+ from namecoin import ensureNamecoinOptions
+@@ -58,17 +57,6 @@
+         # This appears to be the first time running the program; there is
+         # no config file (or it cannot be accessed). Create config file.
+         shared.config.add_section('bitmessagesettings')
+-        
+-        #Preconfigure password
+-        shared.config.set('bitmessagesettings', 'daemon', 'true')
+-        shared.config.set('bitmessagesettings', 'apienabled', 'true')
+-        shared.config.set('bitmessagesettings', 'apiinterface', '127.0.0.1')
+-        shared.config.set('bitmessagesettings', 'apiport', '8442')
+-        shared.config.set('bitmessagesettings', 'apiusername', environ['PYBITMESSAGE_USER'])
+-        shared.config.set('bitmessagesettings', 'apipassword', environ['PYBITMESSAGE_PASSWORD'])
+-
+-
+-
+         shared.config.set('bitmessagesettings', 'settingsversion', '8')
+         shared.config.set('bitmessagesettings', 'port', '8444')
+         shared.config.set(
+@@ -149,12 +137,11 @@
+     _loadTrustedPeer()
+ 
+ def isOurOperatingSystemLimitedToHavingVeryFewHalfOpenConnections():
+-    return False
+-#    try:
+-#        VER_THIS=StrictVersion(platform.version())
+-#        if sys.platform[0:3]=="win":
+-#            return StrictVersion("5.1.2600")<=VER_THIS and StrictVersion("6.0.6000")>=VER_THIS
+-#        return False
+-#    except Exception as err:
+-#        print 'An Exception occurred within isOurOperatingSystemLimitedToHavingVeryFewHalfOpenConnections:', err
+-#        return False
++    try:
++        VER_THIS=StrictVersion(platform.version())
++        if sys.platform[0:3]=="win":
++            return StrictVersion("5.1.2600")<=VER_THIS and StrictVersion("6.0.6000")>=VER_THIS
++        return False
++    except Exception as err:
++        print 'An Exception occurred within isOurOperatingSystemLimitedToHavingVeryFewHalfOpenConnections:', err
++        return False
+Only in src: images
+Only in src: l10n.py
+Common subdirectories: ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/pyelliptic and src/pyelliptic
+Common subdirectories: ../BitmessageKit/BitmessageKit/Vendor/pybitmessage/socks and src/socks
+Only in src: translations

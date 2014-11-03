@@ -89,13 +89,12 @@ class singleListener(threading.Thread):
                 time.sleep(10)
 
             while True:
-
                 rdy_read, rdy_write, in_error = select.select([sock, sys.stdin],[],[])
                 if sys.stdin in rdy_read:
-                  print 'Parent Exit. Stopping Bitmessage Daemon.'
-                  shared.doCleanShutdown()
+                    print 'Parent Exit. Stopping Bitmessage Daemon.'
+                    shared.doCleanShutdown()
 
-                a, sockaddr = sock.accept()
+                socketObject, sockaddr = sock.accept()
                 (HOST, PORT) = sockaddr[0:2]
 
                 # If the address is an IPv4-mapped IPv6 address then
@@ -110,7 +109,7 @@ class singleListener(threading.Thread):
                 # share the same external IP. This is here to prevent
                 # connection flooding.
                 if HOST in shared.connectedHostsList:
-                    a.close()
+                    socketObject.close()
                     with shared.printLock:
                         print 'We are already connected to', HOST + '. Ignoring connection.'
                 else:
@@ -118,17 +117,17 @@ class singleListener(threading.Thread):
 
             someObjectsOfWhichThisRemoteNodeIsAlreadyAware = {} # This is not necessairly a complete list; we clear it from time to time to save memory.
             sendDataThreadQueue = Queue.Queue() # Used to submit information to the send data thread for this connection.
-            a.settimeout(20)
+            socketObject.settimeout(20)
 
             sd = sendDataThread(sendDataThreadQueue)
             sd.setup(
-                a, HOST, PORT, -1, someObjectsOfWhichThisRemoteNodeIsAlreadyAware)
+                socketObject, HOST, PORT, -1, someObjectsOfWhichThisRemoteNodeIsAlreadyAware)
             sd.start()
 
             rd = receiveDataThread()
             rd.daemon = True  # close the main program even if there are threads left
             rd.setup(
-                a, HOST, PORT, -1, someObjectsOfWhichThisRemoteNodeIsAlreadyAware, self.selfInitiatedConnections, sendDataThreadQueue)
+                socketObject, HOST, PORT, -1, someObjectsOfWhichThisRemoteNodeIsAlreadyAware, self.selfInitiatedConnections, sendDataThreadQueue)
             rd.start()
 
             with shared.printLock:
