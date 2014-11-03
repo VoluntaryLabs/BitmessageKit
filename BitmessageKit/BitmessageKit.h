@@ -43,4 +43,6 @@
 
 @interface BitmessageKit : NavInfoNode
 
+- nodeAbout;
+
 @end
