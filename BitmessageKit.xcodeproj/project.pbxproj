@@ -96,13 +96,14 @@
 		AA4F112319EB234500CD08A5 /* NavNodeKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA4F110519EB220F00CD08A5 /* NavNodeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AA4F112419EB234500CD08A5 /* NavKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA4F10F919EB220600CD08A5 /* NavKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AA4F112519EB234500CD08A5 /* FoundationCategoriesKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA4F10ED19EB21FF00CD08A5 /* FoundationCategoriesKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AA54F6231A098BC200C843B9 /* BitmessageKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AA54F6221A098BC200C843B9 /* BitmessageKit.m */; };
 		AA9A6570199ECF5800993E8B /* BMMergable.h in Headers */ = {isa = PBXBuildFile; fileRef = AA9A656E199ECF5800993E8B /* BMMergable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA9A6571199ECF5800993E8B /* BMMergable.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9A656F199ECF5800993E8B /* BMMergable.m */; };
 		AA9A6579199EDA9700993E8B /* BMUnreadCountable.h in Headers */ = {isa = PBXBuildFile; fileRef = AA9A6577199EDA9700993E8B /* BMUnreadCountable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA9A657A199EDA9700993E8B /* BMUnreadCountable.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9A6578199EDA9700993E8B /* BMUnreadCountable.m */; };
 		AAA9FA6919F0B38600D5858C /* BMAboutNode.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA9FA6719F0B38600D5858C /* BMAboutNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAA9FA6A19F0B38600D5858C /* BMAboutNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA9FA6819F0B38600D5858C /* BMAboutNode.m */; };
-		AAC342131A01AAE200EF9A53 /* BitmessageKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC342121A01AAE200EF9A53 /* BitmessageKit.m */; };
+		AAC342131A01AAE200EF9A53 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		AAE31DBD18FF11A000405754 /* static-python in Resources */ = {isa = PBXBuildFile; fileRef = AAE31DBC18FF11A000405754 /* static-python */; };
 /* End PBXBuildFile section */
 
@@ -309,6 +310,7 @@
 		AA4F10FF19EB220F00CD08A5 /* NavNodeKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NavNodeKit.xcodeproj; path = submodules/NavNodeKit/NavNodeKit.xcodeproj; sourceTree = "<group>"; };
 		AA4F110819EB221300CD08A5 /* SystemInfoKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SystemInfoKit.xcodeproj; path = submodules/SystemInfoKit/SystemInfoKit.xcodeproj; sourceTree = "<group>"; };
 		AA4F111119EB221800CD08A5 /* TorServerKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TorServerKit.xcodeproj; path = submodules/TorServerKit/TorServerKit.xcodeproj; sourceTree = "<group>"; };
+		AA54F6221A098BC200C843B9 /* BitmessageKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitmessageKit.m; sourceTree = "<group>"; };
 		AA7CE00319F0879C00E9EFAC /* FoundationCategoriesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FoundationCategoriesKit.xcodeproj; path = submodules/FoundationCategoriesKit/FoundationCategoriesKit.xcodeproj; sourceTree = "<group>"; };
 		AA9A656E199ECF5800993E8B /* BMMergable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMMergable.h; sourceTree = "<group>"; };
 		AA9A656F199ECF5800993E8B /* BMMergable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMMergable.m; sourceTree = "<group>"; };
@@ -316,11 +318,6 @@
 		AA9A6578199EDA9700993E8B /* BMUnreadCountable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMUnreadCountable.m; sourceTree = "<group>"; };
 		AAA9FA6719F0B38600D5858C /* BMAboutNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMAboutNode.h; sourceTree = "<group>"; };
 		AAA9FA6819F0B38600D5858C /* BMAboutNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMAboutNode.m; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		AAC342031A006CFD00EF9A53 /* BitmessageKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BitmessageKit.m; path = BitMessage/Info/BitmessageKit.m; sourceTree = "<group>"; };
-=======
-		AAC342121A01AAE200EF9A53 /* BitmessageKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BitmessageKit.m; path = BitmessageKit/BitmessageKit.m; sourceTree = SOURCE_ROOT; };
->>>>>>> 003b61eca6d29e3a83e9ea3abc43771db43a240f
 		AAE31DBC18FF11A000405754 /* static-python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "static-python"; path = "Vendor/static-python"; sourceTree = "<group>"; };
 		AAE31DBE18FF11BA00405754 /* pybitmessage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybitmessage; path = Vendor/pybitmessage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -426,13 +423,9 @@
 		8EDE5B8318F59414009A726A /* BitmessageKit */ = {
 			isa = PBXGroup;
 			children = (
+				AA54F6221A098BC200C843B9 /* BitmessageKit.m */,
 				8EDE5BA818F594EA009A726A /* BitMessage */,
 				8EDE5B8A18F59414009A726A /* BitmessageKit.h */,
-<<<<<<< HEAD
-				AAC342031A006CFD00EF9A53 /* BitmessageKit.m */,
-=======
-				AAC342121A01AAE200EF9A53 /* BitmessageKit.m */,
->>>>>>> 003b61eca6d29e3a83e9ea3abc43771db43a240f
 				8EDE5B8418F59414009A726A /* Supporting Files */,
 			);
 			path = BitmessageKit;
@@ -956,9 +949,10 @@
 				8EDE5C2F18F594EA009A726A /* JSONDB.m in Sources */,
 				8EDE5C2D18F594EA009A726A /* BMServerProcess.m in Sources */,
 				8EDE5C0518F594EA009A726A /* BMNode.m in Sources */,
+				AA54F6231A098BC200C843B9 /* BitmessageKit.m in Sources */,
 				8ED41FC218F596310025A51B /* XMLRPCConnection.m in Sources */,
 				8EDE5C1D18F594EA009A726A /* BMSentMessage.m in Sources */,
-				AAC342131A01AAE200EF9A53 /* BitmessageKit.m in Sources */,
+				AAC342131A01AAE200EF9A53 /* (null) in Sources */,
 				8EDE5C0118F594EA009A726A /* BMAddressed.m in Sources */,
 				8ED41FC718F596310025A51B /* XMLRPCDefaultEncoder.m in Sources */,
 				8ED41FCC18F596310025A51B /* XMLRPCEventBasedParserDelegate.m in Sources */,
@@ -984,7 +978,6 @@
 				8EDE5C2518F594EA009A726A /* BMProxyMessage.m in Sources */,
 				8ED41FCE18F596310025A51B /* XMLRPCRequest.m in Sources */,
 				8EDE5C2918F594EA009A726A /* BMDatabase.m in Sources */,
-				AAC342051A006CFD00EF9A53 /* BitmessageKit.m in Sources */,
 				8EDE5C0318F594EA009A726A /* BMClient.m in Sources */,
 				8EDE5C2118F594EA009A726A /* BMSubscription.m in Sources */,
 				8EDE5C0918F594EA009A726A /* BMChannels.m in Sources */,

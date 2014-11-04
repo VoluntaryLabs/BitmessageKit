@@ -7,9 +7,14 @@
 //
 
 #import "BitmessageKit.h"
-//#import "BMAboutNode.h"
+#import "BMClient.h"
 
 @implementation BitmessageKit
+
++ (id)nodeRoot
+{
+    return [BMClient sharedBMClient];
+}
 
 - nodeAbout
 {
