@@ -10,6 +10,7 @@
 #import "BMProxyMessage.h"
 #import "BMClient.h"
 #import <FoundationCategoriesKit/FoundationCategoriesKit.h>
+#import "BMKeysFile.h"
 
 @implementation BMMessage
 
@@ -335,6 +336,15 @@
 - (void)show
 {
     NSLog(@"-------------------\n  from: %@\n  to:%@\n  message: %@\n ------------------", _fromAddress, _toAddress, _message);
+}
+
+- (NSNumber *)estimatedSecondsForPow
+{
+    NSUInteger trialsPerByte = BMClient.sharedBMClient.server.keysFile.defaultnoncetrialsperbyte.intValue;
+    NSUInteger bytes = self.message.length;
+    NSUInteger trials = bytes * trialsPerByte;
+    float laptopSecondsPer1024 = 1;
+    return [NSNumber numberWithFloat:laptopSecondsPer1024 * trials / 1024.0];
 }
 
 @end
