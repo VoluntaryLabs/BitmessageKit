@@ -21,6 +21,7 @@
 @property (strong) SITask *bitmessageTask;
 @property (strong) NSPipe *inpipe;
 @property (strong, nonatomic) BMKeysFile *keysFile;
+@property (strong) NSString *binaryVersion;
 
 // keys.dat config
 
@@ -47,5 +48,6 @@
 - (NSString *)bundleDataPath;
 
 - (NSString *)pybitmessageVersion;
+- (NSString *)pyhtonBinaryVersion;
 
 @end

@@ -187,6 +187,13 @@
         
         {
             NavInfoNode *nonce = [[NavInfoNode alloc] init];
+            nonce.nodeTitle = @"Python Version";
+            nonce.nodeSubtitle = [NSString stringWithFormat:@"%@", BMClient.sharedBMClient.server.pyhtonBinaryVersion];
+            [status addChild:nonce];
+        }
+                
+        {
+            NavInfoNode *nonce = [[NavInfoNode alloc] init];
             nonce.nodeTitle = @"Proof of work";
             nonce.nodeSubtitle = [NSString stringWithFormat:@"%@ trials/byte", BMClient.sharedBMClient.server.keysFile.defaultnoncetrialsperbyte];
             [status addChild:nonce];
