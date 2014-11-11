@@ -57,6 +57,7 @@ def loadConfig():
     if needToCreateKeysFile:
         # This appears to be the first time running the program; there is
         # no config file (or it cannot be accessed). Create config file.
+        shared.config.add_section('bitmessagesettings')
 
         #Preconfigure password
         shared.config.set('bitmessagesettings', 'daemon', 'true')
@@ -68,7 +69,6 @@ def loadConfig():
 
 
 
-        shared.config.add_section('bitmessagesettings')
         shared.config.set('bitmessagesettings', 'settingsversion', '10')
         shared.config.set('bitmessagesettings', 'port', '8444')
         shared.config.set(
