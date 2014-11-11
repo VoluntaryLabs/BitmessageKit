@@ -52,19 +52,19 @@
     [about addChild:contributors];
     contributors.nodeTitle = @"Credits";
     contributors.nodeSuggestedWidth = 200;
-    
+    contributors.shouldSortChildren = NO;
     
     {
         NavInfoNode *contributor = [[NavInfoNode alloc] init];
-        contributor.nodeTitle = @"Chris Robinson";
-        contributor.nodeSubtitle = @"Designer";
+        contributor.nodeTitle = @"Steve Dekorte";
+        contributor.nodeSubtitle = @"Lead & UI Developer";
         [contributors addChild:contributor];
     }
     
     {
         NavInfoNode *contributor = [[NavInfoNode alloc] init];
-        contributor.nodeTitle = @"Steve Dekorte";
-        contributor.nodeSubtitle = @"Lead / UI Dev";
+        contributor.nodeTitle = @"Chris Robinson";
+        contributor.nodeSubtitle = @"Designer";
         [contributors addChild:contributor];
     }
     
@@ -81,6 +81,7 @@
         contributor.nodeSubtitle = @"Unix Guru";
         [contributors addChild:contributor];
     }
+    
     
     
     NavInfoNode *others = [[NavInfoNode alloc] init];
