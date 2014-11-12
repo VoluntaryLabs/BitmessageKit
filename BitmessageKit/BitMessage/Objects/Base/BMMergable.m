@@ -3,7 +3,7 @@
 //  BitmessageKit
 //
 //  Created by Steve Dekorte on 8/15/14.
-//  Copyright (c) 2014 Adam Thorsen. All rights reserved.
+//  Copyright (c) 2014 voluntary.net. All rights reserved.
 //
 
 #import "BMMergable.h"
@@ -28,13 +28,6 @@
     if (mergeAttributeSelector)
     {
         NSString *attribute = [aMessage idNoWarningPerformSelector:mergeAttributeSelector];
-        
-        /*
-        if ([self.label isEqualToString:@"Time Service"])
-        {
-            NSLog(@"Time Service check! %@ =?= %@", self.address, attribute);
-        }
-        */
         
         if ([attribute isEqualToString:self.address])
         {

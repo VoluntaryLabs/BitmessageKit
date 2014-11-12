@@ -63,7 +63,6 @@
 
 // server
 
-//- (void)startServer;
 - (void)stopServer; // call when app quits
 
 /*

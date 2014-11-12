@@ -15,15 +15,19 @@
 {
     self = [super init];
     self.shouldSelectChildOnAdd = YES;
+    
+    {
+        NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"add"];
+        [slot setVisibleName:@"add"];
+    }
+    
     return self;
 }
 
-- (NSArray *)modelActions
+- (NSString *)nodeTitle
 {
-    NSArray *modelActions = [NSMutableArray arrayWithObjects:@"add", nil];
-    return  [modelActions arrayByAddingObjectsFromArray:super.modelActions];
+    return @"Contacts";
 }
-
 
 - (void)fetch
 {
@@ -73,11 +77,5 @@
     [self justAdd];
     [self postSelfChanged];
 }
-
-- (NSString *)nodeTitle
-{
-    return @"Contacts";
-}
-
 
 @end

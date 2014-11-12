@@ -11,7 +11,6 @@
 
 @implementation BMAddress
 
-
 + (BOOL)isValidAddress:(NSString *)address
 {
     if (![address hasPrefix:@"BM-"] || !([address length] > 30))
@@ -54,7 +53,5 @@
         [self setDict:dict];
     }
 }
-
-
 
 @end

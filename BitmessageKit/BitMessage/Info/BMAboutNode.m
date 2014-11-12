@@ -52,19 +52,19 @@
     [about addChild:contributors];
     contributors.nodeTitle = @"Credits";
     contributors.nodeSuggestedWidth = 200;
-    
+    contributors.shouldSortChildren = NO;
     
     {
         NavInfoNode *contributor = [[NavInfoNode alloc] init];
-        contributor.nodeTitle = @"Chris Robinson";
-        contributor.nodeSubtitle = @"Designer";
+        contributor.nodeTitle = @"Steve Dekorte";
+        contributor.nodeSubtitle = @"Lead & UI Developer";
         [contributors addChild:contributor];
     }
     
     {
         NavInfoNode *contributor = [[NavInfoNode alloc] init];
-        contributor.nodeTitle = @"Steve Dekorte";
-        contributor.nodeSubtitle = @"Lead / UI Dev";
+        contributor.nodeTitle = @"Chris Robinson";
+        contributor.nodeSubtitle = @"Designer";
         [contributors addChild:contributor];
     }
     
@@ -81,6 +81,7 @@
         contributor.nodeSubtitle = @"Unix Guru";
         [contributors addChild:contributor];
     }
+    
     
     
     NavInfoNode *others = [[NavInfoNode alloc] init];
@@ -187,6 +188,13 @@
         
         {
             NavInfoNode *nonce = [[NavInfoNode alloc] init];
+            nonce.nodeTitle = @"Python Version";
+            nonce.nodeSubtitle = [NSString stringWithFormat:@"%@", BMClient.sharedBMClient.server.pyhtonBinaryVersion];
+            [status addChild:nonce];
+        }
+                
+        {
+            NavInfoNode *nonce = [[NavInfoNode alloc] init];
             nonce.nodeTitle = @"Proof of work";
             nonce.nodeSubtitle = [NSString stringWithFormat:@"%@ trials/byte", BMClient.sharedBMClient.server.keysFile.defaultnoncetrialsperbyte];
             [status addChild:nonce];
@@ -228,6 +236,15 @@
             nonce.nodeSubtitle = [NSString stringWithFormat:@"%@", BMClient.sharedBMClient.server.torProcess.torSocksPort];
             [status addChild:nonce];
         }
+        
+        
+        {
+            NavInfoNode *torVersion = [[NavInfoNode alloc] init];
+            torVersion.nodeTitle = @"Tor Version";
+            torVersion.nodeSubtitle = [NSString stringWithFormat:@"%@", BMClient.sharedBMClient.server.torProcess.binaryVersion];
+            [status addChild:torVersion];
+        }
+        
     }
 }
 

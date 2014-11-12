@@ -52,5 +52,6 @@
 - (NSMutableAttributedString *)messageStringWithAttributes:(NSDictionary *)attributes;
 
 - (void)show;
+- (NSNumber *)estimatedSecondsForPow;
 
 @end

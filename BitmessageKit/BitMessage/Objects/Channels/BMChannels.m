@@ -18,13 +18,13 @@
 {
     self = [super init];
     self.shouldSelectChildOnAdd = YES;
+    
+    {
+        NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"add"];
+        [slot setVisibleName:@"add"];
+    }
+    
     return self;
-}
-
-- (NSArray *)modelActions
-{
-    NSArray *modelActions = [NSMutableArray arrayWithObjects:@"add", nil];
-    return  [modelActions arrayByAddingObjectsFromArray:super.modelActions];
 }
 
 - (void)fetch
@@ -123,6 +123,5 @@
         [channel delete];
     }
 }
-
 
 @end

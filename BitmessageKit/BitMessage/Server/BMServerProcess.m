@@ -197,7 +197,7 @@ static BMServerProcess *shared = nil;
     [self.keysFile setApiUsername:NSNumber.entropyNumber.asUnsignedIntegerString];
     [self.keysFile setApiPassword:NSNumber.entropyNumber.asUnsignedIntegerString];
     
-    [self.keysFile setDefaultnoncetrialsperbyte:@1024];
+    [self.keysFile setDefaultnoncetrialsperbyte:@128];
     //[self.keysFile setDefaultnoncetrialsperbyte:@16384];
 
 }
@@ -276,7 +276,7 @@ static BMServerProcess *shared = nil;
     
     [environment setObject:self.bundleDataPath forKey:@"BITMESSAGE_HOME"];
 
-    [_bitmessageTask setEnvironment: environment];
+    [_bitmessageTask setEnvironment:environment];
     
     // Set the path to the python executable
     NSBundle *mainBundle = [NSBundle bundleForClass:self.class];
@@ -286,7 +286,7 @@ static BMServerProcess *shared = nil;
     
     //[_bitmessageTask setStandardInput: (NSFileHandle *) _inpipe];
     
-    if (self.debug)
+    if (self.debug || !hasRunBefore)
     {
         [_bitmessageTask setStandardOutput:[NSFileHandle fileHandleWithStandardOutput]];
         [_bitmessageTask setStandardError:[NSFileHandle fileHandleWithStandardOutput]];
@@ -412,6 +412,58 @@ static BMServerProcess *shared = nil;
     NSObject *response = [message parsedResponseValue];
     //NSLog(@"canConnect response = '%@'", response);
     return response && [response isKindOfClass:NSDictionary.class];
+}
+
+- (NSString *)pythonExePath
+{
+    NSBundle *bundle = [NSBundle bundleForClass:self.class];
+    return [bundle pathForResource:@"python" ofType:@"exe" inDirectory: @"static-python"];
+}
+
+- (NSString *)pyhtonBinaryVersion
+{
+    if (!_binaryVersion)
+    {
+        //_binaryVersion = @"2.7.5+";
+        
+        if (![[NSFileManager defaultManager] fileExistsAtPath:self.pythonExePath])
+        {
+            return @"error";
+        }
+        
+        NSTask *task = [[NSTask alloc] init];
+        [task setLaunchPath:self.pythonExePath];
+        
+        NSPipe *outPipe = [NSPipe pipe];
+        
+        [task setStandardInput: [NSFileHandle fileHandleWithNullDevice]];
+        [task setStandardOutput:outPipe];
+        [task setStandardError:outPipe];
+        
+        NSMutableArray *args = [NSMutableArray array];
+        [args addObject:@"--version"];
+        [task setArguments:args];
+        
+        @try
+        {
+            [task launch];
+            [task waitUntilExit];
+        }
+        @catch (NSException *exception)
+        {
+            NSLog(@"%@", exception);
+            [task terminate];
+            return @"error";
+        }
+        
+        NSData *theData = [outPipe fileHandleForReading].availableData;
+        _binaryVersion = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
+        
+        // example output: Tor version 0.2.5.10 (git-42b42605f8d8eac2).
+        _binaryVersion = [_binaryVersion after:@"Python"].strip;
+    }
+    
+    return _binaryVersion;
 }
 
 @end

@@ -20,15 +20,20 @@
 {
     self = [super init];
     self.isSynced = NO;
+    
+    {
+        NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"message"];
+        [slot setVisibleName:@"message"];
+    }
+    
+    {
+        NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"delete"];
+        [slot setVisibleName:@"delete"];
+        [slot setVerifyMessage:@"CAUTION: Are you sure you want to delete the '%@' contact?"];
+    }
+    
     return self;
 }
-
-- (NSArray *)modelActions
-{
-    NSArray *modelActions = [NSMutableArray arrayWithObjects:@"message", @"delete", nil];
-    return  [modelActions arrayByAddingObjectsFromArray:super.modelActions];
-}
-
 
 + (BMContact *)withDict:(NSDictionary *)dict
 {
@@ -56,13 +61,6 @@
 {
     return self.label;
 }
-
-/*
-- (NSString *)nodeSubtitle
-{
-    return self.address;
-}
- */
 
 // -----
 
@@ -131,16 +129,5 @@
 
     return YES;
 }
-
-- (NSString *)verifyActionMessage:(NSString *)actionString
-{
-    if ([actionString isEqualToString:@"delete"])
-    {
-        return [NSString stringWithFormat:@"CAUTION: Are you sure you want to delete the '%@' contact?", self.nodeTitle];
-    }
-    
-    return nil;
-}
-
 
 @end

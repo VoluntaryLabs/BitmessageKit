@@ -3,7 +3,7 @@
 //  BitmessageKit
 //
 //  Created by Adam Thorsen on 4/9/14.
-//  Copyright (c) 2014 Adam Thorsen. All rights reserved.
+//  Copyright (c) 2014 voluntary.net. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,10 +11,8 @@
 
 #import "BMNode.h"
 #import "BMAboutNode.h"
-
 #import "BMMergable.h"
 #import "BMUnreadCountable.h"
-
 #import "BMMessages.h"
 #import "BMSubscription.h"
 #import "BMChannels.h"
@@ -25,7 +23,6 @@
 #import "BMKeysFile.h"
 #import "BMReceivedMessage.h"
 #import "BMMessage.h"
-//#import "BMArchive.h"
 #import "BMChannel.h"
 #import "BMProxyMessage.h"
 #import "BMDatabase.h"
@@ -44,6 +41,5 @@
 @interface BitmessageKit : NavInfoNode
 
 + nodeRoot;
-
 
 @end

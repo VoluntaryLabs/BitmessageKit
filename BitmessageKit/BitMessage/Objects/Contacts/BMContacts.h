@@ -15,5 +15,4 @@
 - (void)fetch;
 - (BMContact *)justAdd;
 
-
 @end

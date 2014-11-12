@@ -15,13 +15,14 @@
 - (id)init
 {
     self = [super init];
+    
+    {
+        NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"delete"];
+        [slot setVisibleName:@"delete"];
+        [slot setVerifyMessage:@"CAUTION: This address is one of your identities. Deleting it will permanently loose the private key for the identity and you will never be able to receive or read messages sent to this address again."];
+    }
+    
     return self;
-}
-
-- (NSArray *)modelActions
-{
-    NSArray *modelActions = [NSArray arrayWithObjects:@"delete", nil];
-    return  [modelActions arrayByAddingObjectsFromArray:super.modelActions];
 }
 
 + (BMIdentity *)withDict:(NSDictionary *)dict
@@ -94,16 +95,6 @@
     id response = [message parsedResponseValue];
     NSLog(@"insert response = %@", response);
     */
-}
-
-- (NSString *)verifyActionMessage:(NSString *)actionString
-{
-    if ([actionString isEqualToString:@"delete"])
-    {
-        return @"CAUTION: This address is one of your identities. Deleting it will permanently loose the private key for the identity and you will never be able to receive or read messages sent to this address again.";
-    }
-    
-    return nil;
 }
 
 @end
