@@ -23,7 +23,6 @@
 - (id)init
 {
     self = [super init];
-    //self.actions = [NSMutableArray arrayWithObjects:@"message", @"delete", nil];
     return self;
 }
 

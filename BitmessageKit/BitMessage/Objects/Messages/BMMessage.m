@@ -17,13 +17,13 @@
 - (id)init
 {
     self = [super init];
+    
+    {
+        NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"delete"];
+        [slot setVisibleName:@"delete"];
+    }
+    
     return self;
-}
-
-- (NSArray *)modelActions
-{
-    NSArray *modelActions = [NSMutableArray arrayWithObjects:@"delete", nil];
-    return  [modelActions arrayByAddingObjectsFromArray:super.modelActions];
 }
 
 - (NSUInteger)hash

@@ -29,13 +29,6 @@
     {
         NSString *attribute = [aMessage idNoWarningPerformSelector:mergeAttributeSelector];
         
-        /*
-        if ([self.label isEqualToString:@"Time Service"])
-        {
-            NSLog(@"Time Service check! %@ =?= %@", self.address, attribute);
-        }
-        */
-        
         if ([attribute isEqualToString:self.address])
         {
             [self.mergingChildren addObject:aMessage];

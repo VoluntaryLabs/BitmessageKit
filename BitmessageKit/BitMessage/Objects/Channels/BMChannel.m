@@ -25,7 +25,6 @@
     [self setPassphrase:self.class.defaultLabel];
     [self setAddress:@""];
     [self setDifficulty:@"1"];
-    //[self setNodeForceDisplayChildren:YES];
     self.nodeSuggestedWidth = 180;
     
     {
@@ -73,25 +72,6 @@
 
 - (void)fetch
 {
-    // handled by BMReceivedMessages and merge methods
-    
-    /*
-    NSMutableArray *children = [NSMutableArray array];
-    
-    NSArray *messages = [[BMClient.sharedBMClient messages] received].children;
-    
-    for (BMMessage *message in messages)
-    {
-        if ([message.toAddress isEqualToString:self.address])
-        {
-            NSLog(@"fetch channel '%@' '%@'", self.passphrase, message.msgid);
-
-            [children addObject:message];
-        }
-    }
-    
-    [self setChildren:children];
-    */
 }
 
 - (BOOL)shouldOwnMessage:(BMMessage *)aMessage
@@ -130,8 +110,6 @@
     //message.debug = YES;
     [message sendSync];
     self.address = [message responseValue];
-    
-    //NSLog(@"self.address %@", self.address);
     
     if (self.address == nil)
     {
@@ -173,7 +151,6 @@
 
 - (void)delete
 {
-    //[self deleteAllChildren];
     self.isSynced = NO;
     [self leave];
 }
@@ -183,7 +160,8 @@
     // leaveChan <address>	 0.4.2	 Leave a chan.
     // Outputs "success". Note that at this time,
     // the address is still shown in the UI until a restart.
-    NSLog(@"BMChannel justLeave '%@'", self.address);
+    
+    //NSLog(@"BMChannel justLeave '%@'", self.address);
 
     BMProxyMessage *message = [[BMProxyMessage alloc] init];
     [message setMethodName:@"leaveChan"];
