@@ -51,6 +51,11 @@ static BMServerProcess *shared = nil;
     return self;
 }
 
+- (void)dealloc
+{
+    [NSNotificationCenter.defaultCenter removeObserver:self];
+}
+
 - (NSBundle *)bundle
 {
     return [NSBundle bundleForClass:self.class];
