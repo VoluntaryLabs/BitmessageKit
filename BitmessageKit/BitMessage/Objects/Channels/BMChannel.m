@@ -35,6 +35,7 @@
     {
         NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"delete"];
         [slot setVisibleName:@"delete"];
+        [slot setVerifyMessage: @"Are you sure you want to stop receiving this channel?"];
     }
     
     return self;
@@ -216,16 +217,6 @@
 }
 
 // -------------------
-
-- (NSString *)verifyActionMessage:(NSString *)actionString
-{
-    if ([actionString isEqualToString:@"delete"])
-    {
-        return @"Are you sure you want to stop receiving this channel?";
-    }
-    
-    return nil;
-}
 
 - (BOOL)canSearch
 {

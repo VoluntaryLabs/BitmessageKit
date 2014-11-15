@@ -31,6 +31,7 @@
     {
         NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"delete"];
         [slot setVisibleName:@"delete"];
+        [slot setVerifyMessage:@"Are you sure you want to stop receiving this subscription?"];
     }
     
     return self;
@@ -152,16 +153,6 @@
 {
     NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"receivedTime" ascending:NO];
     [self.children sortUsingDescriptors:[NSArray arrayWithObject:sorter]];
-}
-
-- (NSString *)verifyActionMessage:(NSString *)actionString
-{
-    if ([actionString isEqualToString:@"delete"])
-    {
-        return @"Are you sure you want to stop receiving this subscription?";
-    }
-    
-    return nil;
 }
 
 - (BOOL)canSearch
