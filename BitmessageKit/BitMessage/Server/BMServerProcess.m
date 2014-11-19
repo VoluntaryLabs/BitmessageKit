@@ -5,6 +5,8 @@
 //  Created by Steve Dekorte on 2/17/14.
 //  Copyright (c) 2014 voluntary.net. All rights reserved.
 //
+// Notes:
+// - some hacks in here to work around the missing bits of the bitmessage api
 
 #import "BMServerProcess.h"
 #import <FoundationCategoriesKit/FoundationCategoriesKit.h>
@@ -13,7 +15,6 @@
 @implementation BMServerProcess
 
 static BMServerProcess *shared = nil;
-
 
 + (BMServerProcess *)sharedBMServerProcess
 {
@@ -243,7 +244,6 @@ static BMServerProcess *shared = nil;
         [self.torProcess launch];
     }
     
-
     BOOL hasRunBefore = self.keysFile.doesExist;
     
     if (hasRunBefore)
@@ -251,8 +251,7 @@ static BMServerProcess *shared = nil;
         [self setupKeysDat];
     }
     
-    
-    //if (self.debug)
+    if (self.debug)
     {
         NSLog(@"launching Bitmessage with keys.dat:");
         NSLog(@"    port: %@", self.port);
@@ -265,9 +264,7 @@ static BMServerProcess *shared = nil;
     _inpipe = [NSPipe pipe];
     NSDictionary *environmentDict = [[NSProcessInfo processInfo] environment];
     NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithDictionary:environmentDict];
-    //NSLog(@"%@", [environment valueForKey:@"PATH"]);
     
-    // Set environment variables containing api username and password
     if (hasRunBefore)
     {
         [environment setObject:self.username forKey:@"PYBITMESSAGE_USER"];
@@ -283,13 +280,10 @@ static BMServerProcess *shared = nil;
 
     [_bitmessageTask setEnvironment:environment];
     
-    // Set the path to the python executable
     NSBundle *mainBundle = [NSBundle bundleForClass:self.class];
     NSString *pythonPath       = [mainBundle pathForResource:@"python" ofType:@"exe" inDirectory: @"static-python"];
     NSString *pybitmessagePath = [mainBundle pathForResource:@"bitmessagemain" ofType:@"py" inDirectory: @"pybitmessage"];
     [_bitmessageTask setLaunchPath:pythonPath];
-    
-    //[_bitmessageTask setStandardInput: (NSFileHandle *) _inpipe];
     
     if (self.debug || !hasRunBefore)
     {
@@ -311,7 +305,6 @@ static BMServerProcess *shared = nil;
     
     if (hasRunBefore)
     {
-        //[_bitmessageTask addWaitOnConnectToPortNumber:self.port];
         [_bitmessageTask addWaitOnConnectToPortNumber:self.apiPort];
     }
     
@@ -324,27 +317,25 @@ static BMServerProcess *shared = nil;
         NSLog(@"first launch - relaunching in 3 seconds to complete keys.dat setup...");
         sleep(3);
         [self terminate];
-        sleep(3); // would be nice to wait for shutdown instead
+        [_bitmessageTask.task waitUntilExit];
         [self launch];
         return;
     }
     
-    //sleep(2);
-
     if (![_bitmessageTask isRunning])
     {
         NSLog(@"pybitmessage task not running after launch");
     }
     else
     {
-        sleep(2);
         [self waitOnConnect];
     }
 }
 
 - (BOOL)waitOnConnect
 {
-    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPush" object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPush"
+                                                      object:self];
     
     for (int i = 0; i < 100; i ++)
     {
@@ -355,12 +346,14 @@ static BMServerProcess *shared = nil;
                 NSLog(@"connected to server");
             }
             
-            [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
+            [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop"
+                                                              object:self];
             return YES;
         }
         
         NSLog(@"waiting to connect to server...");
-        sleep(1);
+        //sleep(1);
+        [NSDate waitFor:.1];
     }
     
     [NSException raise:@"unable to connect to Bitmessage server" format:nil];
@@ -404,15 +397,6 @@ static BMServerProcess *shared = nil;
     NSArray *params = [NSArray arrayWithObjects:nil];
     [message setParameters:params];
     [message sendSync];
-    
-    /*
-    BMProxyMessage *message = [[BMProxyMessage alloc] init];
-    [message setMethodName:@"helloWorld"];
-    NSArray *params = [NSArray arrayWithObjects:@"hello", @"world", nil];
-    [message setParameters:params];
-    //message.debug = YES;
-    [message sendSync];
-    */
     
     NSObject *response = [message parsedResponseValue];
     //NSLog(@"canConnect response = '%@'", response);
@@ -464,7 +448,6 @@ static BMServerProcess *shared = nil;
         NSData *theData = [outPipe fileHandleForReading].availableData;
         _binaryVersion = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
         
-        // example output: Tor version 0.2.5.10 (git-42b42605f8d8eac2).
         _binaryVersion = [_binaryVersion after:@"Python"].strip;
     }
     
