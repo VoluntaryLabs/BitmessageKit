@@ -17,5 +17,5 @@ These are included in the BitmessageKit/Vendor folder:
 Credits
 ----------
 
-Steve Dekorte - objc framework design/implementation
-Adam Thorson - static-python and Tor integration
+- Steve Dekorte - objc framework design/implementation
+- Adam Thorson - static-python and Tor integration
