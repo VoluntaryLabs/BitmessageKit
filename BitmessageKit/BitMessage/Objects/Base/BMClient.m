@@ -29,7 +29,7 @@ static BMClient *sharedBMClient;
 - (id)init
 {
     self = [super init];
-    self.refreshInterval = 3;
+    self.refreshInterval = 7;
     [self startServer];
     
     self.shouldSortChildren = NO;
