@@ -219,11 +219,11 @@ static BMServerProcess *shared = nil;
 - (BOOL)setLabel:(NSString *)aLabel onAddress:(NSString *)anAddress
 {
     [self assertIsRunning];
-    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPush" object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPushNotification" object:self];
     [self terminate];
     [self.keysFile setLabel:aLabel onAddress:anAddress];
     [self launch];
-    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPopNotification" object:self];
     return YES;
 }
 
@@ -237,7 +237,7 @@ static BMServerProcess *shared = nil;
     
     // Launch tor client
     
-    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPush" object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPushNotification" object:self];
     
     if (self.useTor && !self.torProcess.isRunning)
     {
@@ -310,7 +310,7 @@ static BMServerProcess *shared = nil;
     
     [_bitmessageTask launch];
     
-    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPopNotification" object:self];
     
     if (!hasRunBefore)
     {
@@ -334,7 +334,7 @@ static BMServerProcess *shared = nil;
 
 - (BOOL)waitOnConnect
 {
-    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPush"
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPushNotification"
                                                       object:self];
     
     for (int i = 0; i < 100; i ++)
@@ -346,7 +346,7 @@ static BMServerProcess *shared = nil;
                 NSLog(@"connected to server");
             }
             
-            [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop"
+            [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPopNotification"
                                                               object:self];
             return YES;
         }
@@ -358,7 +358,7 @@ static BMServerProcess *shared = nil;
     
     [NSException raise:@"unable to connect to Bitmessage server" format:nil];
     
-    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPopNotification" object:self];
     
     return NO;
 }
