@@ -7,6 +7,11 @@
 //
 
 #import "BMNode.h"
+#import "BMServerProcess.h"
+#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
+
+// groups
+
 #import "BMIdentities.h"
 #import "BMContacts.h"
 #import "BMMessages.h"
@@ -14,7 +19,7 @@
 #import "BMChannels.h"
 #import "BMDatabase.h"
 
-// extra
+// objects
 
 #import "BMMessage.h"
 #import "BMChannel.h"
@@ -22,11 +27,6 @@
 #import "BMContact.h"
 #import "BMIdentity.h"
 #import "BMAddress.h"
-
-// categories
-
-#import <FoundationCategoriesKit/FoundationCategoriesKit.h>
-#import "BMServerProcess.h"
 
 @interface BMClient : BMNode
 
