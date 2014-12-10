@@ -15,4 +15,7 @@
 - (BMSubscription *)subscriptionWithAddress:(NSString *)anAddress;
 - (BMSubscription *)subscriptionWithAddressAddIfNeeded:(NSString *)anAddress;
 
+- (void)leaveAll;
+- (void)leaveAllExceptThoseInSet:(NSSet *)keepSet;
+
 @end

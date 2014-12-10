@@ -116,11 +116,19 @@
 
 // ----------------------------------------
 
-- (void)leaveAllChannels
+- (void)leaveAll
 {
-    for (BMChannel *channel in self.children.copy)
+    [self leaveAllExceptThoseInSet:[NSSet set]];
+}
+
+- (void)leaveAllExceptThoseInSet:(NSSet *)keepSet
+{
+    for (BMChannel *child in self.children.copy)
     {
-        [channel delete];
+        if (![keepSet containsObject:child])
+        {
+            [child delete];
+        }
     }
 }
 

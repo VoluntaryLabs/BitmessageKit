@@ -14,6 +14,7 @@
 - (BMChannel *)channelWithPassphraseJoinIfNeeded:(NSString *)aTitle;
 - (BMChannel *)channelWithPassphrase:(NSString *)aPassphrase;
 
-- (void)leaveAllChannels;
+- (void)leaveAll;
+- (void)leaveAllExceptThoseInSet:(NSSet *)keepSet;
 
 @end

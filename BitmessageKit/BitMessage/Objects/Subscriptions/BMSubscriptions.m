@@ -116,4 +116,24 @@
     return 300.0;
 }
 
+
+// ----------------------------------------
+
+- (void)leaveAll
+{
+    [self leaveAllExceptThoseInSet:[NSSet set]];
+}
+
+- (void)leaveAllExceptThoseInSet:(NSSet *)keepSet
+{
+    for (BMSubscription *child in self.children.copy)
+    {
+        if (![keepSet containsObject:child])
+        {
+            [child delete];
+        }
+    }
+}
+
+
 @end
