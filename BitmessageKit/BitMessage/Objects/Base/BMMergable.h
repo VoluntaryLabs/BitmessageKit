@@ -14,6 +14,7 @@
 @property (retain, nonatomic) NSMutableArray *mergingChildren;
 
 - (void)prepareToMergeChildren;
+- (BOOL)shouldMergeChild:(BMMessage *)aMessage;
 - (BOOL)mergeChild:(BMMessage *)aMessage;
 - (void)completeMergeChildren;
 

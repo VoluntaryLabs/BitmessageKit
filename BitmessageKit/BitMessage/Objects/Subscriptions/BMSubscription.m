@@ -174,4 +174,21 @@
 }
 */
 
+- (BOOL)shouldMergeChild:(BMMessage *)aMessage
+{
+    // for testing, timeservice is BM-BcbRqcFFSQUUmXFKsPJgVQPSiFA3Xash
+    
+    if ([aMessage.fromAddress isEqualToString:self.address]
+        && [aMessage.toAddress isEqualToString:@"[Broadcast subscribers]"]
+        )
+    {
+        //NSLog(@"TO %@", aMessage.toAddress);
+        //NSLog(@"FROM %@", aMessage.fromAddress);
+
+        return YES;
+    }
+    
+    return NO;
+}
+
 @end

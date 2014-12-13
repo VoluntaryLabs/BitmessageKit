@@ -178,14 +178,15 @@
     
     // subject and message in base64
     NSArray *params = [NSArray arrayWithObjects:self.fromAddress, self.subject.encodedBase64, self.message.encodedBase64, nil];
-    
-    //message.debug = YES;
+
+
+    message.debug = YES;
     [message setParameters:params];
     [message sendSync];
     
     //id result =  [message parsedResponseValue];
     self.ackData = [message responseValue];
-    //NSLog(@"broadcast result %@", result);
+    NSLog(@"broadcast ackData = '%@'", self.ackData);
     
     return self.ackData != nil;
 }

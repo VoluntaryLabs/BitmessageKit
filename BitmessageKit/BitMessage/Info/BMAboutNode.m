@@ -95,6 +95,7 @@
         NavInfoNode *package = [[NavInfoNode alloc] init];
         package.nodeTitle = @"Bitmessage";
         package.nodeSubtitle = @"bitmessage.org";
+        package.nodeResourceName = @"licenses/bitmessage_license.txt";
         [others addChild:package];
     }
     
@@ -102,6 +103,7 @@
         NavInfoNode *package = [[NavInfoNode alloc] init];
         package.nodeTitle = @"Open Sans";
         package.nodeSubtitle = @"Steve Matteson, Google fonts";
+        package.nodeResourceName = @"licenses/opensans_license.txt";
         [others addChild:package];
     }
     
@@ -109,6 +111,7 @@
         NavInfoNode *package = [[NavInfoNode alloc] init];
         package.nodeTitle = @"Python";
         package.nodeSubtitle = @"python.org";
+        package.nodeResourceName = @"licenses/python_license.txt";
         [others addChild:package];
     }
     
@@ -116,6 +119,7 @@
         NavInfoNode *package = [[NavInfoNode alloc] init];
         package.nodeTitle = @"Tor";
         package.nodeSubtitle = @"torproject.org";
+        package.nodeResourceName = @"licenses/tor_license.txt";
         [others addChild:package];
     }
     
@@ -123,6 +127,7 @@
         NavInfoNode *package = [[NavInfoNode alloc] init];
         package.nodeTitle = @"XmlRPC";
         package.nodeSubtitle = @"Eric Czarny";
+        package.nodeResourceName = @"licenses/xmlrpc_license.txt";
         [others addChild:package];
     }
     

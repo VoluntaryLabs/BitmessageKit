@@ -103,6 +103,7 @@
 		AA9A657A199EDA9700993E8B /* BMUnreadCountable.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9A6578199EDA9700993E8B /* BMUnreadCountable.m */; };
 		AAA9FA6919F0B38600D5858C /* BMAboutNode.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA9FA6719F0B38600D5858C /* BMAboutNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAA9FA6A19F0B38600D5858C /* BMAboutNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA9FA6819F0B38600D5858C /* BMAboutNode.m */; };
+		AABEB7671A3BD6D3005502A4 /* licenses in Resources */ = {isa = PBXBuildFile; fileRef = AABEB7661A3BD6D3005502A4 /* licenses */; };
 		AAC342131A01AAE200EF9A53 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		AAE31DBD18FF11A000405754 /* static-python in Resources */ = {isa = PBXBuildFile; fileRef = AAE31DBC18FF11A000405754 /* static-python */; };
 /* End PBXBuildFile section */
@@ -318,6 +319,7 @@
 		AA9A6578199EDA9700993E8B /* BMUnreadCountable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMUnreadCountable.m; sourceTree = "<group>"; };
 		AAA9FA6719F0B38600D5858C /* BMAboutNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMAboutNode.h; sourceTree = "<group>"; };
 		AAA9FA6819F0B38600D5858C /* BMAboutNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMAboutNode.m; sourceTree = "<group>"; };
+		AABEB7661A3BD6D3005502A4 /* licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; path = licenses; sourceTree = "<group>"; };
 		AAE31DBC18FF11A000405754 /* static-python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "static-python"; path = "Vendor/static-python"; sourceTree = "<group>"; };
 		AAE31DBE18FF11BA00405754 /* pybitmessage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pybitmessage; path = Vendor/pybitmessage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -434,6 +436,7 @@
 		8EDE5B8418F59414009A726A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AABEB7661A3BD6D3005502A4 /* licenses */,
 				AAE31DBE18FF11BA00405754 /* pybitmessage */,
 				AAE31DBC18FF11A000405754 /* static-python */,
 				8EDE5B8518F59414009A726A /* BitmessageKit-Info.plist */,
@@ -924,6 +927,7 @@
 			files = (
 				AAE31DBD18FF11A000405754 /* static-python in Resources */,
 				8ED41FA518F595DA0025A51B /* pybitmessage in Resources */,
+				AABEB7671A3BD6D3005502A4 /* licenses in Resources */,
 				8EDE5B8818F59414009A726A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

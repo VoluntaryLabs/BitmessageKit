@@ -96,6 +96,7 @@
         }
         else if ([subscriptions mergeChild:message])
         {
+            //NSLog(@"merged subscription message %@", message.subjectString);
             continue;
         }
         else if ([channels mergeChild:message])

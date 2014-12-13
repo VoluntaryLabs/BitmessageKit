@@ -21,7 +21,7 @@
     self.mergingChildren = [NSMutableArray array];
 }
 
-- (BOOL)mergeChild:(BMMessage *)aMessage
+- (BOOL)shouldMergeChild:(BMMessage *)aMessage
 {
     SEL mergeAttributeSelector = self.mergeAttributeSelector;
     
@@ -31,9 +31,19 @@
         
         if ([attribute isEqualToString:self.address])
         {
-            [self.mergingChildren addObject:aMessage];
             return YES;
         }
+    }
+    
+    return NO;
+}
+
+- (BOOL)mergeChild:(BMMessage *)aMessage
+{
+    if ([self shouldMergeChild:aMessage])
+    {
+        [self.mergingChildren addObject:aMessage];
+        return YES;
     }
     
     return NO;
