@@ -41,6 +41,7 @@
 @property (strong, nonatomic) BMChannels *channels;
 @property (strong, nonatomic) BMDatabase *readMessagesDB;
 @property (strong, nonatomic) BMDatabase *deletedMessagesDB;
+@property (strong, nonatomic) BMDatabase *sentMessagesDB;
 @property (strong, nonatomic) NavInfoNode *nodeAbout;
 
 

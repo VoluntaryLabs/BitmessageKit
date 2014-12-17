@@ -15,6 +15,7 @@
 @property (assign, nonatomic) int daysToCache;
 
 - (void)mark:(NSString *)messageId;
+- (void)unmark:(NSString *)messageId;
 - (BOOL)hasMarked:(NSString *)messageId;
 
 - (void)removeOldKeys;

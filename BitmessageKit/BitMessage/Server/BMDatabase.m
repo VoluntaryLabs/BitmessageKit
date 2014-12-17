@@ -27,19 +27,27 @@
 
 - (void)mark:(NSString *)messageId
 {
-    NSNumber *d = [NSNumber numberWithLong:[[NSDate date] timeIntervalSinceReferenceDate]];
-    
     if ([self.dict objectForKey:messageId] == nil)
     {
+        NSNumber *d = [NSNumber numberWithLong:[[NSDate date] timeIntervalSinceReferenceDate]];
         [self.dict setObject:d forKey:messageId];
+        [self write];
     }
-    
-    [self write];
+}
+
+- (void)unmark:(NSString *)messageId
+{
+    if ([self.dict objectForKey:messageId] != nil)
+    {
+        [self.dict removeObjectForKey:messageId];
+        [self write];
+    }
 }
 
 - (BOOL)hasMarked:(NSString *)messageId
 {
-    return [self.dict objectForKey:messageId] != nil;
+    NSNumber *d = [self.dict objectForKey:messageId];
+    return d != nil;
 }
 
 - (void)removeOldKeys

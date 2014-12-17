@@ -53,6 +53,9 @@ static BMClient *sharedBMClient;
     self.deletedMessagesDB = [[BMDatabase alloc] init];
     [self.deletedMessagesDB setName:@"deletedMessagesDB"];
     
+    self.sentMessagesDB = [[BMDatabase alloc] init];
+    [self.sentMessagesDB setName:@"sentMessagesDB"];
+    
 
     // fetch these addresses first so we can filter messages
     // when we fetch them
