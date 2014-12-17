@@ -248,14 +248,12 @@
             [status addChild:nonce];
         }
         
-        
         {
             NavInfoNode *torVersion = [[NavInfoNode alloc] init];
             torVersion.nodeTitle = @"Tor Version";
             torVersion.nodeSubtitle = [NSString stringWithFormat:@"%@", BMClient.sharedBMClient.server.torProcess.binaryVersion];
             [status addChild:torVersion];
         }
-        
     }
 }
 
