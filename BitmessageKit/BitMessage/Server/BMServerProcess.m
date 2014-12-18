@@ -188,7 +188,7 @@ static BMServerProcess *shared = nil;
         assert(_torProcess.isRunning);
         assert(_torProcess.torSocksPort != nil); // need to launch tor first so it picks a port
         [self.keysFile setSOCKSPort:_torProcess.torSocksPort];
-        NSLog(@"*** setup Bitmessage for Tor on port %@", _torProcess.torSocksPort);
+        //NSLog(@"*** setup Bitmessage for Tor on port %@", _torProcess.torSocksPort);
     }
     
     SIPort *startPort = [SIPort portWithNumber:_torProcess.torSocksPort];
