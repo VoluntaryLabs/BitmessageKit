@@ -165,9 +165,9 @@
     [message sendSync];
     
     self.ackData = [message responseValue];
-    //NSLog(@" self.ackData: %@",  self.ackData);
+    NSLog(@" self.ackData: %@",  self.ackData);
     // not all messages are acknowledge?
-    
+        
     return self.ackData != nil;
 }
 
@@ -236,18 +236,18 @@
 
 - (BOOL)read
 {
-    return (_read || [self.client.readMessagesDB hasMarked:self.msgid]);
+    return self.isRead;
 }
 
 - (BOOL)isRead
 {
-    return self.read;
+    return (_read || [self.client.readMessagesDB hasMarked:self.msgid]);
 }
 
 
 - (void)markAsRead
 {
-    if (!self.read)
+    if (!self.isRead)
     {
         //NSLog(@"markAsRead");
         [self.client.readMessagesDB mark:self.msgid];
@@ -258,7 +258,7 @@
 
 - (void)markAsUnread
 {
-    if (self.read)
+    if (self.isRead)
     {
         [self setReadState:NO];
         [self postParentChanged];

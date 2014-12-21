@@ -97,7 +97,7 @@
     [message setParameters:params];
     message.debug = NO;
     [message sendSync];
-    id response = [message parsedResponseValue];
+    id response = [message responseValue];
     NSLog(@"response %@", response);
     return YES;
 }

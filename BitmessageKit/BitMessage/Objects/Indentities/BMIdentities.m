@@ -98,7 +98,7 @@
     NSArray *params = [NSArray arrayWithObjects:label.encodedBase64, nil];
     [message setParameters:params];
     [message sendSync];
-    id response = [message parsedResponseValue];
+    id response = [message responseValue];
     NSLog(@"createRandomAddress response %@", response);
     [self fetch];
     

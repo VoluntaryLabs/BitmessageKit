@@ -53,7 +53,7 @@
     
     NSArray *dicts = [[message parsedResponseValue] objectForKey:@"subscriptions"];
     
-    //NSLog(@"\n\ndicts = %@", dicts);
+    NSLog(@"\n\ndicts = %@", dicts);
     
     for (NSDictionary *dict in dicts)
     {

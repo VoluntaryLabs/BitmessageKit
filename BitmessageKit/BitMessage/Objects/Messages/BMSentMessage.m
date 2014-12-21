@@ -15,7 +15,7 @@
 
 - (NSString *)nodeTitle
 {
-    return self.toAddressLabel;
+    return [NSString stringWithFormat:@"to %@", self.toAddressLabel];
 }
 
 /*
@@ -70,27 +70,69 @@
     return [self.getHumanReadbleStatus containsCaseInsensitiveString:@"sent"];
 }
 
+/*
+ - (NSArray *)unreadStates
+ {
+ return [NSArray arrayWithObjects:@"doingpubkeypow", @"awaitingpubkey", @"doingmsgpow", @"forcepow", nil];
+ }
+ */
+
 - (NSArray *)readStates
 {
-    return [NSArray arrayWithObjects:@"msgsentnoackexpected", @"ackreceived", @"broadcastsent", nil];
+    return [NSArray arrayWithObjects:@"msgsentnoackexpected", @"ackreceived", @"broadcastsent", @"msgsent", nil];
 }
 
-- (BOOL)read
+- (BOOL)hasReadState
 {
-    if (![super read])
+    NSString *status = [self getStatus];
+    return [self.readStates containsObject:status];
+}
+
+- (void)markAsRead
+{
+    // ignore - we are only using the sent state on sent messages
+}
+
+- (void)markAsSent
+{
+    [self.client.sentMessagesDB mark:self.msgid];
+}
+
+- (BOOL)isMarkedAsSent
+{
+    return [self.client.sentMessagesDB hasMarked:self.msgid];
+}
+
+- (void)delete
+{
+    [self.client.sentMessagesDB unmark:self.msgid];
+    [super delete];
+}
+
+- (BOOL)isSent
+{
+    if (!_isSent)
     {
-        BOOL isRead = [self.readStates containsObject:[self getStatus]];
+        _isSent = self.isMarkedAsSent;
         
-        if (isRead)
+        if (!_isSent)
         {
-            // need to put these in separate db that doesn't expire
-            // but removed deleted sent messages
+            _isSent = self.hasReadState;
             
-            [self.client.readMessagesDB mark:self.msgid];
+            if (_isSent)
+            {
+                [self markAsSent];
+            }
         }
+        
     }
     
-    return [super read];
+    return _isSent;
+}
+
+- (BOOL)isRead
+{
+    return [self isSent];
 }
 
 - (NSString *)getHumanReadbleStatus
@@ -111,7 +153,21 @@
     id result = [message responseValue];
     //NSLog(@"getStatus result %@", result);
     
-    /* responses: notfound, msgqueued, broadcastqueued, broadcastsent, doingpubkeypow, awaitingpubkey, doingmsgpow, forcepow, msgsent, msgsentnoackexpected, or ackreceived */
+    /* 
+     responses: 
+     
+     notfound, 
+     msgqueued, 
+     broadcastqueued, 
+     broadcastsent, 
+     doingpubkeypow, 
+     awaitingpubkey, 
+     doingmsgpow, 
+     forcepow, 
+     msgsent, 
+     msgsentnoackexpected, 
+     ackreceived
+     */
     
     return result;
 }

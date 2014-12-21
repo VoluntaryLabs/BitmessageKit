@@ -49,6 +49,13 @@
 
 // --------------------------
 
+/*
+- (void)setLabel:(NSString *)label
+{
+    _label = [label strip];
+}
+*/
+
 - (NSUInteger)hash
 {
     return [self.address hash];

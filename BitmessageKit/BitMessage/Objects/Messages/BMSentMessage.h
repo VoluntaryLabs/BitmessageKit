@@ -10,6 +10,8 @@
 
 @interface BMSentMessage : BMMessage
 
+@property (assign, nonatomic) BOOL isSent;
+
 - (BOOL)notFound;
 - (BOOL)wasSent;
 - (NSString *)getStatus;

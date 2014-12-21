@@ -53,6 +53,12 @@ static BMClient *sharedBMClient;
     self.deletedMessagesDB = [[BMDatabase alloc] init];
     [self.deletedMessagesDB setName:@"deletedMessagesDB"];
     
+    self.sentMessagesDB = [[BMDatabase alloc] init];
+    [self.sentMessagesDB setName:@"sentMessagesDB"];
+    
+    self.deletedSentMessagesDB = [[BMDatabase alloc] init];
+    [self.sentMessagesDB setName:@"deletedSentMessagesDB"];
+    
 
     // fetch these addresses first so we can filter messages
     // when we fetch them
@@ -115,7 +121,36 @@ static BMClient *sharedBMClient;
 
 - (NSString *)addressForLabel:(NSString *)labelString // returns nil if none found
 {
-    for (BMAddressed *child in self.allAddressed)
+    for (BMAddressed *child in self.allAddressedArray)
+    {
+        if ([child.label isEqualToString:labelString])
+        {
+            return child.address;
+        }
+    }
+    
+    return nil;
+}
+
+- (NSString *)identityAddressForLabel:(NSString *)labelString // returns nil if none found
+{
+    for (BMAddressed *child in self.identities.children)
+    {
+        if ([child.label isEqualToString:labelString])
+        {
+            return child.address;
+        }
+    }
+    
+    return nil;
+}
+
+- (NSString *)identityOrChannelAddressForLabel:(NSString *)labelString // returns nil if none found
+{
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self.identities.children];
+    [array addObjectsFromArray:self.channels.children];
+    
+    for (BMAddressed *child in array)
     {
         if ([child.label isEqualToString:labelString])
         {
@@ -140,9 +175,19 @@ static BMClient *sharedBMClient;
     return fromLabels;
 }
 
-- (NSSet *)allAddressed
+- (NSSet *)allAddressed // careful - address can be the same for subscription and identity
 {
     NSMutableSet *results = [NSMutableSet setWithSet:[self nonIdentityAddressed]];
+    [results addObjectsFromArray:self.identities.children];
+    return results;
+}
+
+- (NSArray *)allAddressedArray
+{
+    NSMutableArray *results = [NSMutableArray array];
+    [results addObjectsFromArray:self.contacts.children];
+    [results addObjectsFromArray:self.subscriptions.children];
+    [results addObjectsFromArray:self.channels.children];
     [results addObjectsFromArray:self.identities.children];
     return results;
 }
