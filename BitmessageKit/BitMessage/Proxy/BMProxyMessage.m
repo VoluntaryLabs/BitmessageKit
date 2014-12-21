@@ -72,7 +72,7 @@
     self.response = [XMLRPCConnection sendSynchronousXMLRPCRequest:self.request error:&error];
     self.error = error;
     
-    if (self.debug)
+    if (self.debug || error)
     {
         //NSLog(@"\n\nResponse: %@", self.response);
         NSLog(@"\n\nresponseValue: %@\n", [self responseValue]);

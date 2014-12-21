@@ -77,6 +77,11 @@
 - (NSMutableArray *)filterMessages:(NSMutableArray *)messages
 {
     NSMutableArray *results = [NSMutableArray array];
+    
+    if (messages.count == 0)
+    {
+        return results;
+    }
 
     BMSubscriptions *subscriptions = self.client.subscriptions;
     [subscriptions prepareToMergeChildren];

@@ -62,7 +62,7 @@
     [message setParameters:params];
     //message.debug = YES;
     [message sendSync];
-    id response = [message parsedResponseValue];
+    id response = [message responseValue];
     NSLog(@"delete response = %@", response);
     
     [self removeFromParent];

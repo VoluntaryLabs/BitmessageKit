@@ -39,9 +39,13 @@
 @property (strong, nonatomic) BMMessages *messages;
 @property (strong, nonatomic) BMSubscriptions *subscriptions;
 @property (strong, nonatomic) BMChannels *channels;
+
 @property (strong, nonatomic) BMDatabase *readMessagesDB;
 @property (strong, nonatomic) BMDatabase *deletedMessagesDB;
+
 @property (strong, nonatomic) BMDatabase *sentMessagesDB;
+@property (strong, nonatomic) BMDatabase *deletedSentMessagesDB;
+
 @property (strong, nonatomic) NavInfoNode *nodeAbout;
 
 
@@ -53,6 +57,8 @@
 
 - (NSString *)labelForAddress:(NSString *)addressString; // returns address if none found
 - (NSString *)addressForLabel:(NSString *)labelString; // returns address if none found
+- (NSString *)identityAddressForLabel:(NSString *)labelString; // returns nil if none found
+- (NSString *)identityOrChannelAddressForLabel:(NSString *)labelString; // returns nil if none found
 
 - (NSSet *)fromAddressLabels;
 - (NSSet *)toAddressLabels;
