@@ -111,9 +111,9 @@
     return @"Subscriptions";
 }
 
-- (CGFloat)nodeSuggestedWidth
+- (NSNumber *)nodeSuggestedWidth
 {
-    return 300.0;
+    return @300.0;
 }
 
 

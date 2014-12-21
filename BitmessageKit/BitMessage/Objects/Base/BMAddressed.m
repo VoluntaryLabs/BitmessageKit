@@ -107,9 +107,9 @@
 
 // UI - move to category
 
-- (CGFloat)nodeSuggestedWidth
+- (NSNumber *)nodeSuggestedWidth
 {
-    return 350.0;
+    return @350.0;
 }
 
 @end

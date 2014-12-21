@@ -76,9 +76,9 @@
     return @"Channels";
 }
 
-- (CGFloat)nodeSuggestedWidth
+- (NSNumber *)nodeSuggestedWidth
 {
-    return 180.0;
+    return @180.0;
 }
 
 

@@ -38,7 +38,7 @@
     about.nodeShouldSortChildren = @NO;
     about.nodeTitle = @"BitmessageKit";
     about.nodeSubtitle = self.versionString;
-    about.nodeSuggestedWidth = 150;
+    about.nodeSuggestedWidth = @150;
     
     
     /*
@@ -46,13 +46,13 @@
     [about addChild:version];
     version.nodeTitle = @"Version";
     version.nodeSubtitle = self.versionString;
-    version.nodeSuggestedWidth = 200;
+    version.nodeSuggestedWidth = @200;
     */
     
     NavInfoNode *contributors = [[NavInfoNode alloc] init];
     [about addChild:contributors];
     contributors.nodeTitle = @"Credits";
-    contributors.nodeSuggestedWidth = 200;
+    contributors.nodeSuggestedWidth = @200;
     contributors.nodeShouldSortChildren = @NO;
     
     {
@@ -88,7 +88,7 @@
     NavInfoNode *others = [[NavInfoNode alloc] init];
     [contributors addChild:others];
     others.nodeTitle = @"3rd Party";
-    others.nodeSuggestedWidth = 200;
+    others.nodeSuggestedWidth = @200;
     others.nodeShouldSortChildren = @NO;
     
     
@@ -186,7 +186,7 @@
     NavInfoNode *status = [[NavInfoNode alloc] init];
     [about addChild:status];
     status.nodeTitle = @"Status";
-    status.nodeSuggestedWidth = 200;
+    status.nodeSuggestedWidth = @200;
     status.nodeShouldSortChildren = @NO;
     
     {

@@ -25,7 +25,7 @@
     [self setPassphrase:self.class.defaultLabel];
     [self setAddress:@""];
     [self setDifficulty:@"1"];
-    self.nodeSuggestedWidth = 180;
+    self.nodeSuggestedWidth = @180;
     
     {
         NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"message"];

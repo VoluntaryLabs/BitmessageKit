@@ -100,9 +100,9 @@ static BMClient *sharedBMClient;
         userInfo:aNote.userInfo];
 }
 
-- (CGFloat)nodeSuggestedWidth
+- (NSNumber *)nodeSuggestedWidth
 {
-    return 150.0;
+    return @150.0;
 }
 
 - (NSString *)labelForAddress:(NSString *)addressString
