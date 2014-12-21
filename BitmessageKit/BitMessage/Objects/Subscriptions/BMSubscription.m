@@ -37,9 +37,9 @@
     return self;
 }
 
-- (BOOL)nodeForceDisplayChildren
+- (NSNumber *)nodeForceDisplayChildren
 {
-    return self.children.count > 0;
+    return [NSNumber numberWithBool:self.children.count > 0];
 }
 
 + (BMSubscription *)withDict:(NSDictionary *)dict
