@@ -11,6 +11,7 @@
 
 #import "BMNode.h"
 #import "BMAboutNode.h"
+#import "BNErrorReport.h"
 #import "BMMergable.h"
 #import "BMUnreadCountable.h"
 #import "BMMessages.h"

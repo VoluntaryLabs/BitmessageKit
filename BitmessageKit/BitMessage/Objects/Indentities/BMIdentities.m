@@ -16,8 +16,8 @@
 - (id)init
 {
     self = [super init];
-    self.shouldSelectChildOnAdd = YES;
-    self.shouldSortChildren = YES;
+    self.nodeShouldSelectChildOnAdd = @YES;
+    self.nodeShouldSortChildren = @YES;
     
     {
         NavActionSlot *slot = [self.navMirror newActionSlotWithName:@"add"];

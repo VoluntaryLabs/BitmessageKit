@@ -35,7 +35,7 @@
 - (void)setup
 {
     NavInfoNode *about = self;
-    about.shouldSortChildren = NO;
+    about.nodeShouldSortChildren = @NO;
     about.nodeTitle = @"BitmessageKit";
     about.nodeSubtitle = self.versionString;
     about.nodeSuggestedWidth = 150;
@@ -53,7 +53,7 @@
     [about addChild:contributors];
     contributors.nodeTitle = @"Credits";
     contributors.nodeSuggestedWidth = 200;
-    contributors.shouldSortChildren = NO;
+    contributors.nodeShouldSortChildren = @NO;
     
     {
         NavInfoNode *contributor = [[NavInfoNode alloc] init];
@@ -89,7 +89,7 @@
     [contributors addChild:others];
     others.nodeTitle = @"3rd Party";
     others.nodeSuggestedWidth = 200;
-    others.shouldSortChildren = NO;
+    others.nodeShouldSortChildren = @NO;
     
     
     {
@@ -187,7 +187,7 @@
     [about addChild:status];
     status.nodeTitle = @"Status";
     status.nodeSuggestedWidth = 200;
-    status.shouldSortChildren = NO;
+    status.nodeShouldSortChildren = @NO;
     
     {
         {

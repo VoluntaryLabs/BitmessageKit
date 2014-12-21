@@ -86,6 +86,8 @@
 		8EDE5C2F18F594EA009A726A /* JSONDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5BF018F594EA009A726A /* JSONDB.m */; };
 		AA0E58E418FEE4830095DEBD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0E58E318FEE4830095DEBD /* libz.dylib */; };
 		AA153C3618FF057D007B4785 /* BitmessageKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EDE5B8A18F59414009A726A /* BitmessageKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA32A3681A3FB6D6009CDC31 /* BNErrorReport.h in Headers */ = {isa = PBXBuildFile; fileRef = AA32A3661A3FB6D6009CDC31 /* BNErrorReport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA32A3691A3FB6D6009CDC31 /* BNErrorReport.m in Sources */ = {isa = PBXBuildFile; fileRef = AA32A3671A3FB6D6009CDC31 /* BNErrorReport.m */; };
 		AA4F111B19EB228900CD08A5 /* FoundationCategoriesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4F10ED19EB21FF00CD08A5 /* FoundationCategoriesKit.framework */; };
 		AA4F111C19EB228900CD08A5 /* NavKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4F10F919EB220600CD08A5 /* NavKit.framework */; };
 		AA4F111D19EB228900CD08A5 /* NavNodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4F110519EB220F00CD08A5 /* NavNodeKit.framework */; };
@@ -306,6 +308,8 @@
 		8EDE5BEF18F594EA009A726A /* JSONDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONDB.h; sourceTree = "<group>"; };
 		8EDE5BF018F594EA009A726A /* JSONDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONDB.m; sourceTree = "<group>"; };
 		AA0E58E318FEE4830095DEBD /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		AA32A3661A3FB6D6009CDC31 /* BNErrorReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNErrorReport.h; sourceTree = "<group>"; };
+		AA32A3671A3FB6D6009CDC31 /* BNErrorReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNErrorReport.m; sourceTree = "<group>"; };
 		AA4F10E719EB21FF00CD08A5 /* FoundationCategoriesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FoundationCategoriesKit.xcodeproj; path = submodules/FoundationCategoriesKit/FoundationCategoriesKit.xcodeproj; sourceTree = "<group>"; };
 		AA4F10F019EB220600CD08A5 /* NavKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NavKit.xcodeproj; path = submodules/NavKit/NavKit.xcodeproj; sourceTree = "<group>"; };
 		AA4F10FF19EB220F00CD08A5 /* NavNodeKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NavNodeKit.xcodeproj; path = submodules/NavNodeKit/NavNodeKit.xcodeproj; sourceTree = "<group>"; };
@@ -478,6 +482,7 @@
 		8EDE5BB618F594EA009A726A /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				AA32A3651A3FB6D6009CDC31 /* Error */,
 				8EDE5BB718F594EA009A726A /* Base */,
 				8EDE5BC018F594EA009A726A /* Channels */,
 				8EDE5BC518F594EA009A726A /* Contacts */,
@@ -606,6 +611,15 @@
 			name = Vendor;
 			sourceTree = "<group>";
 		};
+		AA32A3651A3FB6D6009CDC31 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				AA32A3661A3FB6D6009CDC31 /* BNErrorReport.h */,
+				AA32A3671A3FB6D6009CDC31 /* BNErrorReport.m */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		AA4F10E619EB21F100CD08A5 /* submodules */ = {
 			isa = PBXGroup;
 			children = (
@@ -727,6 +741,7 @@
 				8ED41FC618F596310025A51B /* XMLRPCDefaultEncoder.h in Headers */,
 				AA9A6570199ECF5800993E8B /* BMMergable.h in Headers */,
 				AAA9FA6919F0B38600D5858C /* BMAboutNode.h in Headers */,
+				AA32A3681A3FB6D6009CDC31 /* BNErrorReport.h in Headers */,
 				AA9A6579199EDA9700993E8B /* BMUnreadCountable.h in Headers */,
 				AA153C3618FF057D007B4785 /* BitmessageKit.h in Headers */,
 			);
@@ -961,6 +976,7 @@
 				8ED41FC718F596310025A51B /* XMLRPCDefaultEncoder.m in Sources */,
 				8ED41FCC18F596310025A51B /* XMLRPCEventBasedParserDelegate.m in Sources */,
 				8EDE5C2B18F594EA009A726A /* BMKeysFile.m in Sources */,
+				AA32A3691A3FB6D6009CDC31 /* BNErrorReport.m in Sources */,
 				AAA9FA6A19F0B38600D5858C /* BMAboutNode.m in Sources */,
 				8ED41FBF18F596310025A51B /* NSStringAdditions.m in Sources */,
 				8EDE5C1518F594EA009A726A /* BMMessageGroup.m in Sources */,

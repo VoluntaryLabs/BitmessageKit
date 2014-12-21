@@ -336,7 +336,7 @@
 
 - (void)show
 {
-    NSLog(@"-------------------\n  from: %@\n  to:%@\n  message: %@\n ------------------", _fromAddress, _toAddress, _message);
+    NSLog(@"-------------------\n  from: %@\n  to:%@\n  subject:%@\n  message: %@\n ------------------", _fromAddress, _toAddress, _subject, _message);
 }
 
 - (NSNumber *)estimatedSecondsForPow

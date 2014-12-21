@@ -32,7 +32,7 @@ static BMClient *sharedBMClient;
     self.refreshInterval = 7;
     [self startServer];
     
-    self.shouldSortChildren = NO;
+    self.nodeShouldSortChildren = @NO;
     
     self.identities    = [[BMIdentities alloc] init];
     self.contacts      = [[BMContacts alloc] init];
