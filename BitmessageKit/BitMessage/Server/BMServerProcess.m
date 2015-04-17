@@ -229,12 +229,14 @@ static BMServerProcess *shared = nil;
 
 - (void)launch
 {
-    if (self.isRunning)
+   if (self.isRunning)
     {
         NSLog(@"Attempted to launch BM server more than once.");
         return;
     }
-    
+
+    self.isLaunching = YES;
+
     // Launch tor client
     
     [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPushNotification" object:self];
@@ -337,7 +339,10 @@ static BMServerProcess *shared = nil;
     [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPushNotification"
                                                       object:self];
     
-    for (int i = 0; i < 100; i ++)
+    NSTimeInterval waitInterval = .1;
+    NSTimeInterval maxWait = 20;
+    
+    for (int i = 0; i < maxWait/waitInterval; i ++)
     {
         if ([self canConnect])
         {
@@ -348,18 +353,21 @@ static BMServerProcess *shared = nil;
             
             [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPopNotification"
                                                               object:self];
+            self.isLaunching = NO;
             return YES;
         }
         
         NSLog(@"waiting to connect to server...");
         //sleep(1);
-        [NSDate waitFor:.1];
+        [NSDate waitFor:waitInterval];
     }
-    
+
+    self.isLaunching = NO;
+
     [NSException raise:@"unable to connect to Bitmessage server" format:nil];
     
     [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPopNotification" object:self];
-    
+
     return NO;
 }
 
@@ -452,6 +460,11 @@ static BMServerProcess *shared = nil;
     }
     
     return _binaryVersion;
+}
+
+- (BOOL)hasFailed
+{
+    return !self.isLaunching && !self.isRunning;
 }
 
 @end

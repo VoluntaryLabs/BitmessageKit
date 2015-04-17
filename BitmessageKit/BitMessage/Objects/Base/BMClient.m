@@ -268,7 +268,7 @@ static BMClient *sharedBMClient;
 
 - (void)refresh
 {
-    if (_server == nil || !_server.isRunning)
+    if (_server == nil || _server.hasFailed)
     {
         [NSException raise:@"Bitmessage server down" format:nil];
     }

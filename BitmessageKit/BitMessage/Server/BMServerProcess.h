@@ -22,6 +22,7 @@
 @property (strong) NSPipe *inpipe;
 @property (strong, nonatomic) BMKeysFile *keysFile;
 @property (strong) NSString *binaryVersion;
+@property (assign, nonatomic) BOOL isLaunching;
 
 // keys.dat config
 
@@ -38,6 +39,7 @@
 - (void)terminate;
 
 - (BOOL)canConnect;
+- (BOOL)hasFailed;
 
 
 // hack around BitMessage server API's inability to do this for all identities
