@@ -467,4 +467,34 @@ static BMServerProcess *shared = nil;
     return !self.isLaunching && !self.isRunning;
 }
 
+- (NSDictionary *)clientStatus
+{
+    /*
+    Returns the 
+        softwareName, 
+        softwareVersion, 
+        networkStatus, 
+        networkConnections, 
+        numberOfPubkeysProcessed, 
+        numberOfMessagesProcessed, and 
+        numberOfBroadcastsProcessed. 
+     
+        networkStatus will be one of these strings: 
+            "notConnected", 
+            "connectedButHaveNotReceivedIncomingConnections", or 
+            "connectedAndReceivingIncomingConnections".
+     */
+
+    BMProxyMessage *message = [[BMProxyMessage alloc] init];
+    [message setMethodName:@"clientStatus"];
+    
+    //message.debug = YES;
+    [message sendSync];
+    
+    id result =  [message parsedResponseValue];
+    //NSLog(@"clientStatus = '%@'", result);
+    
+    return result;
+}
+
 @end

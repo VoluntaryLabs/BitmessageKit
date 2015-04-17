@@ -240,6 +240,15 @@ static BMClient *sharedBMClient;
     [self.server launch];
     [self startRefreshTimer];
     
+    [self postStartingServer];
+}
+
+- (void)postStartingServer
+{
+    [NSNotificationCenter.defaultCenter
+     postNotificationName:@"NavWindowSetTitle"
+     object:self
+     userInfo:[NSDictionary dictionaryWithObject:@"starting bitmessage server..." forKey:@"windowTitle"]];
 }
 
 - (void)stopServer
@@ -270,11 +279,44 @@ static BMClient *sharedBMClient;
 {
     if (_server == nil || _server.hasFailed)
     {
+        //[self stopRefreshTimer];
         [NSException raise:@"Bitmessage server down" format:nil];
     }
     
     [self.messages.received refresh];
     [self.messages.sent refresh];
+    
+    [self postClientStatus];
+}
+
+- (void)postClientStatus
+{
+    NSDictionary *status = [self.server clientStatus];
+    
+    if (status)
+    {
+        //self.statusCounter ++;
+        
+        NSMutableDictionary *mStatus = [NSMutableDictionary dictionaryWithDictionary:status];
+        
+        NSNumber *messagesProcessed = [status objectForKey:@"numberOfMessagesProcessed"];
+        NSNumber *networkConnections = [status objectForKey:@"networkConnections"];
+        
+        NSString *description = @"connecting to bitmessage network...";
+        
+        if (messagesProcessed.integerValue > 0)
+        {
+            description = [NSString stringWithFormat:@"syncing with bitmessage network - %@ connections, %@ messages processed",
+                            networkConnections, messagesProcessed];
+        }
+        
+        [mStatus setObject:description forKey:@"windowTitle"];
+
+        [NSNotificationCenter.defaultCenter
+             postNotificationName:@"NavWindowSetTitle"
+             object:self
+             userInfo:mStatus];
+    }
 }
 
 // addresses
@@ -327,5 +369,7 @@ static BMClient *sharedBMClient;
  [self deepFetch];
  }
  */
+
+
 
 @end

@@ -52,4 +52,6 @@
 - (NSString *)pybitmessageVersion;
 - (NSString *)pyhtonBinaryVersion;
 
+- (NSDictionary *)clientStatus;
+
 @end

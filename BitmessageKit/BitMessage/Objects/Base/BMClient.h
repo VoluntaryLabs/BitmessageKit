@@ -31,8 +31,8 @@
 @interface BMClient : BMNode
 
 @property (strong, nonatomic) BMServerProcess *server;
-@property (strong, nonatomic) NSTimer *refreshTimer;
-@property (assign, nonatomic) NSTimeInterval refreshInterval;
+//@property (strong, nonatomic) NSTimer *refreshTimer;
+//@property (assign, nonatomic) NSTimeInterval refreshInterval;
 
 @property (strong, nonatomic) BMIdentities *identities;
 @property (strong, nonatomic) BMContacts *contacts;
@@ -47,6 +47,7 @@
 @property (strong, nonatomic) BMDatabase *deletedSentMessagesDB;
 
 @property (strong, nonatomic) NavInfoNode *nodeAbout;
+//@property (assign, nonatomic) NSInteger statusCounter;
 
 
 + (BMClient *)sharedBMClient;
