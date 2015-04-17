@@ -17,8 +17,16 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSMutableDictionary *dict;
 @property (strong, nonatomic) NSString *location;
+@property (assign, nonatomic) BOOL isDirty;
 
 - (void)read;
 - (void)write;
+- (void)writeIfDirty;
+
+
+- (void)setObject:aValue forKey:aKey;
+- (void)removeObjectForKey:aKey;
+- (id)objectForKey:aKey;
+- (NSArray *)allKeys;
 
 @end

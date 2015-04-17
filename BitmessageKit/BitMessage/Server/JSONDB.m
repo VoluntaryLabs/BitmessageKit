@@ -84,6 +84,7 @@
     if (![[NSFileManager defaultManager] fileExistsAtPath:self.path])
     {
         self.dict = [NSMutableDictionary dictionary];
+        _isDirty = NO;
         return;
     }
     
@@ -103,6 +104,15 @@
     else
     {
         self.dict = (NSMutableDictionary *)jsonObject;
+        _isDirty = NO;
+    }
+}
+
+- (void)writeIfDirty
+{
+    if (_isDirty)
+    {
+        [self write];
     }
 }
 
@@ -120,9 +130,41 @@
     }
     else
     {
-        [data writeToFile:self.path atomically:YES];
+        if([data writeToFile:self.path atomically:YES])
+        {
+            _isDirty = NO;
+        }
     }
 }
 
+- (void)setObject:aValue forKey:aKey
+{
+    //id oldValue = [self.dict objectForKey:aKey];
+    
+    //if (!oldValue || ![oldValue isEqual:aValue])
+    {
+        [self.dict setObject:aValue forKey:aKey];
+        _isDirty = YES;
+    }
+}
+
+- (void)removeObjectForKey:aKey
+{
+   if ([self.dict objectForKey:aKey])
+   {
+       [self.dict removeObjectForKey:aKey];
+       _isDirty = YES;
+    }
+}
+
+- (NSArray *)allKeys
+{
+    return self.dict.allKeys;
+}
+
+- (id)objectForKey:aKey
+{
+    return [self.dict objectForKey:aKey];
+}
 
 @end

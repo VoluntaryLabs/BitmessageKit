@@ -27,43 +27,41 @@
 
 - (void)mark:(NSString *)messageId
 {
-    if ([self.dict objectForKey:messageId] == nil)
+    if ([self objectForKey:messageId] == nil)
     {
         NSNumber *d = [NSNumber numberWithLong:[[NSDate date] timeIntervalSinceReferenceDate]];
-        [self.dict setObject:d forKey:messageId];
-        [self write];
+        [self setObject:d forKey:messageId];
+        [self writeIfDirty];
     }
 }
 
 - (void)unmark:(NSString *)messageId
 {
-    if ([self.dict objectForKey:messageId] != nil)
-    {
-        [self.dict removeObjectForKey:messageId];
-        [self write];
-    }
+    [self removeObjectForKey:messageId];
+    [self writeIfDirty];
 }
 
 - (BOOL)hasMarked:(NSString *)messageId
 {
-    NSNumber *d = [self.dict objectForKey:messageId];
+    NSNumber *d = [self objectForKey:messageId];
     return d != nil;
 }
 
 - (void)removeOldKeys
 {
-    for (NSString *key in self.dict.allKeys)
+    for (NSString *key in self.allKeys)
     {
-        NSNumber *d = [self.dict objectForKey:key];
+        NSNumber *d = [self objectForKey:key];
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:[d longLongValue]];
         int secondsInDay = 60 * 60 * 24;
         
         if ([date timeIntervalSinceNow] > secondsInDay * self.daysToCache)
         {
-            [self.dict removeObjectForKey:key];
+            [self removeObjectForKey:key];
         }
     }
-    [self write];
+    
+    [self writeIfDirty];
 }
 
 @end
