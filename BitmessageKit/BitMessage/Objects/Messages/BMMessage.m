@@ -159,7 +159,12 @@
     [message setMethodName:@"sendMessage"];
     
     // subject and message in base64
-    NSArray *params = [NSArray arrayWithObjects:self.toAddress, self.fromAddress, self.subject.encodedBase64, self.message.encodedBase64, /*@2,*/ nil];
+    NSString *encodedContent = self.message.encodedBase64;
+    
+    NSLog(@"sending message '%@' size %i", self.subject, (int)encodedContent.length);
+    
+    
+    NSArray *params = [NSArray arrayWithObjects:self.toAddress, self.fromAddress, self.subject.encodedBase64, encodedContent, /*@2,*/ nil];
     //message.debug = YES;
     [message setParameters:params];
     [message sendSync];

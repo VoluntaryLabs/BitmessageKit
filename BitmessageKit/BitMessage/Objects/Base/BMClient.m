@@ -29,7 +29,7 @@ static BMClient *sharedBMClient;
 - (id)init
 {
     self = [super init];
-    self.refreshInterval = 7;
+    self.refreshInterval = 14;
     [self startServer];
     
     self.nodeShouldSortChildren = @NO;
@@ -283,10 +283,13 @@ static BMClient *sharedBMClient;
         [NSException raise:@"Bitmessage server down" format:nil];
     }
     
-    [self.messages.received refresh];
-    [self.messages.sent refresh];
-    
-    [self postClientStatus];
+    if (_server.isRunning)
+    {
+        [self.messages.received refresh];
+        [self.messages.sent refresh];
+        
+        [self postClientStatus];
+    }
 }
 
 - (void)postClientStatus
@@ -304,7 +307,7 @@ static BMClient *sharedBMClient;
         
         NSString *description = @"connecting to bitmessage network...";
         
-        if (messagesProcessed.integerValue > 0)
+        if (networkConnections.integerValue > 0 || messagesProcessed.integerValue > 0)
         {
             description = [NSString stringWithFormat:@"syncing with bitmessage network - %@ connections, %@ messages processed",
                             networkConnections, messagesProcessed];

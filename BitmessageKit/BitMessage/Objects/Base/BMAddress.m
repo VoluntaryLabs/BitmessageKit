@@ -9,10 +9,29 @@
 #import "BMAddress.h"
 #import "BMProxyMessage.h"
 
+static NSMutableDictionary *_validAddressCache = nil;
+
 @implementation BMAddress
+
++ (NSMutableDictionary *)validAddressCache
+{
+    if (!_validAddressCache)
+    {
+        _validAddressCache = [NSMutableDictionary dictionary];
+    }
+    
+    return _validAddressCache;
+}
 
 + (BOOL)isValidAddress:(NSString *)address
 {
+    NSNumber *value = [self.validAddressCache objectForKey:address];
+    
+    if (value)
+    {
+        return value.boolValue;
+    }
+    
     if (![address hasPrefix:@"BM-"] || !([address length] > 30))
     {
         return NO;
@@ -21,7 +40,11 @@
     BMAddress *add = [[BMAddress alloc] init];
     add.address = address;
     [add decode];
-    return add.isValid;
+    BOOL isValid = add.isValid;
+
+    [self.validAddressCache setObject:[NSNumber numberWithBool:isValid] forKey:address];
+    
+    return isValid;
 }
 
 - (void)setDict:(NSDictionary *)dict

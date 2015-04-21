@@ -67,8 +67,14 @@
 
 - (BOOL)wasSent
 {
-    return [self.getHumanReadbleStatus containsCaseInsensitiveString:@"sent"];
+    if (!_isSent)
+    {
+        _isSent = [self.getHumanReadbleStatus containsCaseInsensitiveString:@"sent"];
+    }
+    
+    return _isSent;
 }
+
 
 /*
  - (NSArray *)unreadStates
