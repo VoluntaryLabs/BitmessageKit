@@ -213,6 +213,13 @@
         
         {
             NavInfoNode *nonce = [[NavInfoNode alloc] init];
+            nonce.nodeTitle = @"Max cores for POW";
+            nonce.nodeSubtitle = [NSString stringWithFormat:@"%@ cores", BMClient.sharedBMClient.server.keysFile.maxCores];
+            [status addChild:nonce];
+        }
+        
+        {
+            NavInfoNode *nonce = [[NavInfoNode alloc] init];
             nonce.nodeTitle = @"Port";
             
             if (BMClient.sharedBMClient.server.useTor)

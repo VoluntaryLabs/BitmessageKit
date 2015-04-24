@@ -283,6 +283,17 @@
     return [self getSettingsNumber:@"defaultnoncetrialsperbyte"];
 }
 
+- (void)setMaxCores:(NSNumber *)aMax
+{
+    [self setSettingsNumber:aMax forKey:@"maxcores"];
+}
+
+- (NSNumber *)maxCores
+{
+    return [self getSettingsNumber:@"maxcores"];
+}
+
+
 
 - (BOOL)setLabel:(NSString *)aLabel onAddress:(NSString *)anAddress
 {

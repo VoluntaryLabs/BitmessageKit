@@ -14,7 +14,7 @@
 
 @property (retain, nonatomic) NSString *passphrase;
 @property (retain, nonatomic) NSString *difficulty;
-@property (assign, nonatomic) NSInteger unreadCount;
+//@property (assign, nonatomic) NSInteger unreadCount;
 
 + (BMChannel *)withDict:(NSDictionary *)dict;
 

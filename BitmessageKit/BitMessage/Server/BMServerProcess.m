@@ -204,6 +204,7 @@ static BMServerProcess *shared = nil;
     [self.keysFile setApiPassword:NSNumber.entropyNumber.asUnsignedIntegerString];
     
     [self.keysFile setDefaultnoncetrialsperbyte:@320];
+    [self.keysFile setMaxCores:@1];
 }
 
 - (void)assertIsRunning

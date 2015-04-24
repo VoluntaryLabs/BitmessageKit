@@ -35,6 +35,8 @@
 - (void)setDefaultnoncetrialsperbyte:(NSNumber *)aPow;
 - (NSNumber *)defaultnoncetrialsperbyte;
 
+- (void)setMaxCores:(NSNumber *)aMax;
+- (NSNumber *)maxCores;
 
 - (BOOL)setLabel:(NSString *)aLabel onAddress:(NSString *)anAddress;
 
