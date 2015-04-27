@@ -170,8 +170,13 @@
     [message sendSync];
     
     self.ackData = [message responseValue];
-    NSLog(@" self.ackData: %@",  self.ackData);
+    //NSLog(@" self.ackData: %@",  self.ackData);
     // not all messages are acknowledge?
+    
+    if (self.ackData == nil)
+    {
+        NSLog(@"error sending message %@", message.description);
+    }
         
     return self.ackData != nil;
 }
