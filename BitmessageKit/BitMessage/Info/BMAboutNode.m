@@ -214,7 +214,7 @@
         {
             NavInfoNode *nonce = [[NavInfoNode alloc] init];
             nonce.nodeTitle = @"Max cores for POW";
-            nonce.nodeSubtitle = [NSString stringWithFormat:@"%@ cores", BMClient.sharedBMClient.server.keysFile.maxCores];
+            nonce.nodeSubtitle = [NSString stringWithFormat:@"%@", BMClient.sharedBMClient.server.keysFile.maxCores];
             [status addChild:nonce];
         }
         
