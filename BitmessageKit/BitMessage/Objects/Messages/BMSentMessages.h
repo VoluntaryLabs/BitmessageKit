@@ -11,4 +11,6 @@
 @interface BMSentMessages : BMMessageGroup
 
 
+- (NSArray *)messagesDoingPOW;
+
 @end

@@ -88,6 +88,17 @@
     return [NSArray arrayWithObjects:@"msgsentnoackexpected", @"ackreceived", @"broadcastsent", @"msgsent", nil];
 }
 
+- (NSArray *)powStates
+{
+    return [NSArray arrayWithObjects:@"doingpubkeypow", @"doingmsgpow", nil];
+}
+
+- (BOOL)isDoingPOW
+{
+    NSString *status = [self getStatus];
+    return [self.readStates containsObject:status];
+}
+
 - (BOOL)hasReadState
 {
     NSString *status = [self getStatus];
@@ -140,6 +151,8 @@
 {
     return [self isSent];
 }
+
+
 
 - (NSString *)getHumanReadbleStatus
 {

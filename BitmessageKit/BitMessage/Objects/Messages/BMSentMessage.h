@@ -17,4 +17,7 @@
 - (NSString *)getStatus;
 - (NSString *)getHumanReadbleStatus;
 
+- (BOOL)isDoingPOW;
+
+
 @end

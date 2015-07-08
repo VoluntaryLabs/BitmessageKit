@@ -309,8 +309,20 @@ static BMClient *sharedBMClient;
         
         if (networkConnections.integerValue > 0 || messagesProcessed.integerValue > 0)
         {
-            description = [NSString stringWithFormat:@"syncing with bitmessage network - %@ connections, %@ messages processed",
-                            networkConnections, messagesProcessed];
+            NSInteger sendingCount = [self.messages.sent messagesDoingPOW].count;
+            NSString *sendingStatus = @"";
+            
+            if (sendingCount == 1)
+            {
+                sendingStatus = [NSString stringWithFormat:@", sending %li message", (long)sendingCount];
+            }
+            else if (sendingCount > 1)
+            {
+                sendingStatus = [NSString stringWithFormat:@", sending %li messages", (long)sendingCount];
+            }
+            
+            description = [NSString stringWithFormat:@"syncing with bitmessage network - %@ connections, %@ messages processed%@",
+                            networkConnections, messagesProcessed, sendingStatus];
         }
         
         [mStatus setObject:description forKey:@"windowTitle"];
