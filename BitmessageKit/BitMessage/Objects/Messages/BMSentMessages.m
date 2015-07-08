@@ -64,10 +64,12 @@
 {
     NSArray *results = [self.children select:@selector(isDoingPOW)];
     
+    /*
     for (BMSentMessage *m in self.children)
     {
         NSLog(@"sending msg with ack '%@'\n----------\n%@----------\n", m.ackData, m.messageString);
     }
+    */
     
     return results;
 }
