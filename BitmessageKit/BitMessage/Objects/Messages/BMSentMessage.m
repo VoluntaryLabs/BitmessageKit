@@ -96,7 +96,7 @@
 - (BOOL)isDoingPOW
 {
     NSString *status = [self getStatus];
-    return [self.readStates containsObject:status];
+    return [self.powStates containsObject:status];
 }
 
 - (BOOL)hasReadState
