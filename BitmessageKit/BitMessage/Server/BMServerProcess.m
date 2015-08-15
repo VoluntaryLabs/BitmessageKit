@@ -57,11 +57,6 @@ static BMServerProcess *shared = nil;
     [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
-- (NSBundle *)bundle
-{
-    return [NSBundle bundleForClass:self.class];
-}
-
 - (void)moveOldBitmessageFilesIfNeeded
 {
     NSString *oldDataPath = [[NSFileManager defaultManager] applicationSupportDirectory];
@@ -94,6 +89,11 @@ static BMServerProcess *shared = nil;
             }
         }
     }
+}
+
+- (NSBundle *)bundle
+{
+    return [NSBundle bundleForClass:self.class];
 }
 
 - (NSString *)justBundleDataPath

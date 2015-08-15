@@ -82,8 +82,6 @@
 		8EDE5C2B18F594EA009A726A /* BMKeysFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5BEC18F594EA009A726A /* BMKeysFile.m */; };
 		8EDE5C2C18F594EA009A726A /* BMServerProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EDE5BED18F594EA009A726A /* BMServerProcess.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8EDE5C2D18F594EA009A726A /* BMServerProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5BEE18F594EA009A726A /* BMServerProcess.m */; };
-		8EDE5C2E18F594EA009A726A /* JSONDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EDE5BEF18F594EA009A726A /* JSONDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8EDE5C2F18F594EA009A726A /* JSONDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDE5BF018F594EA009A726A /* JSONDB.m */; };
 		AA0E58E418FEE4830095DEBD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0E58E318FEE4830095DEBD /* libz.dylib */; };
 		AA153C3618FF057D007B4785 /* BitmessageKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EDE5B8A18F59414009A726A /* BitmessageKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA32A3681A3FB6D6009CDC31 /* BNErrorReport.h in Headers */ = {isa = PBXBuildFile; fileRef = AA32A3661A3FB6D6009CDC31 /* BNErrorReport.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -305,8 +303,6 @@
 		8EDE5BEC18F594EA009A726A /* BMKeysFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMKeysFile.m; sourceTree = "<group>"; };
 		8EDE5BED18F594EA009A726A /* BMServerProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMServerProcess.h; sourceTree = "<group>"; };
 		8EDE5BEE18F594EA009A726A /* BMServerProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMServerProcess.m; sourceTree = "<group>"; };
-		8EDE5BEF18F594EA009A726A /* JSONDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONDB.h; sourceTree = "<group>"; };
-		8EDE5BF018F594EA009A726A /* JSONDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONDB.m; sourceTree = "<group>"; };
 		AA0E58E318FEE4830095DEBD /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		AA32A3661A3FB6D6009CDC31 /* BNErrorReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNErrorReport.h; sourceTree = "<group>"; };
 		AA32A3671A3FB6D6009CDC31 /* BNErrorReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNErrorReport.m; sourceTree = "<group>"; };
@@ -595,8 +591,6 @@
 				8EDE5BEC18F594EA009A726A /* BMKeysFile.m */,
 				8EDE5BED18F594EA009A726A /* BMServerProcess.h */,
 				8EDE5BEE18F594EA009A726A /* BMServerProcess.m */,
-				8EDE5BEF18F594EA009A726A /* JSONDB.h */,
-				8EDE5BF018F594EA009A726A /* JSONDB.m */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -726,7 +720,6 @@
 				8EDE5C1418F594EA009A726A /* BMMessageGroup.h in Headers */,
 				8EDE5C2218F594EA009A726A /* BMSubscriptions.h in Headers */,
 				8ED41FC018F596310025A51B /* XMLRPC.h in Headers */,
-				8EDE5C2E18F594EA009A726A /* JSONDB.h in Headers */,
 				8ED41FCB18F596310025A51B /* XMLRPCEventBasedParserDelegate.h in Headers */,
 				8EDE5C1E18F594EA009A726A /* BMSentMessages.h in Headers */,
 				8EDE5C0C18F594EA009A726A /* BMContacts.h in Headers */,
@@ -965,7 +958,6 @@
 				8EDE5C1118F594EA009A726A /* BMIdentity.m in Sources */,
 				8ED41FD018F596310025A51B /* XMLRPCResponse.m in Sources */,
 				8EDE5C1718F594EA009A726A /* BMMessages.m in Sources */,
-				8EDE5C2F18F594EA009A726A /* JSONDB.m in Sources */,
 				8EDE5C2D18F594EA009A726A /* BMServerProcess.m in Sources */,
 				8EDE5C0518F594EA009A726A /* BMNode.m in Sources */,
 				AA54F6231A098BC200C843B9 /* BitmessageKit.m in Sources */,

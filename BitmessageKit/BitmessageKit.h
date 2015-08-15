@@ -37,7 +37,6 @@
 #import "BMReceivedMessages.h"
 #import "BMContact.h"
 #import "BMSentMessage.h"
-#import "JSONDB.h"
 
 @interface BitmessageKit : NavInfoNode
 
