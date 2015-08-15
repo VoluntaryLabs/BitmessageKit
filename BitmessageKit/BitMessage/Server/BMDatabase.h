@@ -8,7 +8,7 @@
 
 // database to workaround bitmessage bugs like reappearing deleted messages
 
-#import "JSONDB.h"
+#import <NavNodeKit/JSONDB.h>
 
 @interface BMDatabase : JSONDB
 

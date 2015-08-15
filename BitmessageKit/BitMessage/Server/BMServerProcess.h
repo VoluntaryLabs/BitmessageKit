@@ -47,7 +47,7 @@
 
 - (BOOL)setLabel:(NSString *)aLabel onAddress:(NSString *)anAddress;
 
-- (NSString *)bundleDataPath;
+//- (NSString *)bundleDataPath;
 
 - (NSString *)pybitmessageVersion;
 - (NSString *)pyhtonBinaryVersion;

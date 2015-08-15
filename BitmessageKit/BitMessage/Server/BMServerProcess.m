@@ -91,6 +91,7 @@ static BMServerProcess *shared = nil;
     }
 }
 
+/*
 - (NSBundle *)bundle
 {
     return [NSBundle bundleForClass:self.class];
@@ -115,6 +116,7 @@ static BMServerProcess *shared = nil;
                                                     error:&error];
     return path;
 }
+ */
 
 - (NSString *)pybitmessageVersion
 {
