@@ -22,6 +22,8 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>0.9.8.3</string>
+	<key>NSAllowsArbitraryLoads</key>
+	<true/>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2014 Voluntary.net. All rights reserved. MIT licensed.</string>
 	<key>NSPrincipalClass</key>
