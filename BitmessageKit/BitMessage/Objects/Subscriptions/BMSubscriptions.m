@@ -45,7 +45,7 @@
 {
     BMProxyMessage *message = [[BMProxyMessage alloc] init];
     [message setMethodName:@"listSubscriptions"];
-    NSArray *params = [NSArray arrayWithObjects:nil];
+    NSArray *params = [NSArray array];
     [message setParameters:params];
     [message sendSync];
     

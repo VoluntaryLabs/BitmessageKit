@@ -114,7 +114,7 @@
     
     if (self.address == nil)
     {
-        [NSException raise:@"unable to create channel address" format:nil];
+        [NSException raise:@"unable to create channel address" format:@""];
     }
     
     if ([self.address hasPrefix:@"BM"])

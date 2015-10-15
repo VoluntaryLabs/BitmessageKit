@@ -42,7 +42,7 @@
 {
     BMProxyMessage *message = [[BMProxyMessage alloc] init];
     [message setMethodName:@"listAddresses2"];
-    NSArray *params = [NSArray arrayWithObjects:nil];
+    NSArray *params = [NSArray array];
     [message setParameters:params];
     [message sendSync];
     

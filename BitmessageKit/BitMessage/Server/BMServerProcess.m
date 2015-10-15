@@ -213,7 +213,7 @@ static BMServerProcess *shared = nil;
 {
     if (!self.isRunning)
     {
-        [NSException raise:@"Server not running" format:nil];
+        [NSException raise:@"Server not running" format:@""];
     }
 }
 
@@ -365,7 +365,7 @@ static BMServerProcess *shared = nil;
 
     self.isLaunching = NO;
 
-    [NSException raise:@"unable to connect to Bitmessage server" format:nil];
+    [NSException raise:@"unable to connect to Bitmessage server" format:@""];
     
     [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPopNotification" object:self];
 
@@ -403,7 +403,7 @@ static BMServerProcess *shared = nil;
 {
     BMProxyMessage *message = [[BMProxyMessage alloc] init];
     [message setMethodName:@"listAddressBookEntries"];
-    NSArray *params = [NSArray arrayWithObjects:nil];
+    NSArray *params = [NSArray array];
     [message setParameters:params];
     [message sendSync];
     
